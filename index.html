@@ -3,353 +3,954 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kerwin Arlan - Resume</title>
+  <title>Kerwin Arlan – Civil Engineering &amp; Data</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <style>
-    /* ─── RESET & BASE ─── */
+    /* ─── CSS Variables (Light & Dark) ─── */
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f8fafc;
+      --text: #0f172a;
+      --text-secondary: #334155;
+      --border: #e2e8f0;
+      --card: #ffffff;
+      --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --badge-bg: #dbeafe;
+      --badge-text: #1e40af;
+      --nav-bg: rgba(255, 255, 255, 0.85);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --bg-secondary: #1e293b;
+      --text: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border: #334155;
+      --card: #1e293b;
+      --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+      --accent: #3b82f6;
+      --accent-hover: #60a5fa;
+      --badge-bg: #1e3a5f;
+      --badge-text: #93c5fd;
+      --nav-bg: rgba(15, 23, 42, 0.9);
+    }
+
+    /* ─── Reset & Base ─── */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background: #e6e9ef;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+      padding-top: 70px;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── Navigation ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 999;
+      padding: 14px 0;
+      transition: background 0.3s, border 0.3s;
+    }
+
+    .nav-inner {
       display: flex;
-      justify-content: center;
-      padding: 40px 20px;
-      font-family: 'Times New Roman', Times, serif;
-      line-height: 1.45;
-      color: #1e1e1e;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
     }
 
-    .resume {
-      max-width: 900px;
-      width: 100%;
-      background: white;
-      padding: 44px 52px 48px 52px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
-    }
-
-    /* ─── HEADER ─── */
-    h1 {
-      font-size: 3.2em;
+    .nav-logo {
       font-weight: 700;
-      text-align: center;
-      letter-spacing: 2px;
-      margin-bottom: 2px;
+      font-size: 1.2rem;
+      letter-spacing: -0.5px;
+      color: var(--text);
     }
 
-    .contact-info {
-      text-align: center;
-      font-size: 1.0em;
-      padding-bottom: 12px;
-      border-bottom: 2.5px solid #111;
-      margin-bottom: 22px;
-    }
-    .contact-info span {
-      margin: 0 6px;
+    .nav-logo span {
+      color: var(--accent);
     }
 
-    /* ─── SECTIONS ─── */
-    .section {
-      margin-bottom: 18px;
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 1.3rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .theme-toggle:hover {
+      background: var(--border);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 2.5px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* ─── Sections ─── */
+    section {
+      padding: 70px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
     }
 
     .section-title {
-      font-size: 1.25em;
+      font-size: 2rem;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      border-bottom: 1px solid #222;
-      padding-bottom: 3px;
+      letter-spacing: -0.5px;
+      margin-bottom: 36px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title i {
+      color: var(--accent);
+      font-size: 1.6rem;
+    }
+
+    /* ─── Hero ─── */
+    #hero {
+      padding: 40px 0 60px 0;
+      border-bottom: none;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 6px 18px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    .hero-badge i {
+      margin-right: 8px;
+    }
+
+    .hero h1 {
+      font-size: 3.8rem;
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--accent), #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 620px;
       margin-bottom: 12px;
     }
 
-    /* ─── EDUCATION ─── */
-    .edu-item {
+    .hero-availability {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      background: var(--bg-secondary);
+      padding: 12px 20px;
+      border-radius: 12px;
+      display: inline-block;
+      border-left: 4px solid var(--accent);
+      margin: 16px 0 28px 0;
+    }
+
+    .hero-availability strong {
+      color: var(--text);
+    }
+
+    .hero-buttons {
       display: flex;
-      justify-content: space-between;
       flex-wrap: wrap;
-      font-weight: 700;
-      font-size: 1.05em;
-    }
-    .edu-item .edu-date {
-      font-weight: 400;
-      font-style: italic;
-    }
-    .edu-detail {
-      font-weight: 400;
-      margin-top: 1px;
-      margin-bottom: 4px;
-      font-size: 0.98em;
+      gap: 14px;
     }
 
-    /* ─── EXPERIENCE & TRAINING ─── */
-    .job {
-      margin-bottom: 14px;
-    }
-
-    .job-header {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      font-weight: 700;
-      font-size: 1.05em;
-    }
-    .job-header .date {
-      font-weight: 400;
-      font-style: italic;
-    }
-
-    .job-title {
-      font-style: italic;
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      padding: 12px 32px;
+      border-radius: 50px;
       font-weight: 600;
-      margin-top: 1px;
-      margin-bottom: 2px;
-      font-size: 0.98em;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: none;
+      cursor: pointer;
     }
 
-    .job-details {
-      list-style: none;
-      padding-left: 18px;
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
     }
-    .job-details li {
-      text-align: justify;
-      margin-bottom: 1px;
-      position: relative;
-      padding-left: 18px;
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-weight: 600;
+      border: 1.5px solid var(--border);
+      transition: border 0.2s, background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
     }
-    .job-details li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      background: var(--bg-secondary);
+    }
+
+    /* ─── About ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .about-text p {
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      font-size: 1.05rem;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-self: start;
+    }
+
+    .stat-card {
+      background: var(--bg-secondary);
+      padding: 20px 18px;
+      border-radius: 16px;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+
+    .stat-number {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--accent);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    /* ─── Experience & Training (shared card style) ─── */
+    .exp-item {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 36px;
+      padding: 20px 24px;
+      background: var(--card);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .exp-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+    }
+
+    .exp-left {
+      min-width: 140px;
+    }
+
+    .exp-left .company {
       font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text);
     }
 
-    /* ─── TRAINING HIGHLIGHT ─── */
-    .training-details {
+    .exp-left .date {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .exp-right .title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text);
       margin-bottom: 4px;
     }
 
-    /* ─── SKILLS ─── */
-    .skill-row {
+    .exp-right ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .exp-right li {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 4px;
+    }
+
+    .exp-right li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* ─── Training Highlight (accent border) ─── */
+    .training-item {
+      border-left: 4px solid var(--accent);
+    }
+
+    /* ─── Skills ─── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-category {
+      background: var(--bg-secondary);
+      padding: 20px 24px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+
+    .skill-category h4 {
+      font-size: 1rem;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .skill-tags {
       display: flex;
       flex-wrap: wrap;
-      align-items: baseline;
-      margin-bottom: 4px;
-    }
-    .skill-row .cat {
-      font-weight: 700;
-      width: 130px;
-      flex-shrink: 0;
-    }
-    .skill-row .items {
-      flex: 1;
+      gap: 8px;
     }
 
-    /* ─── CERTS ─── */
-    .cert-list {
-      list-style: none;
-      padding-left: 18px;
-    }
-    .cert-list li {
-      position: relative;
-      padding-left: 18px;
-      margin-bottom: 1px;
-    }
-    .cert-list li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      font-weight: 700;
-    }
-    .cert-badge {
-      font-style: italic;
-      color: #444;
+    .skill-tag {
+      background: var(--bg);
+      padding: 4px 14px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
     }
 
-    /* ─── PRINT ─── */
-    @media print {
+    /* ─── Certifications ─── */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .cert-item {
+      background: var(--bg-secondary);
+      padding: 16px 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cert-name {
+      font-weight: 600;
+    }
+
+    .cert-status {
+      font-size: 0.8rem;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      padding: 2px 12px;
+      border-radius: 50px;
+      font-weight: 600;
+    }
+
+    /* ─── Contact ─── */
+    #contact {
+      text-align: center;
+      padding-bottom: 40px;
+    }
+
+    #contact p {
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin: 0 auto 28px auto;
+      font-size: 1.1rem;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 24px 40px;
+    }
+
+    .contact-links a {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.2s;
+    }
+
+    .contact-links a:hover {
+      color: var(--accent);
+    }
+
+    .footer-note {
+      margin-top: 40px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+    }
+
+    /* ─── Scroll Animation ─── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 768px) {
       body {
-        background: white;
-        padding: 0.2in;
+        padding-top: 62px;
       }
-      .resume {
-        box-shadow: none;
-        padding: 0;
-        max-width: 100%;
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 12px;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: var(--nav-bg);
+        backdrop-filter: blur(12px);
+        padding: 24px;
+        border-bottom: 1px solid var(--border);
       }
-      .job-details li {
-        page-break-inside: avoid;
+      .nav-links.open {
+        display: flex;
+      }
+      .hamburger {
+        display: flex;
+      }
+
+      .hero h1 {
+        font-size: 2.6rem;
+      }
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      .about-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+      .exp-item {
+        flex-direction: column;
+        gap: 8px;
+        padding: 16px;
+      }
+      .exp-left {
+        min-width: unset;
+      }
+      .section-title {
+        font-size: 1.6rem;
       }
     }
 
-    @media (max-width: 600px) {
-      .resume {
-        padding: 24px 20px 28px 20px;
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2.0rem;
+        letter-spacing: -1px;
       }
-      h1 {
-        font-size: 2.4em;
-      }
-      .job-header {
+      .hero-buttons {
         flex-direction: column;
+        align-items: stretch;
       }
-      .skill-row .cat {
-        width: 100%;
+      .btn-primary,
+      .btn-secondary {
+        justify-content: center;
+      }
+      .cert-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
 
-<div class="resume">
-
-  <!-- ═══ HEADER ═══ -->
-  <h1>Kerwin Dio Joseph Arlan</h1>
-  <div class="contact-info">
-    kerwinarlan@gmail.com <span>|</span> (+63) 976 101 3092 <span>|</span> Cavite, Philippines
-    <br />
-    linkedin.com/in/kerwinarlan <span>|</span> github.com/kerwinarlan
-  </div>
-
-  <!-- ═══ EDUCATION ═══ -->
-  <section class="section">
-    <div class="section-title">Education</div>
-    <div class="edu-item">
-      <span><strong>University of the Philippines Diliman</strong></span>
-      <span class="edu-date">Feb 2026 – Present</span>
+  <!-- ═══ NAVIGATION ═══ -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Kerwin<span>.</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#training">Training</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li>
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+            <i class="fas fa-moon" id="themeIcon"></i>
+          </button>
+        </li>
+      </ul>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <div class="edu-detail">
-      <strong>B.S. Civil Engineering</strong> (Continuing Student) – Expected Graduation: <strong>July 2027</strong>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <section id="hero">
+    <div class="container fade-up">
+      <div class="hero-badge">
+        <i class="fas fa-bolt"></i> Open to roles starting <strong>August 2026</strong>
+      </div>
+      <h1>
+        Hi, I'm <span class="highlight">Kerwin</span><br />
+        Engineer · Analyst · Builder
+      </h1>
+      <p>
+        Civil Engineering student at UP Diliman, bridging the gap between
+        structural design and data-driven decisions.
+      </p>
+      <div class="hero-availability">
+        <i class="fas fa-calendar-check" style="color: var(--accent); margin-right: 8px;"></i>
+        <strong>Light academic load next year:</strong> Thesis I &amp; II + 1 major + 2 PE subjects.<br />
+        Fully available for <strong>full-time or heavy part-time work</strong>.
+      </div>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn-primary">
+          <i class="fas fa-paper-plane"></i> Get in Touch
+        </a>
+        <a href="#" class="btn-secondary" onclick="window.print(); return false;">
+          <i class="fas fa-file-pdf"></i> Print Resume
+        </a>
+      </div>
     </div>
-    <div style="font-size:0.92rem; color:#444; margin-top:2px;">
-      <em>Light academic load starting Aug 2026:</em> Thesis I &amp; II + 1 major + 2 PE subjects. Fully available for full-time work.
+  </section>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section id="about">
+    <div class="container">
+      <div class="section-title fade-up">
+        <i class="fas fa-user"></i> About Me
+      </div>
+      <div class="about-grid">
+        <div class="about-text fade-up">
+          <p>
+            I'm a continuing Civil Engineering student at the University of the Philippines Diliman,
+            set to graduate in <strong>July 2027</strong>. My journey has been anything but linear —
+            from supervising quality control on 5-storey buildings to analyzing customer data
+            at a telecommunications firm, and now upskilling in Python and data engineering.
+          </p>
+          <p>
+            I believe that the most interesting problems sit at the intersection of
+            <strong>physical infrastructure and digital intelligence</strong>.
+            With my engineering rigor and growing data toolkit, I aim to build systems
+            that are not only structurally sound but also operationally intelligent.
+          </p>
+          <p>
+            <strong>Next semester (starting August 2026)</strong>, I will only be taking
+            Thesis 1, Thesis 2, one major subject, and two PE courses — which means I have
+            <strong>exceptional bandwidth</strong> to contribute meaningfully to your team.
+          </p>
+        </div>
+        <div class="about-stats fade-up">
+          <div class="stat-card">
+            <span class="stat-number">5+</span>
+            <span class="stat-label">Years of combined work &amp; tutoring</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Student admission success rate</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">5</span>
+            <span class="stat-label">Storey building project supervised</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">2027</span>
+            <span class="stat-label">B.S. Civil Engineering graduation</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ═══ EXPERIENCE ═══ -->
-  <section class="section">
-    <div class="section-title">Experience</div>
-
-    <!-- 1. Swinnerton-Staten -->
-    <div class="job">
-      <div class="job-header">
-        <span><strong>Swinnerton-Staten Solutions, Inc.</strong></span>
-        <span class="date">May 2024 – Jan 2026</span>
+  <section id="experience">
+    <div class="container">
+      <div class="section-title fade-up">
+        <i class="fas fa-briefcase"></i> Experience
       </div>
-      <div class="job-title">Junior Data Analyst</div>
-      <ul class="job-details">
-        <li>Extracted and analyzed operational data using Excel and CRM tools, delivering insights that improved workflow efficiency by 12%.</li>
-        <li>Performed rigorous data quality checks on client databases, ensuring 99% data integrity.</li>
-        <li>Created weekly performance dashboards and reports to support strategic decision-making.</li>
-        <li>Collaborated with cross-functional teams to reduce manual data entry time by 20%.</li>
-      </ul>
-    </div>
 
-    <!-- 2. Diliman Labs -->
-    <div class="job">
-      <div class="job-header">
-        <span><strong>Diliman Labs</strong></span>
-        <span class="date">Sep 2022 – Mar 2023</span>
+      <!-- 1. Swinnerton-Staten -->
+      <div class="exp-item fade-up">
+        <div class="exp-left">
+          <div class="company">Swinnerton-Staten Solutions, Inc.</div>
+          <div class="date">May 2024 – Jan 2026</div>
+        </div>
+        <div class="exp-right">
+          <div class="title">Junior Data Analyst</div>
+          <ul>
+            <li>Extracted and analyzed operational data using Excel and CRM tools, delivering insights that improved workflow efficiency by 12%.</li>
+            <li>Performed data quality checks on client databases, identifying and rectifying discrepancies to ensure 99% data integrity.</li>
+            <li>Created weekly performance dashboards and reports to support strategic decision-making.</li>
+            <li>Collaborated with cross-functional teams to reduce manual data entry time by 20%.</li>
+          </ul>
+        </div>
       </div>
-      <div class="job-title">AI Data Operations Specialist</div>
-      <ul class="job-details">
-        <li>Prepared, cleaned, and validated datasets for machine learning models, achieving 99.5% accuracy across training sets.</li>
-        <li>Executed data annotation and labeling guidelines, resolving ambiguous cases through systematic quality audits.</li>
-        <li>Audited data integrity across systems and documented process improvements.</li>
-        <li>Worked with data engineers to refine annotation protocols, directly improving model performance.</li>
-      </ul>
-    </div>
 
-    <!-- 3. Private Tutor -->
-    <div class="job">
-      <div class="job-header">
-        <span><strong>Private Tutoring Practice</strong></span>
-        <span class="date">2019 – 2024</span>
+      <!-- 2. Diliman Labs -->
+      <div class="exp-item fade-up">
+        <div class="exp-left">
+          <div class="company">Diliman Labs</div>
+          <div class="date">Sep 2022 – Mar 2023</div>
+        </div>
+        <div class="exp-right">
+          <div class="title">AI Data Operations Specialist</div>
+          <ul>
+            <li>Prepared, cleaned, and validated datasets for machine learning models, achieving 99.5% accuracy across training sets.</li>
+            <li>Executed data annotation and labeling guidelines, resolving ambiguous cases via systematic quality audits.</li>
+            <li>Audited data integrity across systems, correcting inconsistencies and documenting process improvements.</li>
+            <li>Worked with data engineers to refine annotation protocols, directly improving model performance metrics.</li>
+          </ul>
+        </div>
       </div>
-      <div class="job-title">Academic Tutor – Mathematics &amp; Sciences</div>
-      <ul class="job-details">
-        <li>Tutored a student from Grade 7 through senior high, achieving 100% admission success to UP Diliman, Ateneo, and DLSU.</li>
-        <li>Developed customized learning plans and transitioned instruction seamlessly to online platforms.</li>
-        <li>Emphasized deep conceptual understanding over rote memorization.</li>
-      </ul>
-    </div>
 
-    <!-- 4. Concentrix -->
-    <div class="job">
-      <div class="job-header">
-        <span><strong>Concentrix (AT&amp;T Account)</strong></span>
-        <span class="date">Feb 2022 – Aug 2022</span>
+      <!-- 3. Private Tutor -->
+      <div class="exp-item fade-up">
+        <div class="exp-left">
+          <div class="company">Private Tutoring Practice</div>
+          <div class="date">2019 – 2024</div>
+        </div>
+        <div class="exp-right">
+          <div class="title">Academic Tutor – Mathematics &amp; Sciences</div>
+          <ul>
+            <li>Tutored a student from Grade 7 through senior high, achieving 100% admission success to UP Diliman, Ateneo, and DLSU.</li>
+            <li>Developed customized learning plans and transitioned instruction seamlessly to online platforms.</li>
+            <li>Emphasized deep conceptual understanding over rote memorization, significantly improving problem-solving confidence.</li>
+          </ul>
+        </div>
       </div>
-      <div class="job-title">Customer Service Representative</div>
-      <ul class="job-details">
-        <li>Resolved complex billing and service issues using systematic problem-solving and Salesforce CRM.</li>
-        <li>Managed escalations and tracked customer data to identify recurring service issues.</li>
-      </ul>
-    </div>
 
-    <!-- 5. Primeart Builders -->
-    <div class="job">
-      <div class="job-header">
-        <span><strong>Primeart Builders Inc.</strong></span>
-        <span class="date">Jun 2018 – Jul 2018</span>
+      <!-- 4. Concentrix -->
+      <div class="exp-item fade-up">
+        <div class="exp-left">
+          <div class="company">Concentrix (AT&amp;T Account)</div>
+          <div class="date">Feb 2022 – Aug 2022</div>
+        </div>
+        <div class="exp-right">
+          <div class="title">Customer Service Representative</div>
+          <ul>
+            <li>Resolved complex billing and service issues, maintaining high customer satisfaction scores.</li>
+            <li>Managed escalations using systematic problem-solving and Salesforce CRM to track and analyze customer data.</li>
+            <li>Identified recurring service issues and collaborated with internal teams to implement long-term fixes.</li>
+          </ul>
+        </div>
       </div>
-      <div class="job-title">Assistant to Site Engineer (OJT)</div>
-      <ul class="job-details">
-        <li>Supervised quality control for tiling, plastering, and ceiling work on a 5-storey school building.</li>
-        <li>Documented daily progress of structural elements and verified fixture installations.</li>
-      </ul>
+
+      <!-- 5. Primeart Builders -->
+      <div class="exp-item fade-up">
+        <div class="exp-left">
+          <div class="company">Primeart Builders Inc.</div>
+          <div class="date">Jun 2018 – Jul 2018</div>
+        </div>
+        <div class="exp-right">
+          <div class="title">Assistant to Site Engineer (OJT)</div>
+          <ul>
+            <li>Supervised quality control for floor tiling, plastering, and ceiling work across a 5-storey school building.</li>
+            <li>Documented daily progress of structural elements and verified correct fixture installations.</li>
+            <li>Supported daily inspections and reporting, ensuring compliance with construction standards.</li>
+          </ul>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- ═══ TRAINING ═══ -->
-  <section class="section">
-    <div class="section-title">Training &amp; Professional Development</div>
-    <div class="job">
-      <div class="job-header">
-        <span><strong>Online Intensive Program</strong></span>
-        <span class="date">Mar 2024 – Dec 2024</span>
+  <!-- ═══ TRAINING & PROFESSIONAL DEVELOPMENT ═══ -->
+  <section id="training">
+    <div class="container">
+      <div class="section-title fade-up">
+        <i class="fas fa-graduation-cap"></i> Training &amp; Professional Development
       </div>
-      <div class="job-title">Japanese Language &amp; Nursing Care Training</div>
-      <ul class="job-details">
-        <li>Completed a 6‑month rigorous online program focused on technical Japanese vocabulary and caregiving protocols.</li>
-        <li>Passed the <strong>Nursing Care Language Evaluation</strong> and <strong>Nursing Care Skills Test</strong>.</li>
-        <li>Concluded with a comprehensive final capstone assessment in August 2025, validating clinical communication skills.</li>
-        <li>Balanced training alongside full-time data analyst responsibilities, demonstrating strong time management.</li>
-      </ul>
+
+      <div class="exp-item training-item fade-up">
+        <div class="exp-left">
+          <div class="company">Online Intensive Program</div>
+          <div class="date">Mar 2024 – Dec 2024</div>
+        </div>
+        <div class="exp-right">
+          <div class="title">Japanese Language &amp; Nursing Care Training</div>
+          <ul>
+            <li>Completed a 6‑month rigorous online program focused on technical Japanese vocabulary and caregiving protocols.</li>
+            <li>Passed the <strong>Nursing Care Language Evaluation</strong> and <strong>Nursing Care Skills Test</strong> during the program.</li>
+            <li>Participated in immersive cross‑cultural communication workshops and practical skills demonstrations.</li>
+            <li>Successfully balanced the training alongside full‑time data analyst responsibilities, demonstrating strong time management and discipline.</li>
+            <li>Concluded with a comprehensive final capstone assessment in August 2025, validating clinical communication and technical competency.</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ═══ SKILLS ═══ -->
-  <section class="section">
-    <div class="section-title">Skills</div>
-    <div class="skill-row">
-      <span class="cat">Technical</span>
-      <span class="items">Python (Intermediate), Data Analysis, Excel / Spreadsheets, Salesforce CRM, HTML &amp; CSS, Data Quality Assurance</span>
-    </div>
-    <div class="skill-row">
-      <span class="cat">Professional</span>
-      <span class="items">Project Coordination, Client Relations, Technical Writing, Problem-Solving, Cross-functional Collaboration</span>
-    </div>
-    <div class="skill-row">
-      <span class="cat">Languages</span>
-      <span class="items">Filipino (Native), English (Fluent), Japanese (A2 – JFT-Basic)</span>
+  <section id="skills">
+    <div class="container">
+      <div class="section-title fade-up">
+        <i class="fas fa-code"></i> Skills
+      </div>
+      <div class="skills-grid">
+        <div class="skill-category fade-up">
+          <h4><i class="fas fa-laptop-code"></i> Technical</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Python (Intermediate)</span>
+            <span class="skill-tag">Data Analysis</span>
+            <span class="skill-tag">Excel / Spreadsheets</span>
+            <span class="skill-tag">Salesforce CRM</span>
+            <span class="skill-tag">HTML &amp; CSS</span>
+            <span class="skill-tag">Data Quality Assurance</span>
+          </div>
+        </div>
+        <div class="skill-category fade-up">
+          <h4><i class="fas fa-users"></i> Professional</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Project Coordination</span>
+            <span class="skill-tag">Client Relations</span>
+            <span class="skill-tag">Technical Writing</span>
+            <span class="skill-tag">Problem-Solving</span>
+            <span class="skill-tag">Cross-functional Collaboration</span>
+          </div>
+        </div>
+        <div class="skill-category fade-up">
+          <h4><i class="fas fa-globe"></i> Languages</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Filipino (Native)</span>
+            <span class="skill-tag">English (Fluent)</span>
+            <span class="skill-tag">Japanese (A2 – JFT-Basic)</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ═══ CERTIFICATIONS ═══ -->
-  <section class="section">
-    <div class="section-title">Certifications</div>
-    <ul class="cert-list">
-      <li><strong>JFT‑Basic Japanese</strong> <span class="cert-badge">(A2)</span></li>
-      <li><strong>Nursing Care Language Evaluation</strong> <span class="cert-badge">(Passed)</span></li>
-      <li><strong>Nursing Care Skills Test</strong> <span class="cert-badge">(Passed)</span></li>
-      <li><strong>DataCamp Python</strong> <span class="cert-badge">(In Progress)</span></li>
-    </ul>
+  <section id="certifications">
+    <div class="container">
+      <div class="section-title fade-up">
+        <i class="fas fa-certificate"></i> Certifications
+      </div>
+      <div class="cert-grid">
+        <div class="cert-item fade-up">
+          <span class="cert-name">JFT-Basic Japanese</span>
+          <span class="cert-status">A2</span>
+        </div>
+        <div class="cert-item fade-up">
+          <span class="cert-name">Nursing Care Language Evaluation</span>
+          <span class="cert-status">Passed</span>
+        </div>
+        <div class="cert-item fade-up">
+          <span class="cert-name">Nursing Care Skills Test</span>
+          <span class="cert-status">Passed</span>
+        </div>
+        <div class="cert-item fade-up">
+          <span class="cert-name">DataCamp Python</span>
+          <span class="cert-status">In Progress</span>
+        </div>
+      </div>
+    </div>
   </section>
 
-</div>
-<!-- end .resume -->
+  <!-- ═══ CONTACT ═══ -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-title fade-up" style="justify-content: center;">
+        <i class="fas fa-envelope"></i> Let's Connect
+      </div>
+      <p class="fade-up">
+        I'm actively looking for <strong>data, engineering, or operations roles</strong>
+        starting August 2026. If you think I'd be a good fit, reach out — I'd love to chat.
+      </p>
+      <div class="contact-links fade-up">
+        <a href="mailto:kerwinarlan@gmail.com">
+          <i class="fas fa-envelope"></i> kerwinarlan@gmail.com
+        </a>
+        <a href="tel:+639761013092">
+          <i class="fas fa-phone"></i> (+63) 976 101 3092
+        </a>
+        <a href="#">
+          <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+        <a href="#">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+      </div>
+      <div class="footer-note fade-up">
+        &copy; 2026 Kerwin Dio Joseph Arlan. Built with <i class="fas fa-heart" style="color: var(--accent);"></i> for the future.
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ JAVASCRIPT ═══ -->
+  <script>
+    // ─── Dark Mode ───
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    let currentTheme = localStorage.getItem('theme') || 'light';
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+      localStorage.setItem('theme', theme);
+    }
+
+    applyTheme(currentTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+    });
+
+    // ─── Mobile Hamburger ───
+    const hamburger = document.getElementById('hamburgerBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    // Close nav on link click (mobile)
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // ─── Scroll Animations (Intersection Observer) ───
+    const fadeElements = document.querySelectorAll('.fade-up');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -30px 0px'
+    });
+
+    fadeElements.forEach(el => observer.observe(el));
+
+    // ─── Trigger for elements already in view on load ───
+    window.addEventListener('load', () => {
+      fadeElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+          el.classList.add('visible');
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
