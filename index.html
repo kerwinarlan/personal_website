@@ -74,7 +74,7 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* ─── CHINESE TREND 1: MORPHING BLOBS ─── */
+    /* ─── BLOBS ─── */
     .blob {
       position: fixed;
       width: 700px;
@@ -103,7 +103,7 @@
       100% { transform: translate(200px, -150px) scale(1.2); }
     }
 
-    /* ─── CHINESE TREND 2: NOISE/GRAIN TEXTURE ─── */
+    /* ─── NOISE ─── */
     .noise {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -116,7 +116,7 @@
     }
     [data-theme="light"] .noise { opacity: 0.02; }
 
-    /* ─── CHINESE TREND 3: ATMOSPHERIC 3D RING ─── */
+    /* ─── 3D RING ─── */
     .three-d-ring {
       position: fixed;
       top: 15%;
@@ -155,7 +155,7 @@
     a { color: var(--accent); text-decoration: none; }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 
-    /* ─── GLASS NAV ─── */
+    /* ─── NAV ─── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -202,10 +202,7 @@
     }
     .section-title i { color: var(--accent); }
 
-    /* ═══════════════════════════════════════════ */
-    /*  GLASS CARD UNIFIED STYLES (iOS Level)      */
-    /*  NOTE: transform is now handled by JS       */
-    /* ═══════════════════════════════════════════ */
+    /* ═══ GLASS CARD ═══ */
     .glass-card {
       background: var(--glass-bg);
       backdrop-filter: blur(16px) saturate(180%);
@@ -222,7 +219,7 @@
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px var(--accent-glow), var(--glass-inset);
     }
 
-    /* ─── TERMINAL WINDOW (Solid, not glass) ─── */
+    /* ─── TERMINAL ─── */
     #hero { padding: 20px 0 50px 0; }
     .terminal-window {
       background: #0d1117;
@@ -342,7 +339,63 @@
     .stat-card .stat-number { font-size: 2.2rem; font-weight: 800; color: var(--accent); display: block; }
     .stat-card .stat-label { font-size: 0.9rem; color: var(--text-secondary); }
 
-    /* ─── BENTO GRID ─── */
+    /* ─── TESTIMONIAL ─── */
+    .testimonial-card {
+      padding: 24px 30px;
+      border-radius: 20px;
+      margin-top: 24px;
+      position: relative;
+    }
+    .testimonial-card .quote-mark {
+      font-size: 3rem;
+      color: var(--accent);
+      opacity: 0.3;
+      line-height: 1;
+      margin-bottom: -10px;
+    }
+    .testimonial-card .quote-text {
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+    .testimonial-card .quote-author {
+      font-weight: 600;
+      color: var(--text);
+    }
+    .testimonial-card .quote-role {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* ─── NOW / CURRENT FOCUS ─── */
+    .now-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .now-item {
+      padding: 20px 24px;
+      border-radius: 20px;
+      text-align: center;
+    }
+    .now-item .now-icon {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .now-item h4 {
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .now-item p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    /* ─── BENTO GRID (Experience, Training, Projects) ─── */
     .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .exp-item:first-child { grid-column: 1 / -1; }
     .exp-item {
@@ -357,6 +410,18 @@
     .exp-right li { color: var(--text-secondary); font-size: 0.95rem; padding-left: 20px; position: relative; margin-bottom: 4px; }
     .exp-right li::before { content: "▹"; position: absolute; left: 0; color: var(--accent); }
     .training-item { border-left: 4px solid var(--accent); grid-column: 1 / -1; }
+    .project-item { border-top: 3px solid var(--accent); }
+    .project-links { margin-top: 12px; display: flex; gap: 16px; flex-wrap: wrap; }
+    .project-links a {
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent);
+      transition: color 0.2s;
+    }
+    .project-links a:hover { color: var(--text); }
 
     /* ─── SKILLS & CERTS ─── */
     .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
@@ -398,14 +463,6 @@
       font-weight: 600;
     }
 
-    /* ─── APPLY GLASS TO ALL RELEVANT CARDS ─── */
-    .stat-card,
-    .exp-item,
-    .skill-category,
-    .cert-item {
-      /* glass-card class applied in HTML, but we keep selectors for safety */
-    }
-
     /* ─── CONTACT ─── */
     #contact { text-align: center; padding-bottom: 40px; }
     #contact p { color: var(--text-secondary); max-width: 500px; margin: 0 auto 28px auto; font-size: 1.1rem; }
@@ -427,7 +484,7 @@
     .contact-links a:hover { color: var(--accent); border-color: var(--accent); background: var(--glass-bg-hover); transform: translateY(-2px); }
     .footer-note { margin-top: 40px; font-size: 0.85rem; color: var(--text-secondary); border-top: 1px solid var(--glass-border); padding-top: 28px; }
 
-    /* ─── SCROLL ANIMATION (Base) ─── */
+    /* ─── SCROLL ANIMATION ─── */
     .fade-up {
       opacity: 0;
       transform: translateY(40px);
@@ -446,7 +503,7 @@
     }
     [data-theme="light"] .cursor-glow { mix-blend-mode: soft-light; opacity: 0.4; }
 
-    /* ─── RIPPLE EFFECT ─── */
+    /* ─── RIPPLE ─── */
     .ripple {
       position: fixed;
       border-radius: 50%;
@@ -479,12 +536,14 @@
       .training-item { grid-column: 1; }
       .section-title { font-size: 1.6rem; }
       .blob { width: 300px; height: 300px; filter: blur(60px); }
+      .now-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 480px) {
       .terminal-body { font-size: 0.8rem; padding: 16px; }
       .hero-buttons { flex-direction: column; align-items: stretch; }
       .btn-primary, .btn-secondary { justify-content: center; }
       .blob { width: 200px; height: 200px; filter: blur(50px); }
+      .now-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -503,9 +562,9 @@
       <a href="#" class="nav-logo">Kerwin<span>.</span></a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#about">About</a></li>
+        <li><a href="#now">Now</a></li>
         <li><a href="#experience">Experience</a></li>
-        <li><a href="#training">Training</a></li>
-        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
         <li>
           <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -519,7 +578,7 @@
     </div>
   </nav>
 
-  <!-- ═══ HERO – TERMINAL WINDOW ═══ -->
+  <!-- ═══ HERO – TERMINAL ═══ -->
   <section id="hero">
     <div class="container fade-up">
       <div class="terminal-window">
@@ -562,7 +621,7 @@
     </div>
   </section>
 
-  <!-- ═══ ABOUT ═══ -->
+  <!-- ═══ ABOUT + TESTIMONIAL ═══ -->
   <section id="about">
     <div class="container">
       <div class="section-title fade-up"><i class="fas fa-user"></i> About Me</div>
@@ -571,12 +630,50 @@
           <p>I'm a continuing Civil Engineering student at UP Diliman, set to graduate in <strong>July 2027</strong>. My journey has been anything but linear — from supervising quality control on 5-storey buildings to analyzing customer data at a telecommunications firm, and now upskilling in Python and data engineering.</p>
           <p>I believe that the most interesting problems sit at the intersection of <strong>physical infrastructure and digital intelligence</strong>. With my engineering rigor and growing data toolkit, I aim to build systems that are not only structurally sound but also operationally intelligent.</p>
           <p><strong>Next semester (starting August 2026)</strong>, I will only be taking Thesis 1, Thesis 2, one major subject, and two PE courses — which means I have <strong>exceptional bandwidth</strong> to contribute meaningfully to your team.</p>
+
+          <!-- ✅ NEW: Testimonial -->
+          <div class="testimonial-card glass-card fade-up" style="margin-top: 28px;">
+            <div class="quote-mark">"</div>
+            <p class="quote-text">Kerwin's teaching transformed my understanding of math. I went from struggling in Grade 7 to confidently passing the UPCAT. He didn't just teach formulas — he taught me how to think.</p>
+            <div class="quote-author">— Former Student</div>
+            <div class="quote-role">Now studying at UP Diliman</div>
+          </div>
         </div>
+
         <div class="about-stats fade-up">
           <div class="stat-card glass-card"><span class="stat-number">5+</span><span class="stat-label">Years of combined work &amp; tutoring</span></div>
           <div class="stat-card glass-card"><span class="stat-number">100%</span><span class="stat-label">Student admission success rate</span></div>
           <div class="stat-card glass-card"><span class="stat-number">5</span><span class="stat-label">Storey building project supervised</span></div>
           <div class="stat-card glass-card"><span class="stat-number">2027</span><span class="stat-label">B.S. Civil Engineering graduation</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ NOW / CURRENT FOCUS (NEW) ═══ -->
+  <section id="now">
+    <div class="container">
+      <div class="section-title fade-up"><i class="fas fa-clock"></i> Now / Current Focus</div>
+      <div class="now-grid">
+        <div class="now-item glass-card fade-up">
+          <span class="now-icon"><i class="fas fa-flask"></i></span>
+          <h4>Prepping Thesis</h4>
+          <p>Investigating "Predictive Modeling for Construction Safety Risks" — using Python to analyze historical incident data.</p>
+        </div>
+        <div class="now-item glass-card fade-up">
+          <span class="now-icon"><i class="fas fa-code"></i></span>
+          <h4>Learning Python</h4>
+          <p>Deepening my knowledge of Pandas, Seaborn, and Scikit-learn. Currently completing the DataCamp Python track.</p>
+        </div>
+        <div class="now-item glass-card fade-up">
+          <span class="now-icon"><i class="fas fa-briefcase"></i></span>
+          <h4>Open to Work</h4>
+          <p>Actively looking for <strong>Data Analyst</strong> or <strong>AI Ops</strong> roles starting <strong>August 2026</strong>.</p>
+        </div>
+        <div class="now-item glass-card fade-up">
+          <span class="now-icon"><i class="fas fa-book"></i></span>
+          <h4>Reading</h4>
+          <p>"Storytelling with Data" by Cole Nussbaumer Knaflic — improving my data visualization and communication skills.</p>
         </div>
       </div>
     </div>
@@ -606,12 +703,57 @@
     </div>
   </section>
 
+  <!-- ═══ PROJECTS (NEW) ═══ -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-title fade-up"><i class="fas fa-project-diagram"></i> Projects</div>
+      <div class="exp-grid">
+        <div class="exp-item glass-card project-item fade-up">
+          <div class="exp-left">
+            <div class="company">DataCamp</div>
+            <div class="date">2026</div>
+          </div>
+          <div class="exp-right">
+            <div class="title">Exploratory Data Analysis — Construction Permit Trends</div>
+            <ul>
+              <li>Analyzed publicly available construction permit data to identify seasonal trends in project delays.</li>
+              <li>Used <strong>Pandas</strong> for data cleaning and <strong>Matplotlib</strong> / <strong>Seaborn</strong> for interactive visualizations.</li>
+              <li>Identified that Q2 and Q3 have 18% higher approval times — actionable insight for project planners.</li>
+            </ul>
+            <div class="project-links">
+              <a href="#" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+              <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item glass-card project-item fade-up">
+          <div class="exp-left">
+            <div class="company">Personal</div>
+            <div class="date">2024</div>
+          </div>
+          <div class="exp-right">
+            <div class="title">UPCAT Review Progress Dashboard</div>
+            <ul>
+              <li>Designed a custom progress tracking system for my tutoring student, mapping weak points to targeted practice problems.</li>
+              <li>Visualized performance trends across 5 subject areas over 18 months of tutoring.</li>
+              <li>Directly contributed to the student's <strong>100% admission success</strong> across UP Diliman, Ateneo, and DLSU.</li>
+            </ul>
+            <div class="project-links">
+              <a href="#" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══ SKILLS ═══ -->
   <section id="skills">
     <div class="container">
       <div class="section-title fade-up"><i class="fas fa-code"></i> Skills</div>
       <div class="skills-grid">
-        <div class="skill-category glass-card fade-up"><h4><i class="fas fa-laptop-code"></i> Technical</h4><div class="skill-tags"><span class="skill-tag">Python (Intermediate)</span><span class="skill-tag">Data Analysis</span><span class="skill-tag">Excel / Spreadsheets</span><span class="skill-tag">Salesforce CRM</span><span class="skill-tag">HTML &amp; CSS</span><span class="skill-tag">Data Quality Assurance</span></div></div>
+        <div class="skill-category glass-card fade-up"><h4><i class="fas fa-laptop-code"></i> Technical</h4><div class="skill-tags"><span class="skill-tag">Python (Intermediate)</span><span class="skill-tag">Pandas</span><span class="skill-tag">Matplotlib / Seaborn</span><span class="skill-tag">Data Analysis</span><span class="skill-tag">Excel / Spreadsheets</span><span class="skill-tag">Salesforce CRM</span><span class="skill-tag">HTML &amp; CSS</span><span class="skill-tag">Data Quality Assurance</span></div></div>
         <div class="skill-category glass-card fade-up"><h4><i class="fas fa-users"></i> Professional</h4><div class="skill-tags"><span class="skill-tag">Project Coordination</span><span class="skill-tag">Client Relations</span><span class="skill-tag">Technical Writing</span><span class="skill-tag">Problem-Solving</span><span class="skill-tag">Cross-functional Collaboration</span></div></div>
         <div class="skill-category glass-card fade-up"><h4><i class="fas fa-globe"></i> Languages</h4><div class="skill-tags"><span class="skill-tag">Filipino (Native)</span><span class="skill-tag">English (Fluent)</span><span class="skill-tag">Japanese (A2 – JFT-Basic)</span></div></div>
       </div>
@@ -639,8 +781,9 @@
       <div class="contact-links fade-up">
         <a href="mailto:kerwinarlan@gmail.com"><i class="fas fa-envelope"></i> kerwinarlan@gmail.com</a>
         <a href="tel:+639761013092"><i class="fas fa-phone"></i> (+63) 976 101 3092</a>
-        <a href="https://linkedin.com/in/kerwin-dio-joseph-arlan" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        <a href="https://github.com/kerwinarlan" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+        <!-- ⚠️ IMPORTANT: Replace the '#' below with your real LinkedIn and GitHub URLs -->
+        <a href="linkedin.com/in/kerwin-dio-joseph-arlan" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <a href="github.com/kerwinarlan" target="_blank"><i class="fab fa-github"></i> GitHub</a>
       </div>
       <div class="footer-note fade-up">&copy; 2026 Kerwin Dio Joseph Arlan. Built with <i class="fas fa-heart" style="color: var(--accent);"></i> for the future.</div>
     </div>
@@ -648,157 +791,157 @@
 
   <!-- ═══ JAVASCRIPT ═══ -->
   <script>
-  // ─── Dark / Light Toggle ───
-  const themeToggle = document.getElementById('themeToggle');
-  const themeIcon = document.getElementById('themeIcon');
-  let currentTheme = localStorage.getItem('theme') || 'dark';
+    // ─── Dark / Light Toggle ───
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    let currentTheme = localStorage.getItem('theme') || 'dark';
 
-  function applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-    localStorage.setItem('theme', theme);
-  }
-  applyTheme(currentTheme);
-
-  themeToggle.addEventListener('click', () => {
-    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    applyTheme(next);
-  });
-
-  // ─── Mobile Hamburger ───
-  const hamburger = document.getElementById('hamburgerBtn');
-  const navLinks = document.getElementById('navLinks');
-  hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
-  });
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-    });
-  });
-
-  // ─── Glowing Cursor ───
-  const cursorGlow = document.getElementById('cursorGlow');
-  document.addEventListener('mousemove', (e) => {
-    cursorGlow.style.left = e.clientX + 'px';
-    cursorGlow.style.top = e.clientY + 'px';
-  });
-
-  // ─── ✅ Staggered Scroll Reveal (FIXED) ───
-  const revealElements = document.querySelectorAll('.fade-up, .glass-card');
-
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, index * 80);
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { 
-    threshold: 0.15, 
-    rootMargin: '0px 0px -30px 0px' 
-  });
-
-  revealElements.forEach(el => revealObserver.observe(el));
-
-  // ─── Particle Network Background ───
-  (function() {
-    const canvas = document.createElement('canvas');
-    canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;';
-    document.body.prepend(canvas);
-    const ctx = canvas.getContext('2d');
-    let w, h, particles;
-
-    function resize() {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+      localStorage.setItem('theme', theme);
     }
-    window.addEventListener('resize', resize);
-    resize();
+    applyTheme(currentTheme);
 
-    class Particle {
-      constructor() { this.reset(); }
-      reset() {
-        this.x = Math.random() * w;
-        this.y = Math.random() * h;
-        this.vx = (Math.random() - 0.5) * 0.4;
-        this.vy = (Math.random() - 0.5) * 0.4;
-        this.radius = Math.random() * 2 + 1;
-      }
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        if (this.x < 0 || this.x > w) this.vx *= -1;
-        if (this.y < 0 || this.y > h) this.vy *= -1;
-      }
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(129, 140, 248, 0.5)';
-        ctx.fill();
-      }
-    }
+    themeToggle.addEventListener('click', () => {
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+    });
 
-    particles = Array.from({ length: 80 }, () => new Particle());
+    // ─── Mobile Hamburger ───
+    const hamburger = document.getElementById('hamburgerBtn');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
 
-    function drawLines() {
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 150) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(129, 140, 248, ${0.15 * (1 - dist / 150)})`;
-            ctx.lineWidth = 0.8;
-            ctx.stroke();
+    // ─── Glowing Cursor ───
+    const cursorGlow = document.getElementById('cursorGlow');
+    document.addEventListener('mousemove', (e) => {
+      cursorGlow.style.left = e.clientX + 'px';
+      cursorGlow.style.top = e.clientY + 'px';
+    });
+
+    // ─── Staggered Scroll Reveal ───
+    const revealElements = document.querySelectorAll('.fade-up, .glass-card');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 80);
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { 
+      threshold: 0.15, 
+      rootMargin: '0px 0px -30px 0px' 
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // ─── Particle Network Background ───
+    (function() {
+      const canvas = document.createElement('canvas');
+      canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;';
+      document.body.prepend(canvas);
+      const ctx = canvas.getContext('2d');
+      let w, h, particles;
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      class Particle {
+        constructor() { this.reset(); }
+        reset() {
+          this.x = Math.random() * w;
+          this.y = Math.random() * h;
+          this.vx = (Math.random() - 0.5) * 0.4;
+          this.vy = (Math.random() - 0.5) * 0.4;
+          this.radius = Math.random() * 2 + 1;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          if (this.x < 0 || this.x > w) this.vx *= -1;
+          if (this.y < 0 || this.y > h) this.vy *= -1;
+        }
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(129, 140, 248, 0.5)';
+          ctx.fill();
+        }
+      }
+
+      particles = Array.from({ length: 80 }, () => new Particle());
+
+      function drawLines() {
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 150) {
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = `rgba(129, 140, 248, ${0.15 * (1 - dist / 150)})`;
+              ctx.lineWidth = 0.8;
+              ctx.stroke();
+            }
           }
         }
       }
-    }
 
-    function animate() {
-      ctx.clearRect(0, 0, w, h);
-      particles.forEach(p => { p.update(); p.draw(); });
-      drawLines();
-      requestAnimationFrame(animate);
-    }
-    animate();
-  })();
+      function animate() {
+        ctx.clearRect(0, 0, w, h);
+        particles.forEach(p => { p.update(); p.draw(); });
+        drawLines();
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
 
-  // ─── 3D Tilt on Glass Cards ───
-  document.querySelectorAll('.glass-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = (y - centerY) / 25;
-      const rotateY = (centerX - x) / 25;
-      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+    // ─── 3D Tilt on Glass Cards ───
+    document.querySelectorAll('.glass-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 25;
+        const rotateY = (centerX - x) / 25;
+        card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+      });
     });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-    });
-  });
 
-  // ─── Click Ripple Effect ───
-  document.addEventListener('click', (e) => {
-    const ripple = document.createElement('div');
-    ripple.className = 'ripple';
-    const size = 40;
-    ripple.style.width = ripple.style.height = size + 'px';
-    ripple.style.left = (e.clientX - size/2) + 'px';
-    ripple.style.top = (e.clientY - size/2) + 'px';
-    document.body.appendChild(ripple);
-    setTimeout(() => ripple.remove(), 800);
-  });
-</script>
+    // ─── Click Ripple Effect ───
+    document.addEventListener('click', (e) => {
+      const ripple = document.createElement('div');
+      ripple.className = 'ripple';
+      const size = 40;
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = (e.clientX - size/2) + 'px';
+      ripple.style.top = (e.clientY - size/2) + 'px';
+      document.body.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 800);
+    });
+  </script>
 
 </body>
 </html>
