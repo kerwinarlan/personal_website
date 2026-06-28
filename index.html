@@ -6,38 +6,43 @@
   <title>Kerwin Arlan – Civil Engineering &amp; Data</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <style>
-    /* ─── CSS Variables (Light & Dark) ─── */
+    /* ─── CSS Variables (Glass + Dark Mode) ─── */
     :root {
-      --bg: #ffffff;
-      --bg-secondary: #f8fafc;
+      /* Glass backgrounds (translucent) */
+      --glass-bg: rgba(255, 255, 255, 0.55);
+      --glass-bg-secondary: rgba(255, 255, 255, 0.25);
+      --glass-border: rgba(255, 255, 255, 0.35);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+
+      /* Text Colors */
       --text: #0f172a;
-      --text-secondary: #334155;
-      --border: #e2e8f0;
-      --card: #ffffff;
-      --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
-      --accent: #2563eb;
-      --accent-hover: #1d4ed8;
-      --badge-bg: #dbeafe;
-      --badge-text: #1e40af;
-      --nav-bg: rgba(255, 255, 255, 0.85);
+      --text-secondary: #1e293b;
+      --accent: #4f46e5;
+      --accent-glow: rgba(79, 70, 229, 0.3);
+      --badge-bg: rgba(79, 70, 229, 0.15);
+      --badge-text: #4338ca;
+
+      /* Body background colors (for the gradient) */
+      --bg-start: #e0e7ff;
+      --bg-end: #fce7f3;
     }
 
     [data-theme="dark"] {
-      --bg: #0f172a;
-      --bg-secondary: #1e293b;
+      --glass-bg: rgba(15, 23, 42, 0.65);
+      --glass-bg-secondary: rgba(30, 41, 59, 0.4);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
       --text: #f1f5f9;
-      --text-secondary: #94a3b8;
-      --border: #334155;
-      --card: #1e293b;
-      --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-      --accent: #3b82f6;
-      --accent-hover: #60a5fa;
-      --badge-bg: #1e3a5f;
-      --badge-text: #93c5fd;
-      --nav-bg: rgba(15, 23, 42, 0.9);
+      --text-secondary: #cbd5e1;
+      --accent: #818cf8;
+      --accent-glow: rgba(129, 140, 248, 0.25);
+      --badge-bg: rgba(129, 140, 248, 0.2);
+      --badge-text: #a5b4fc;
+      --bg-start: #0f172a;
+      --bg-end: #1e1b4b;
     }
 
-    /* ─── Reset & Base ─── */
+    /* ─── BASE & ANIMATED BACKGROUND ─── */
     * {
       margin: 0;
       padding: 0;
@@ -50,11 +55,22 @@
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      transition: background 0.3s, color 0.3s;
+      transition: color 0.3s;
+      min-height: 100vh;
       padding-top: 70px;
+
+      /* Animated Gradient Background (behind the glass) */
+      background: linear-gradient(-45deg, var(--bg-start), var(--bg-end), #dbeafe, #ede9fe);
+      background-size: 400% 400%;
+      animation: gradientShift 12s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     a {
@@ -63,41 +79,41 @@
     }
 
     .container {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
       padding: 0 24px;
     }
 
-    /* ─── Navigation ─── */
+    /* ─── GLASS NAVIGATION ─── */
     nav {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      background: var(--nav-bg);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--glass-border);
       z-index: 999;
       padding: 14px 0;
-      transition: background 0.3s, border 0.3s;
+      transition: background 0.3s;
     }
 
     .nav-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
       padding: 0 24px;
     }
 
     .nav-logo {
-      font-weight: 700;
-      font-size: 1.2rem;
+      font-weight: 800;
+      font-size: 1.3rem;
       letter-spacing: -0.5px;
       color: var(--text);
     }
-
     .nav-logo span {
       color: var(--accent);
     }
@@ -108,31 +124,29 @@
       gap: 28px;
       list-style: none;
     }
-
     .nav-links a {
       color: var(--text-secondary);
       font-weight: 500;
       font-size: 0.95rem;
       transition: color 0.2s;
     }
-
     .nav-links a:hover {
       color: var(--accent);
     }
 
     .theme-toggle {
-      background: none;
-      border: none;
+      background: var(--glass-bg-secondary);
+      border: 1px solid var(--glass-border);
       color: var(--text-secondary);
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       cursor: pointer;
-      padding: 4px 8px;
-      border-radius: 8px;
+      padding: 6px 12px;
+      border-radius: 40px;
+      backdrop-filter: blur(4px);
       transition: background 0.2s;
     }
-
     .theme-toggle:hover {
-      background: var(--border);
+      background: var(--accent-glow);
     }
 
     .hamburger {
@@ -144,7 +158,6 @@
       cursor: pointer;
       padding: 4px;
     }
-
     .hamburger span {
       width: 25px;
       height: 2.5px;
@@ -153,14 +166,9 @@
       transition: 0.3s;
     }
 
-    /* ─── Sections ─── */
+    /* ─── SECTIONS (Glass Cards) ─── */
     section {
-      padding: 70px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    section:last-of-type {
-      border-bottom: none;
+      padding: 60px 0;
     }
 
     .section-title {
@@ -171,19 +179,16 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      color: var(--text);
     }
-
     .section-title i {
       color: var(--accent);
-      font-size: 1.6rem;
     }
 
-    /* ─── Hero ─── */
+    /* ─── HERO ─── */
     #hero {
       padding: 40px 0 60px 0;
-      border-bottom: none;
     }
-
     .hero-badge {
       display: inline-block;
       background: var(--badge-bg);
@@ -193,59 +198,67 @@
       padding: 6px 18px;
       border-radius: 50px;
       margin-bottom: 20px;
-      letter-spacing: 0.3px;
+      backdrop-filter: blur(4px);
+      border: 1px solid var(--glass-border);
     }
-
-    .hero-badge i {
-      margin-right: 8px;
-    }
-
     .hero h1 {
-      font-size: 3.8rem;
+      font-size: 4rem;
       font-weight: 800;
       letter-spacing: -2px;
       line-height: 1.1;
       margin-bottom: 16px;
     }
-
     .hero h1 .highlight {
-      background: linear-gradient(135deg, var(--accent), #7c3aed);
+      background: linear-gradient(135deg, var(--accent), #a855f7);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-
     .hero p {
       font-size: 1.2rem;
       color: var(--text-secondary);
       max-width: 620px;
       margin-bottom: 12px;
     }
-
     .hero-availability {
       font-size: 1rem;
-      color: var(--text-secondary);
-      background: var(--bg-secondary);
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
       padding: 12px 20px;
-      border-radius: 12px;
+      border-radius: 16px;
       display: inline-block;
-      border-left: 4px solid var(--accent);
       margin: 16px 0 28px 0;
+      box-shadow: var(--glass-shadow);
     }
-
-    .hero-availability strong {
-      color: var(--text);
-    }
-
     .hero-buttons {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
     }
-
     .btn-primary {
       background: var(--accent);
       color: #fff;
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 25px var(--accent-glow);
+    }
+    .btn-secondary {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      color: var(--text);
       padding: 12px 32px;
       border-radius: 50px;
       font-weight: 600;
@@ -253,119 +266,94 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      border: none;
-      cursor: pointer;
     }
-
-    .btn-primary:hover {
-      background: var(--accent-hover);
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--text);
-      padding: 12px 32px;
-      border-radius: 50px;
-      font-weight: 600;
-      border: 1.5px solid var(--border);
-      transition: border 0.2s, background 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
     .btn-secondary:hover {
-      border-color: var(--accent);
-      background: var(--bg-secondary);
+      background: var(--glass-bg-secondary);
+      transform: translateY(-3px);
     }
 
-    /* ─── About ─── */
+    /* ─── ABOUT (Stat Cards) ─── */
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 40px;
     }
-
     .about-text p {
       color: var(--text-secondary);
       margin-bottom: 16px;
       font-size: 1.05rem;
     }
-
     .about-stats {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
       align-self: start;
     }
-
     .stat-card {
-      background: var(--bg-secondary);
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
       padding: 20px 18px;
-      border-radius: 16px;
+      border-radius: 20px;
       text-align: center;
-      border: 1px solid var(--border);
+      box-shadow: var(--glass-shadow);
     }
-
     .stat-number {
       font-size: 2.2rem;
       font-weight: 800;
       color: var(--accent);
       display: block;
     }
-
     .stat-label {
       font-size: 0.9rem;
       color: var(--text-secondary);
     }
 
-    /* ─── Experience & Training (shared card style) ─── */
-    .exp-item {
-      display: flex;
+    /* ─── BENTO GRID EXPERIENCE ─── */
+    .exp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 24px;
-      margin-bottom: 36px;
-      padding: 20px 24px;
-      background: var(--card);
-      border-radius: 16px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-      transition: transform 0.2s, box-shadow 0.2s;
     }
-
+    /* Make the first item (Swinnerton) span 2 columns for emphasis */
+    .exp-item:first-child {
+      grid-column: 1 / -1;
+    }
+    .exp-item {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      padding: 24px 28px;
+      border-radius: 24px;
+      box-shadow: var(--glass-shadow);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+    }
     .exp-item:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      border-color: var(--accent);
     }
-
-    .exp-left {
-      min-width: 140px;
-    }
-
     .exp-left .company {
       font-weight: 700;
       font-size: 1.1rem;
       color: var(--text);
     }
-
     .exp-left .date {
       font-size: 0.85rem;
       color: var(--text-secondary);
       font-weight: 500;
     }
-
     .exp-right .title {
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: var(--text);
-      margin-bottom: 4px;
+      margin-top: 4px;
+      margin-bottom: 6px;
     }
-
     .exp-right ul {
       list-style: none;
       padding-left: 0;
     }
-
     .exp-right li {
       color: var(--text-secondary);
       font-size: 0.95rem;
@@ -373,7 +361,6 @@
       position: relative;
       margin-bottom: 4px;
     }
-
     .exp-right li::before {
       content: "▹";
       position: absolute;
@@ -381,25 +368,26 @@
       color: var(--accent);
     }
 
-    /* ─── Training Highlight (accent border) ─── */
+    /* Training highlight */
     .training-item {
       border-left: 4px solid var(--accent);
+      grid-column: 1 / -1; /* Make training full width too */
     }
 
-    /* ─── Skills ─── */
+    /* ─── SKILLS & CERTS (Glass tags) ─── */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
     }
-
     .skill-category {
-      background: var(--bg-secondary);
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
       padding: 20px 24px;
-      border-radius: 16px;
-      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--glass-shadow);
     }
-
     .skill-category h4 {
       font-size: 1rem;
       color: var(--accent);
@@ -408,43 +396,40 @@
       align-items: center;
       gap: 8px;
     }
-
     .skill-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
     }
-
     .skill-tag {
-      background: var(--bg);
+      background: var(--glass-bg-secondary);
+      backdrop-filter: blur(4px);
+      border: 1px solid var(--glass-border);
       padding: 4px 14px;
       border-radius: 50px;
       font-size: 0.85rem;
-      border: 1px solid var(--border);
       color: var(--text-secondary);
     }
 
-    /* ─── Certifications ─── */
     .cert-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 16px;
     }
-
     .cert-item {
-      background: var(--bg-secondary);
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
       padding: 16px 20px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
+      border-radius: 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: var(--glass-shadow);
     }
-
     .cert-name {
       font-weight: 600;
     }
-
     .cert-status {
       font-size: 0.8rem;
       background: var(--badge-bg);
@@ -454,26 +439,23 @@
       font-weight: 600;
     }
 
-    /* ─── Contact ─── */
+    /* ─── CONTACT ─── */
     #contact {
       text-align: center;
       padding-bottom: 40px;
     }
-
     #contact p {
       color: var(--text-secondary);
       max-width: 500px;
       margin: 0 auto 28px auto;
       font-size: 1.1rem;
     }
-
     .contact-links {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
       gap: 24px 40px;
     }
-
     .contact-links a {
       color: var(--text-secondary);
       font-size: 1.05rem;
@@ -481,33 +463,36 @@
       align-items: center;
       gap: 10px;
       transition: color 0.2s;
+      background: var(--glass-bg);
+      padding: 8px 20px;
+      border-radius: 40px;
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(4px);
     }
-
     .contact-links a:hover {
       color: var(--accent);
+      border-color: var(--accent);
     }
-
     .footer-note {
       margin-top: 40px;
       font-size: 0.85rem;
       color: var(--text-secondary);
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--glass-border);
       padding-top: 28px;
     }
 
-    /* ─── Scroll Animation ─── */
+    /* ─── SCROLL ANIMATION ─── */
     .fade-up {
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
-
     .fade-up.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* ─── Responsive ─── */
+    /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
       body {
         padding-top: 62px;
@@ -520,10 +505,10 @@
         top: 60px;
         left: 0;
         right: 0;
-        background: var(--nav-bg);
-        backdrop-filter: blur(12px);
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
         padding: 24px;
-        border-bottom: 1px solid var(--border);
+        border-bottom: 1px solid var(--glass-border);
       }
       .nav-links.open {
         display: flex;
@@ -531,7 +516,6 @@
       .hamburger {
         display: flex;
       }
-
       .hero h1 {
         font-size: 2.6rem;
       }
@@ -541,23 +525,22 @@
       .about-stats {
         grid-template-columns: 1fr 1fr;
       }
-      .exp-item {
-        flex-direction: column;
-        gap: 8px;
-        padding: 16px;
+      .exp-grid {
+        grid-template-columns: 1fr;
       }
-      .exp-left {
-        min-width: unset;
+      .exp-item:first-child {
+        grid-column: 1;
+      }
+      .training-item {
+        grid-column: 1;
       }
       .section-title {
         font-size: 1.6rem;
       }
     }
-
     @media (max-width: 480px) {
       .hero h1 {
-        font-size: 2.0rem;
-        letter-spacing: -1px;
+        font-size: 2rem;
       }
       .hero-buttons {
         flex-direction: column;
@@ -567,13 +550,33 @@
       .btn-secondary {
         justify-content: center;
       }
-      .cert-grid {
-        grid-template-columns: 1fr;
-      }
+    }
+
+    /* ─── CUSTOM CURSOR (The "WOW" Factor) ─── */
+    .cursor-glow {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: var(--accent-glow);
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: -1;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.2s;
+      opacity: 0.6;
+      mix-blend-mode: soft-light;
+    }
+    [data-theme="dark"] .cursor-glow {
+      mix-blend-mode: screen;
+      opacity: 0.4;
     }
   </style>
 </head>
 <body>
+
+  <!-- ═══ CUSTOM GLOWING CURSOR ═══ -->
+  <div class="cursor-glow" id="cursorGlow"></div>
 
   <!-- ═══ NAVIGATION ═══ -->
   <nav>
@@ -675,95 +678,96 @@
     </div>
   </section>
 
-  <!-- ═══ EXPERIENCE ═══ -->
+  <!-- ═══ EXPERIENCE (BENTO GRID) ═══ -->
   <section id="experience">
     <div class="container">
       <div class="section-title fade-up">
         <i class="fas fa-briefcase"></i> Experience
       </div>
+      <div class="exp-grid">
 
-      <!-- 1. Swinnerton-Staten -->
-      <div class="exp-item fade-up">
-        <div class="exp-left">
-          <div class="company">Swinnerton-Staten Solutions, Inc.</div>
-          <div class="date">May 2024 – Jan 2026</div>
+        <!-- 1. Swinnerton-Staten (spans full width) -->
+        <div class="exp-item fade-up">
+          <div class="exp-left">
+            <div class="company">Swinnerton-Staten Solutions, Inc.</div>
+            <div class="date">May 2024 – Jan 2026</div>
+          </div>
+          <div class="exp-right">
+            <div class="title">Junior Data Analyst</div>
+            <ul>
+              <li>Extracted and analyzed operational data using Excel and CRM tools, delivering insights that improved workflow efficiency by 12%.</li>
+              <li>Performed data quality checks on client databases, identifying and rectifying discrepancies to ensure 99% data integrity.</li>
+              <li>Created weekly performance dashboards and reports to support strategic decision-making.</li>
+              <li>Collaborated with cross-functional teams to reduce manual data entry time by 20%.</li>
+            </ul>
+          </div>
         </div>
-        <div class="exp-right">
-          <div class="title">Junior Data Analyst</div>
-          <ul>
-            <li>Extracted and analyzed operational data using Excel and CRM tools, delivering insights that improved workflow efficiency by 12%.</li>
-            <li>Performed data quality checks on client databases, identifying and rectifying discrepancies to ensure 99% data integrity.</li>
-            <li>Created weekly performance dashboards and reports to support strategic decision-making.</li>
-            <li>Collaborated with cross-functional teams to reduce manual data entry time by 20%.</li>
-          </ul>
+
+        <!-- 2. Diliman Labs -->
+        <div class="exp-item fade-up">
+          <div class="exp-left">
+            <div class="company">Diliman Labs</div>
+            <div class="date">Sep 2022 – Mar 2023</div>
+          </div>
+          <div class="exp-right">
+            <div class="title">AI Data Operations Specialist</div>
+            <ul>
+              <li>Prepared, cleaned, and validated datasets for machine learning models, achieving 99.5% accuracy across training sets.</li>
+              <li>Executed data annotation and labeling guidelines, resolving ambiguous cases via systematic quality audits.</li>
+              <li>Audited data integrity across systems, correcting inconsistencies and documenting process improvements.</li>
+            </ul>
+          </div>
         </div>
+
+        <!-- 3. Private Tutor -->
+        <div class="exp-item fade-up">
+          <div class="exp-left">
+            <div class="company">Private Tutoring Practice</div>
+            <div class="date">2019 – 2024</div>
+          </div>
+          <div class="exp-right">
+            <div class="title">Academic Tutor – Mathematics &amp; Sciences</div>
+            <ul>
+              <li>Tutored a student from Grade 7 through senior high, achieving 100% admission success to UP Diliman, Ateneo, and DLSU.</li>
+              <li>Developed customized learning plans and transitioned instruction seamlessly to online platforms.</li>
+              <li>Emphasized deep conceptual understanding over rote memorization.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 4. Concentrix -->
+        <div class="exp-item fade-up">
+          <div class="exp-left">
+            <div class="company">Concentrix (AT&amp;T Account)</div>
+            <div class="date">Feb 2022 – Aug 2022</div>
+          </div>
+          <div class="exp-right">
+            <div class="title">Customer Service Representative</div>
+            <ul>
+              <li>Resolved complex billing and service issues, maintaining high customer satisfaction scores.</li>
+              <li>Managed escalations using systematic problem-solving and Salesforce CRM to track and analyze customer data.</li>
+              <li>Identified recurring service issues and collaborated with internal teams to implement long-term fixes.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 5. Primeart Builders -->
+        <div class="exp-item fade-up">
+          <div class="exp-left">
+            <div class="company">Primeart Builders Inc.</div>
+            <div class="date">Jun 2018 – Jul 2018</div>
+          </div>
+          <div class="exp-right">
+            <div class="title">Assistant to Site Engineer (OJT)</div>
+            <ul>
+              <li>Supervised quality control for floor tiling, plastering, and ceiling work across a 5-storey school building.</li>
+              <li>Documented daily progress of structural elements and verified correct fixture installations.</li>
+              <li>Supported daily inspections and reporting, ensuring compliance with construction standards.</li>
+            </ul>
+          </div>
+        </div>
+
       </div>
-
-      <!-- 2. Diliman Labs -->
-      <div class="exp-item fade-up">
-        <div class="exp-left">
-          <div class="company">Diliman Labs</div>
-          <div class="date">Sep 2022 – Mar 2023</div>
-        </div>
-        <div class="exp-right">
-          <div class="title">AI Data Operations Specialist</div>
-          <ul>
-            <li>Prepared, cleaned, and validated datasets for machine learning models, achieving 99.5% accuracy across training sets.</li>
-            <li>Executed data annotation and labeling guidelines, resolving ambiguous cases via systematic quality audits.</li>
-            <li>Audited data integrity across systems, correcting inconsistencies and documenting process improvements.</li>
-            <li>Worked with data engineers to refine annotation protocols, directly improving model performance metrics.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 3. Private Tutor -->
-      <div class="exp-item fade-up">
-        <div class="exp-left">
-          <div class="company">Private Tutoring Practice</div>
-          <div class="date">2019 – 2024</div>
-        </div>
-        <div class="exp-right">
-          <div class="title">Academic Tutor – Mathematics &amp; Sciences</div>
-          <ul>
-            <li>Tutored a student from Grade 7 through senior high, achieving 100% admission success to UP Diliman, Ateneo, and DLSU.</li>
-            <li>Developed customized learning plans and transitioned instruction seamlessly to online platforms.</li>
-            <li>Emphasized deep conceptual understanding over rote memorization, significantly improving problem-solving confidence.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 4. Concentrix -->
-      <div class="exp-item fade-up">
-        <div class="exp-left">
-          <div class="company">Concentrix (AT&amp;T Account)</div>
-          <div class="date">Feb 2022 – Aug 2022</div>
-        </div>
-        <div class="exp-right">
-          <div class="title">Customer Service Representative</div>
-          <ul>
-            <li>Resolved complex billing and service issues, maintaining high customer satisfaction scores.</li>
-            <li>Managed escalations using systematic problem-solving and Salesforce CRM to track and analyze customer data.</li>
-            <li>Identified recurring service issues and collaborated with internal teams to implement long-term fixes.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 5. Primeart Builders -->
-      <div class="exp-item fade-up">
-        <div class="exp-left">
-          <div class="company">Primeart Builders Inc.</div>
-          <div class="date">Jun 2018 – Jul 2018</div>
-        </div>
-        <div class="exp-right">
-          <div class="title">Assistant to Site Engineer (OJT)</div>
-          <ul>
-            <li>Supervised quality control for floor tiling, plastering, and ceiling work across a 5-storey school building.</li>
-            <li>Documented daily progress of structural elements and verified correct fixture installations.</li>
-            <li>Supported daily inspections and reporting, ensuring compliance with construction standards.</li>
-          </ul>
-        </div>
-      </div>
-
     </div>
   </section>
 
@@ -773,21 +777,22 @@
       <div class="section-title fade-up">
         <i class="fas fa-graduation-cap"></i> Training &amp; Professional Development
       </div>
-
-      <div class="exp-item training-item fade-up">
-        <div class="exp-left">
-          <div class="company">Online Intensive Program</div>
-          <div class="date">Mar 2024 – Dec 2024</div>
-        </div>
-        <div class="exp-right">
-          <div class="title">Japanese Language &amp; Nursing Care Training</div>
-          <ul>
-            <li>Completed a 6‑month rigorous online program focused on technical Japanese vocabulary and caregiving protocols.</li>
-            <li>Passed the <strong>Nursing Care Language Evaluation</strong> and <strong>Nursing Care Skills Test</strong> during the program.</li>
-            <li>Participated in immersive cross‑cultural communication workshops and practical skills demonstrations.</li>
-            <li>Successfully balanced the training alongside full‑time data analyst responsibilities, demonstrating strong time management and discipline.</li>
-            <li>Concluded with a comprehensive final capstone assessment in August 2025, validating clinical communication and technical competency.</li>
-          </ul>
+      <div class="exp-grid">
+        <div class="exp-item training-item fade-up">
+          <div class="exp-left">
+            <div class="company">Online Intensive Program</div>
+            <div class="date">Mar 2024 – Dec 2024</div>
+          </div>
+          <div class="exp-right">
+            <div class="title">Japanese Language &amp; Nursing Care Training</div>
+            <ul>
+              <li>Completed a 6‑month rigorous online program focused on technical Japanese vocabulary and caregiving protocols.</li>
+              <li>Passed the <strong>Nursing Care Language Evaluation</strong> and <strong>Nursing Care Skills Test</strong> during the program.</li>
+              <li>Participated in immersive cross‑cultural communication workshops and practical skills demonstrations.</li>
+              <li>Successfully balanced the training alongside full‑time data analyst responsibilities, demonstrating strong time management.</li>
+              <li>Concluded with a comprehensive final capstone assessment in August 2025, validating clinical communication and technical competency.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -918,16 +923,14 @@
       navLinks.classList.toggle('open');
     });
 
-    // Close nav on link click (mobile)
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('open');
       });
     });
 
-    // ─── Scroll Animations (Intersection Observer) ───
+    // ─── Scroll Animations ───
     const fadeElements = document.querySelectorAll('.fade-up');
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -941,7 +944,6 @@
 
     fadeElements.forEach(el => observer.observe(el));
 
-    // ─── Trigger for elements already in view on load ───
     window.addEventListener('load', () => {
       fadeElements.forEach(el => {
         const rect = el.getBoundingClientRect();
@@ -949,6 +951,14 @@
           el.classList.add('visible');
         }
       });
+    });
+
+    // ─── Glowing Cursor Follower ───
+    const cursorGlow = document.getElementById('cursorGlow');
+
+    document.addEventListener('mousemove', (e) => {
+      cursorGlow.style.left = e.clientX + 'px';
+      cursorGlow.style.top = e.clientY + 'px';
     });
   </script>
 
