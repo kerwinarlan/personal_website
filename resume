@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kerwin Arlan - Resume</title>
+  <style>
+    /* ─── RESET & BASE ─── */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #e6e9ef;
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+      font-family: 'Times New Roman', Times, serif;
+      line-height: 1.45;
+      color: #1e1e1e;
+    }
+
+    .resume {
+      max-width: 900px;
+      width: 100%;
+      background: white;
+      padding: 44px 52px 48px 52px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
+    }
+
+    /* ─── HEADER ─── */
+    h1 {
+      font-size: 3.2em;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 2px;
+      margin-bottom: 2px;
+    }
+
+    .contact-info {
+      text-align: center;
+      font-size: 1.0em;
+      padding-bottom: 12px;
+      border-bottom: 2.5px solid #111;
+      margin-bottom: 22px;
+    }
+    .contact-info span {
+      margin: 0 6px;
+    }
+
+    /* ─── SECTIONS ─── */
+    .section {
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: 1.25em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid #222;
+      padding-bottom: 3px;
+      margin-bottom: 12px;
+    }
+
+    /* ─── EDUCATION ─── */
+    .edu-item {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      font-weight: 700;
+      font-size: 1.05em;
+    }
+    .edu-item .edu-date {
+      font-weight: 400;
+      font-style: italic;
+    }
+    .edu-detail {
+      font-weight: 400;
+      margin-top: 1px;
+      margin-bottom: 4px;
+      font-size: 0.98em;
+    }
+
+    /* ─── EXPERIENCE & TRAINING ─── */
+    .job {
+      margin-bottom: 14px;
+    }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      font-weight: 700;
+      font-size: 1.05em;
+    }
+    .job-header .date {
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    .job-title {
+      font-style: italic;
+      font-weight: 600;
+      margin-top: 1px;
+      margin-bottom: 2px;
+      font-size: 0.98em;
+    }
+
+    .job-details {
+      list-style: none;
+      padding-left: 18px;
+    }
+    .job-details li {
+      text-align: justify;
+      margin-bottom: 1px;
+      position: relative;
+      padding-left: 18px;
+    }
+    .job-details li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+    }
+
+    /* ─── SKILLS ─── */
+    .skill-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+    .skill-row .cat {
+      font-weight: 700;
+      width: 130px;
+      flex-shrink: 0;
+    }
+    .skill-row .items {
+      flex: 1;
+    }
+
+    /* ─── CERTS ─── */
+    .cert-list {
+      list-style: none;
+      padding-left: 18px;
+    }
+    .cert-list li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 1px;
+    }
+    .cert-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+    }
+    .cert-badge {
+      font-style: italic;
+      color: #444;
+    }
+
+    /* ─── PRINT ─── */
+    @media print {
+      body {
+        background: white;
+        padding: 0.2in;
+      }
+      .resume {
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+      }
+      .job-details li {
+        page-break-inside: avoid;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .resume {
+        padding: 24px 20px 28px 20px;
+      }
+      h1 {
+        font-size: 2.4em;
+      }
+      .job-header {
+        flex-direction: column;
+      }
+      .skill-row .cat {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="resume">
+
+  <!-- ═══ HEADER ═══ -->
+  <h1>Kerwin Dio Joseph Arlan</h1>
+  <div class="contact-info">
+    kerwinarlan@gmail.com <span>|</span> (+63) 976 101 3092 <span>|</span> Cavite, Philippines
+    <br />
+    linkedin.com/in/kerwinarlan <span>|</span> github.com/kerwinarlan
+  </div>
+
+  <!-- ═══ EDUCATION ═══ -->
+  <section class="section">
+    <div class="section-title">Education</div>
+    <div class="edu-item">
+      <span><strong>University of the Philippines Diliman</strong></span>
+      <span class="edu-date">Feb 2026 – Present</span>
+    </div>
+    <div class="edu-detail">
+      <strong>B.S. Civil Engineering</strong> (Continuing Student) – Expected Graduation: <strong>July 2027</strong>
+    </div>
+    <div style="font-size:0.92rem; color:#444; margin-top:2px;">
+      <em>Light academic load starting Aug 2026:</em> Thesis I &amp; II + 1 major + 2 PE subjects. Fully available for full-time work.
+    </div>
+  </section>
+
+  <!-- ═══ EXPERIENCE ═══ -->
+  <section class="section">
+    <div class="section-title">Experience</div>
+
+    <div class="job">
+      <div class="job-header">
+        <span><strong>Swinnerton-Staten Solutions, Inc.</strong></span>
+        <span class="date">May 2024 – Jan 2026</span>
+      </div>
+      <div class="job-title">Junior Data Analyst</div>
+      <ul class="job-details">
+        <li>Extracted and analyzed operational data using Excel and CRM tools, delivering insights that improved workflow efficiency by 12%.</li>
+        <li>Performed rigorous data quality checks on client databases, ensuring 99% data integrity.</li>
+        <li>Created weekly performance dashboards and reports to support strategic decision-making.</li>
+        <li>Collaborated with cross-functional teams to reduce manual data entry time by 20%.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <span><strong>Diliman Labs</strong></span>
+        <span class="date">Sep 2022 – Mar 2023</span>
+      </div>
+      <div class="job-title">AI Data Operations Specialist</div>
+      <ul class="job-details">
+        <li>Prepared, cleaned, and validated datasets for machine learning models, achieving 99.5% accuracy across training sets.</li>
+        <li>Executed data annotation and labeling guidelines, resolving ambiguous cases through systematic quality audits.</li>
+        <li>Audited data integrity across systems and documented process improvements.</li>
+        <li>Worked with data engineers to refine annotation protocols, directly improving model performance.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <span><strong>Private Tutoring Practice</strong></span>
+        <span class="date">2019 – 2024</span>
+      </div>
+      <div class="job-title">Academic Tutor – Mathematics &amp; Sciences</div>
+      <ul class="job-details">
+        <li>Tutored a student from Grade 7 through senior high, achieving 100% admission success to UP Diliman, Ateneo, and DLSU.</li>
+        <li>Developed customized learning plans and transitioned instruction seamlessly to online platforms.</li>
+        <li>Emphasized deep conceptual understanding over rote memorization.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <span><strong>Concentrix (AT&amp;T Account)</strong></span>
+        <span class="date">Feb 2022 – Aug 2022</span>
+      </div>
+      <div class="job-title">Customer Service Representative</div>
+      <ul class="job-details">
+        <li>Resolved complex billing and service issues using systematic problem-solving and Salesforce CRM.</li>
+        <li>Managed escalations and tracked customer data to identify recurring service issues.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <span><strong>Primeart Builders Inc.</strong></span>
+        <span class="date">Jun 2018 – Jul 2018</span>
+      </div>
+      <div class="job-title">Assistant to Site Engineer (OJT)</div>
+      <ul class="job-details">
+        <li>Supervised quality control for tiling, plastering, and ceiling work on a 5-storey school building.</li>
+        <li>Documented daily progress of structural elements and verified fixture installations.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ TRAINING ═══ -->
+  <section class="section">
+    <div class="section-title">Training &amp; Professional Development</div>
+    <div class="job">
+      <div class="job-header">
+        <span><strong>Online Intensive Program</strong></span>
+        <span class="date">Mar 2024 – Dec 2024</span>
+      </div>
+      <div class="job-title">Japanese Language &amp; Nursing Care Training</div>
+      <ul class="job-details">
+        <li>Completed a 6‑month rigorous online program focused on technical Japanese vocabulary and caregiving protocols.</li>
+        <li>Passed the <strong>Nursing Care Language Evaluation</strong> and <strong>Nursing Care Skills Test</strong>.</li>
+        <li>Concluded with a comprehensive final capstone assessment in August 2025, validating clinical communication skills.</li>
+        <li>Balanced training alongside full-time data analyst responsibilities, demonstrating strong time management.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ SKILLS ═══ -->
+  <section class="section">
+    <div class="section-title">Skills</div>
+    <div class="skill-row">
+      <span class="cat">Technical</span>
+      <span class="items">Python (Intermediate), Data Analysis, Excel / Spreadsheets, Salesforce CRM, HTML &amp; CSS, Data Quality Assurance</span>
+    </div>
+    <div class="skill-row">
+      <span class="cat">Professional</span>
+      <span class="items">Project Coordination, Client Relations, Technical Writing, Problem-Solving, Cross-functional Collaboration</span>
+    </div>
+    <div class="skill-row">
+      <span class="cat">Languages</span>
+      <span class="items">Filipino (Native), English (Fluent), Japanese (A2 – JFT-Basic)</span>
+    </div>
+  </section>
+
+  <!-- ═══ CERTIFICATIONS ═══ -->
+  <section class="section">
+    <div class="section-title">Certifications</div>
+    <ul class="cert-list">
+      <li><strong>JFT‑Basic Japanese</strong> <span class="cert-badge">(A2)</span></li>
+      <li><strong>Nursing Care Language Evaluation</strong> <span class="cert-badge">(Passed)</span></li>
+      <li><strong>Nursing Care Skills Test</strong> <span class="cert-badge">(Passed)</span></li>
+      <li><strong>DataCamp Python</strong> <span class="cert-badge">(In Progress)</span></li>
+    </ul>
+  </section>
+
+</div>
+<!-- end .resume -->
+
+</body>
+</html>
