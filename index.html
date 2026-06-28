@@ -1,45 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kerwin Arlan – Engineer · Analyst · Builder</title>
-  <!-- Font Awesome + JetBrains Mono (terminal vibe) -->
+  <!-- Font Awesome + JetBrains Mono (terminal font) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    /* ─── CSS Variables (Glass + Dark Mode) ─── */
+    /* ─── CSS Variables (Dark default) ─── */
     :root {
+      --glass-bg: rgba(15, 23, 42, 0.65);
+      --glass-bg-secondary: rgba(30, 41, 59, 0.4);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+
+      --text: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --accent: #818cf8;
+      --accent-glow: rgba(129, 140, 248, 0.25);
+      --badge-bg: rgba(129, 140, 248, 0.2);
+      --badge-text: #a5b4fc;
+
+      --bg-start: #0f172a;
+      --bg-end: #1e1b4b;
+      --terminal-font: 'JetBrains Mono', monospace;
+    }
+
+    [data-theme="light"] {
       --glass-bg: rgba(255, 255, 255, 0.55);
       --glass-bg-secondary: rgba(255, 255, 255, 0.25);
       --glass-border: rgba(255, 255, 255, 0.35);
       --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-
       --text: #0f172a;
       --text-secondary: #1e293b;
       --accent: #4f46e5;
       --accent-glow: rgba(79, 70, 229, 0.3);
       --badge-bg: rgba(79, 70, 229, 0.15);
       --badge-text: #4338ca;
-
       --bg-start: #e0e7ff;
       --bg-end: #fce7f3;
-      --terminal-font: 'JetBrains Mono', monospace;
-    }
-
-    [data-theme="dark"] {
-      --glass-bg: rgba(15, 23, 42, 0.65);
-      --glass-bg-secondary: rgba(30, 41, 59, 0.4);
-      --glass-border: rgba(255, 255, 255, 0.08);
-      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-      --text: #f1f5f9;
-      --text-secondary: #cbd5e1;
-      --accent: #818cf8;
-      --accent-glow: rgba(129, 140, 248, 0.25);
-      --badge-bg: rgba(129, 140, 248, 0.2);
-      --badge-text: #a5b4fc;
-      --bg-start: #0f172a;
-      --bg-end: #1e1b4b;
     }
 
     /* ─── BASE ─── */
@@ -57,10 +57,10 @@
       line-height: 1.6;
       min-height: 100vh;
       padding-top: 70px;
-      background: linear-gradient(-45deg, var(--bg-start), var(--bg-end), #dbeafe, #ede9fe);
+      background: linear-gradient(-45deg, var(--bg-start), var(--bg-end), #1a1a2e, #16213e);
       background-size: 400% 400%;
-      animation: gradientShift 12s ease infinite;
-      transition: color 0.3s;
+      animation: gradientShift 15s ease infinite;
+      transition: background 0.3s, color 0.3s;
     }
     @keyframes gradientShift {
       0% { background-position: 0% 50%; }
@@ -169,84 +169,141 @@
       color: var(--accent);
     }
 
-    /* ─── HERO (Terminal Flavour) ─── */
+    /* ════════════════════════════════════ */
+    /*  HERO — TERMINAL WINDOW STYLE      */
+    /* ════════════════════════════════════ */
     #hero {
-      padding: 40px 0 60px 0;
+      padding: 20px 0 50px 0;
     }
-    .hero-badge {
-      display: inline-block;
-      background: var(--badge-bg);
-      color: var(--badge-text);
-      font-weight: 600;
-      font-size: 0.85rem;
-      padding: 6px 18px;
-      border-radius: 50px;
-      margin-bottom: 20px;
-      backdrop-filter: blur(4px);
-      border: 1px solid var(--glass-border);
-    }
-    .hero h1 {
-      font-size: 4rem;
-      font-weight: 800;
-      letter-spacing: -2px;
-      line-height: 1.1;
-      margin-bottom: 12px;
-    }
-    .hero h1 .highlight {
-      background: linear-gradient(135deg, var(--accent), #a855f7);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    /* Terminal typing area */
-    .hero-terminal {
+
+    .terminal-window {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 40px var(--accent-glow);
+      max-width: 820px;
+      margin: 0 auto;
+      overflow: hidden;
       font-family: var(--terminal-font);
-      font-size: 1.2rem;
-      color: var(--accent);
-      min-height: 2.8rem;
-      margin: 8px 0 16px 0;
-      background: var(--glass-bg-secondary);
-      backdrop-filter: blur(4px);
-      padding: 8px 16px;
-      border-radius: 12px;
-      border-left: 4px solid var(--accent);
-      display: inline-block;
-      max-width: 100%;
     }
-    .hero-terminal .cursor {
+
+    /* Terminal Header (traffic lights) */
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 20px;
+      background: #161b22;
+      border-bottom: 1px solid #30363d;
+    }
+    .terminal-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
       display: inline-block;
-      width: 10px;
+    }
+    .terminal-dot.red { background: #ff5f56; }
+    .terminal-dot.yellow { background: #ffbd2e; }
+    .terminal-dot.green { background: #27c93f; }
+
+    .terminal-title {
+      color: #8b949e;
+      font-size: 0.85rem;
+      margin-left: 12px;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+    }
+
+    /* Terminal Body */
+    .terminal-body {
+      padding: 28px 32px;
+      color: #e6edf3;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      min-height: 280px;
+    }
+    .terminal-body .prompt {
+      color: #58a6ff;
+      font-weight: 700;
+    }
+    .terminal-body .output {
+      color: #7ee787;
+      display: block;
+      padding-left: 20px;
+      margin-bottom: 6px;
+    }
+    .terminal-body .output-white {
+      color: #e6edf3;
+      display: block;
+      padding-left: 20px;
+      margin-bottom: 6px;
+    }
+    .terminal-body .cmd-line {
+      margin-bottom: 6px;
+    }
+
+    /* Blinking cursor inside terminal */
+    .cursor-blink {
+      display: inline-block;
+      width: 12px;
       height: 1.2rem;
-      background: var(--accent);
-      margin-left: 4px;
+      background: #58a6ff;
       vertical-align: text-bottom;
       animation: blink 1s step-end infinite;
+      margin-left: 2px;
     }
     @keyframes blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
     }
-    .hero p {
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-      max-width: 620px;
-      margin-top: 8px;
+
+    /* Terminal badge (under the terminal) */
+    .terminal-badge {
+      text-align: center;
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
+    .terminal-badge span {
+      background: var(--glass-bg);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--glass-border);
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    .terminal-badge i {
+      color: var(--accent);
+      margin-right: 6px;
+    }
+
+    /* Availability note (outside terminal) */
     .hero-availability {
       font-size: 1rem;
       background: var(--glass-bg);
       backdrop-filter: blur(12px);
       border: 1px solid var(--glass-border);
-      padding: 12px 20px;
+      padding: 14px 24px;
       border-radius: 16px;
-      display: inline-block;
-      margin: 16px 0 28px 0;
+      max-width: 820px;
+      margin: 24px auto 0 auto;
+      text-align: center;
+      color: var(--text-secondary);
       box-shadow: var(--glass-shadow);
     }
+    .hero-availability strong {
+      color: var(--text);
+    }
+
     .hero-buttons {
       display: flex;
+      justify-content: center;
       flex-wrap: wrap;
       gap: 14px;
+      margin-top: 28px;
     }
     .btn-primary {
       background: var(--accent);
@@ -282,33 +339,6 @@
     .btn-secondary:hover {
       background: var(--glass-bg-secondary);
       transform: translateY(-3px);
-    }
-
-    /* ─── LIVE STATUS BADGE ─── */
-    .live-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.9rem;
-      background: var(--glass-bg);
-      backdrop-filter: blur(8px);
-      border: 1px solid var(--glass-border);
-      padding: 6px 16px;
-      border-radius: 40px;
-      margin-top: 12px;
-      color: var(--text-secondary);
-    }
-    .live-status .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #22c55e;
-      display: inline-block;
-      animation: pulse-dot 1.8s ease-in-out infinite;
-    }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
     }
 
     /* ─── ABOUT, STATS ─── */
@@ -368,7 +398,7 @@
     }
     .exp-item:hover {
       transform: translateY(-6px) scale(1.01);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
       border-color: var(--accent);
     }
     .exp-left .company {
@@ -538,12 +568,12 @@
       pointer-events: none;
       z-index: -1;
       transform: translate(-50%, -50%);
-      opacity: 0.6;
-      mix-blend-mode: soft-light;
+      opacity: 0.5;
+      mix-blend-mode: screen;
       transition: opacity 0.2s;
     }
-    [data-theme="dark"] .cursor-glow {
-      mix-blend-mode: screen;
+    [data-theme="light"] .cursor-glow {
+      mix-blend-mode: soft-light;
       opacity: 0.4;
     }
 
@@ -565,8 +595,8 @@
       }
       .nav-links.open { display: flex; }
       .hamburger { display: flex; }
-      .hero h1 { font-size: 2.6rem; }
-      .hero-terminal { font-size: 1rem; }
+      .terminal-body { font-size: 0.9rem; padding: 20px; }
+      .terminal-window { border-radius: 12px; }
       .about-grid { grid-template-columns: 1fr; }
       .about-stats { grid-template-columns: 1fr 1fr; }
       .exp-grid { grid-template-columns: 1fr; }
@@ -575,7 +605,7 @@
       .section-title { font-size: 1.6rem; }
     }
     @media (max-width: 480px) {
-      .hero h1 { font-size: 2rem; }
+      .terminal-body { font-size: 0.8rem; padding: 16px; }
       .hero-buttons { flex-direction: column; align-items: stretch; }
       .btn-primary, .btn-secondary { justify-content: center; }
     }
@@ -598,7 +628,7 @@
         <li><a href="#contact">Contact</a></li>
         <li>
           <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-            <i class="fas fa-moon" id="themeIcon"></i>
+            <i class="fas fa-sun" id="themeIcon"></i>
           </button>
         </li>
       </ul>
@@ -608,39 +638,57 @@
     </div>
   </nav>
 
-  <!-- ═══ HERO (Terminal + Live Status) ═══ -->
+  <!-- ═══ HERO – TERMINAL WINDOW ═══ -->
   <section id="hero">
     <div class="container fade-up">
-      <div class="hero-badge">
-        <i class="fas fa-bolt"></i> Open to roles starting <strong>August 2026</strong>
+      <div class="terminal-window">
+        <!-- Terminal Header (macOS traffic lights) -->
+        <div class="terminal-header">
+          <span class="terminal-dot red"></span>
+          <span class="terminal-dot yellow"></span>
+          <span class="terminal-dot green"></span>
+          <span class="terminal-title">kerwin@portfolio:~</span>
+        </div>
+
+        <!-- Terminal Body -->
+        <div class="terminal-body">
+          <div class="cmd-line">
+            <span class="prompt">$</span> whoami
+          </div>
+          <span class="output">> Kerwin Arlan · Engineer · Analyst · Builder</span>
+
+          <div class="cmd-line" style="margin-top: 12px;">
+            <span class="prompt">$</span> cat about.md
+          </div>
+          <span class="output-white">> Civil Engineering student at UP Diliman.</span>
+          <span class="output-white">> Bridging structural design with data-driven AI.</span>
+
+          <div class="cmd-line" style="margin-top: 12px;">
+            <span class="prompt">$</span> ./status --current
+          </div>
+          <span class="output">> Prepping Thesis · Learning Python · Open to work</span>
+
+          <div class="cmd-line" style="margin-top: 12px;">
+            <span class="prompt">$</span> <span class="cursor-blink"></span>
+          </div>
+        </div>
       </div>
-      <h1>
-        Hi, I'm <span class="highlight">Kerwin</span><br />
-        Engineer · Analyst · Builder
-      </h1>
 
-      <!-- Terminal Typing Area -->
-      <div class="hero-terminal" id="typingContainer">
-        <span id="typingText"></span><span class="cursor"></span>
+      <!-- Badges under terminal -->
+      <div class="terminal-badge">
+        <span><i class="fas fa-calendar-check"></i> Available Aug 2026</span>
+        <span><i class="fas fa-graduation-cap"></i> B.S. Civil Eng · UP Diliman ‘27</span>
+        <span><i class="fas fa-code"></i> Python · Data · AI</span>
       </div>
 
-      <p>
-        Civil Engineering student at UP Diliman, bridging the gap between
-        structural design and data-driven decisions.
-      </p>
-
-      <!-- Live Status Badge -->
-      <div class="live-status">
-        <span class="dot"></span>
-        <span><strong>Currently:</strong> Prepping Thesis · Learning Python · Open to work</span>
-      </div>
-
+      <!-- Availability note -->
       <div class="hero-availability">
-        <i class="fas fa-calendar-check" style="color: var(--accent); margin-right: 8px;"></i>
+        <i class="fas fa-lightbulb" style="color: var(--accent); margin-right: 8px;"></i>
         <strong>Light academic load next year:</strong> Thesis I &amp; II + 1 major + 2 PE subjects.<br />
         Fully available for <strong>full-time or heavy part-time work</strong>.
       </div>
 
+      <!-- CTA Buttons -->
       <div class="hero-buttons">
         <a href="#contact" class="btn-primary">
           <i class="fas fa-paper-plane"></i> Get in Touch
@@ -700,7 +748,7 @@
     </div>
   </section>
 
-  <!-- ═══ EXPERIENCE (BENTO) ═══ -->
+  <!-- ═══ EXPERIENCE ═══ -->
   <section id="experience">
     <div class="container">
       <div class="section-title fade-up">
@@ -717,7 +765,7 @@
             <div class="title">Junior Data Analyst</div>
             <ul>
               <li>Extracted and analyzed operational data using Excel and CRM tools, delivering insights that improved workflow efficiency by 12%.</li>
-              <li>Performed data quality checks on client databases, identifying and rectifying discrepancies to ensure 99% data integrity.</li>
+              <li>Performed data quality checks on client databases, ensuring 99% data integrity.</li>
               <li>Created weekly performance dashboards and reports to support strategic decision-making.</li>
               <li>Collaborated with cross-functional teams to reduce manual data entry time by 20%.</li>
             </ul>
@@ -732,9 +780,9 @@
           <div class="exp-right">
             <div class="title">AI Data Operations Specialist</div>
             <ul>
-              <li>Prepared, cleaned, and validated datasets for machine learning models, achieving 99.5% accuracy across training sets.</li>
+              <li>Prepared, cleaned, and validated datasets for machine learning models, achieving 99.5% accuracy.</li>
               <li>Executed data annotation and labeling guidelines, resolving ambiguous cases via systematic quality audits.</li>
-              <li>Audited data integrity across systems, correcting inconsistencies and documenting process improvements.</li>
+              <li>Audited data integrity across systems and documented process improvements.</li>
             </ul>
           </div>
         </div>
@@ -762,9 +810,9 @@
           <div class="exp-right">
             <div class="title">Customer Service Representative</div>
             <ul>
-              <li>Resolved complex billing and service issues, maintaining high customer satisfaction scores.</li>
-              <li>Managed escalations using systematic problem-solving and Salesforce CRM to track and analyze customer data.</li>
-              <li>Identified recurring service issues and collaborated with internal teams to implement long-term fixes.</li>
+              <li>Resolved complex billing and service issues, maintaining high customer satisfaction.</li>
+              <li>Managed escalations using systematic problem-solving and Salesforce CRM.</li>
+              <li>Identified recurring service issues and collaborated on long-term fixes.</li>
             </ul>
           </div>
         </div>
@@ -777,9 +825,9 @@
           <div class="exp-right">
             <div class="title">Assistant to Site Engineer (OJT)</div>
             <ul>
-              <li>Supervised quality control for floor tiling, plastering, and ceiling work across a 5-storey school building.</li>
-              <li>Documented daily progress of structural elements and verified correct fixture installations.</li>
-              <li>Supported daily inspections and reporting, ensuring compliance with construction standards.</li>
+              <li>Supervised quality control for tiling, plastering, and ceiling work on a 5-storey school building.</li>
+              <li>Documented daily progress of structural elements and verified fixture installations.</li>
+              <li>Supported daily inspections and reporting, ensuring compliance with standards.</li>
             </ul>
           </div>
         </div>
@@ -803,11 +851,11 @@
           <div class="exp-right">
             <div class="title">Japanese Language &amp; Nursing Care Training</div>
             <ul>
-              <li>Completed a 6‑month rigorous online program focused on technical Japanese vocabulary and caregiving protocols.</li>
-              <li>Passed the <strong>Nursing Care Language Evaluation</strong> and <strong>Nursing Care Skills Test</strong> during the program.</li>
-              <li>Participated in immersive cross‑cultural communication workshops and practical skills demonstrations.</li>
-              <li>Successfully balanced the training alongside full‑time data analyst responsibilities, demonstrating strong time management.</li>
-              <li>Concluded with a comprehensive final capstone assessment in August 2025, validating clinical communication and technical competency.</li>
+              <li>Completed a 6‑month rigorous online program focused on technical Japanese and caregiving protocols.</li>
+              <li>Passed the <strong>Nursing Care Language Evaluation</strong> and <strong>Nursing Care Skills Test</strong>.</li>
+              <li>Participated in immersive cross‑cultural communication workshops.</li>
+              <li>Balanced training alongside full‑time data analyst responsibilities, demonstrating strong time management.</li>
+              <li>Concluded with a comprehensive capstone assessment in August 2025.</li>
             </ul>
           </div>
         </div>
@@ -914,10 +962,10 @@
 
   <!-- ═══ JAVASCRIPT ═══ -->
   <script>
-    // ─── Dark Mode ───
+    // ─── Dark / Light Toggle ───
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
-    let currentTheme = localStorage.getItem('theme') || 'light';
+    let currentTheme = localStorage.getItem('theme') || 'dark';
 
     function applyTheme(theme) {
       document.documentElement.setAttribute('data-theme', theme);
@@ -943,19 +991,6 @@
       });
     });
 
-    // ─── Typing Effect (Terminal) ───
-    const text = "> Building bridges between civil engineering and AI.";
-    const typingElement = document.getElementById('typingText');
-    let charIndex = 0;
-
-    function typeEffect() {
-      if (charIndex < text.length) {
-        typingElement.innerHTML += text.charAt(charIndex);
-        charIndex++;
-        setTimeout(typeEffect, 30);
-      }
-    }
-
     // ─── Scroll Animations ───
     const fadeElements = document.querySelectorAll('.fade-up');
     const observer = new IntersectionObserver((entries) => {
@@ -969,9 +1004,6 @@
     fadeElements.forEach(el => observer.observe(el));
 
     window.addEventListener('load', () => {
-      // Trigger typing on load
-      typeEffect();
-      // Trigger visible for any already-in-view elements
       fadeElements.forEach(el => {
         const rect = el.getBoundingClientRect();
         if (rect.top < window.innerHeight) {
