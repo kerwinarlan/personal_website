@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kerwin Arlan – Civil Engineering &amp; Data</title>
+  <title>Kerwin Arlan – Engineer · Analyst · Builder</title>
+  <!-- Font Awesome + JetBrains Mono (terminal vibe) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     /* ─── CSS Variables (Glass + Dark Mode) ─── */
     :root {
-      /* Glass backgrounds (translucent) */
       --glass-bg: rgba(255, 255, 255, 0.55);
       --glass-bg-secondary: rgba(255, 255, 255, 0.25);
       --glass-border: rgba(255, 255, 255, 0.35);
       --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 
-      /* Text Colors */
       --text: #0f172a;
       --text-secondary: #1e293b;
       --accent: #4f46e5;
@@ -22,9 +22,9 @@
       --badge-bg: rgba(79, 70, 229, 0.15);
       --badge-text: #4338ca;
 
-      /* Body background colors (for the gradient) */
       --bg-start: #e0e7ff;
       --bg-end: #fce7f3;
+      --terminal-font: 'JetBrains Mono', monospace;
     }
 
     [data-theme="dark"] {
@@ -42,49 +42,42 @@
       --bg-end: #1e1b4b;
     }
 
-    /* ─── BASE & ANIMATED BACKGROUND ─── */
+    /* ─── BASE ─── */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     html {
       scroll-behavior: smooth;
     }
-
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       color: var(--text);
       line-height: 1.6;
-      transition: color 0.3s;
       min-height: 100vh;
       padding-top: 70px;
-
-      /* Animated Gradient Background (behind the glass) */
       background: linear-gradient(-45deg, var(--bg-start), var(--bg-end), #dbeafe, #ede9fe);
       background-size: 400% 400%;
       animation: gradientShift 12s ease infinite;
+      transition: color 0.3s;
     }
-
     @keyframes gradientShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
     a {
       color: var(--accent);
       text-decoration: none;
     }
-
     .container {
       max-width: 1100px;
       margin: 0 auto;
       padding: 0 24px;
     }
 
-    /* ─── GLASS NAVIGATION ─── */
+    /* ─── GLASS NAV ─── */
     nav {
       position: fixed;
       top: 0;
@@ -96,9 +89,7 @@
       border-bottom: 1px solid var(--glass-border);
       z-index: 999;
       padding: 14px 0;
-      transition: background 0.3s;
     }
-
     .nav-inner {
       display: flex;
       justify-content: space-between;
@@ -107,7 +98,6 @@
       margin: 0 auto;
       padding: 0 24px;
     }
-
     .nav-logo {
       font-weight: 800;
       font-size: 1.3rem;
@@ -117,7 +107,6 @@
     .nav-logo span {
       color: var(--accent);
     }
-
     .nav-links {
       display: flex;
       align-items: center;
@@ -133,7 +122,6 @@
     .nav-links a:hover {
       color: var(--accent);
     }
-
     .theme-toggle {
       background: var(--glass-bg-secondary);
       border: 1px solid var(--glass-border);
@@ -143,12 +131,10 @@
       padding: 6px 12px;
       border-radius: 40px;
       backdrop-filter: blur(4px);
-      transition: background 0.2s;
     }
     .theme-toggle:hover {
       background: var(--accent-glow);
     }
-
     .hamburger {
       display: none;
       flex-direction: column;
@@ -163,14 +149,12 @@
       height: 2.5px;
       background: var(--text);
       border-radius: 2px;
-      transition: 0.3s;
     }
 
-    /* ─── SECTIONS (Glass Cards) ─── */
+    /* ─── SECTIONS ─── */
     section {
       padding: 60px 0;
     }
-
     .section-title {
       font-size: 2rem;
       font-weight: 700;
@@ -185,7 +169,7 @@
       color: var(--accent);
     }
 
-    /* ─── HERO ─── */
+    /* ─── HERO (Terminal Flavour) ─── */
     #hero {
       padding: 40px 0 60px 0;
     }
@@ -206,7 +190,7 @@
       font-weight: 800;
       letter-spacing: -2px;
       line-height: 1.1;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
     .hero h1 .highlight {
       background: linear-gradient(135deg, var(--accent), #a855f7);
@@ -214,11 +198,39 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .hero p {
+    /* Terminal typing area */
+    .hero-terminal {
+      font-family: var(--terminal-font);
       font-size: 1.2rem;
+      color: var(--accent);
+      min-height: 2.8rem;
+      margin: 8px 0 16px 0;
+      background: var(--glass-bg-secondary);
+      backdrop-filter: blur(4px);
+      padding: 8px 16px;
+      border-radius: 12px;
+      border-left: 4px solid var(--accent);
+      display: inline-block;
+      max-width: 100%;
+    }
+    .hero-terminal .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 1.2rem;
+      background: var(--accent);
+      margin-left: 4px;
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .hero p {
+      font-size: 1.1rem;
       color: var(--text-secondary);
       max-width: 620px;
-      margin-bottom: 12px;
+      margin-top: 8px;
     }
     .hero-availability {
       font-size: 1rem;
@@ -244,11 +256,11 @@
       font-weight: 600;
       border: none;
       cursor: pointer;
-      transition: transform 0.15s, box-shadow 0.2s;
       display: inline-flex;
       align-items: center;
       gap: 10px;
       box-shadow: 0 4px 12px var(--accent-glow);
+      transition: transform 0.15s, box-shadow 0.2s;
     }
     .btn-primary:hover {
       transform: translateY(-3px) scale(1.02);
@@ -262,17 +274,44 @@
       padding: 12px 32px;
       border-radius: 50px;
       font-weight: 600;
-      transition: background 0.2s, transform 0.15s;
       display: inline-flex;
       align-items: center;
       gap: 10px;
+      transition: background 0.2s, transform 0.15s;
     }
     .btn-secondary:hover {
       background: var(--glass-bg-secondary);
       transform: translateY(-3px);
     }
 
-    /* ─── ABOUT (Stat Cards) ─── */
+    /* ─── LIVE STATUS BADGE ─── */
+    .live-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      background: var(--glass-bg);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--glass-border);
+      padding: 6px 16px;
+      border-radius: 40px;
+      margin-top: 12px;
+      color: var(--text-secondary);
+    }
+    .live-status .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #22c55e;
+      display: inline-block;
+      animation: pulse-dot 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    /* ─── ABOUT, STATS ─── */
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -315,7 +354,6 @@
       grid-template-columns: 1fr 1fr;
       gap: 24px;
     }
-    /* Make the first item (Swinnerton) span 2 columns for emphasis */
     .exp-item:first-child {
       grid-column: 1 / -1;
     }
@@ -367,14 +405,12 @@
       left: 0;
       color: var(--accent);
     }
-
-    /* Training highlight */
     .training-item {
       border-left: 4px solid var(--accent);
-      grid-column: 1 / -1; /* Make training full width too */
+      grid-column: 1 / -1;
     }
 
-    /* ─── SKILLS & CERTS (Glass tags) ─── */
+    /* ─── SKILLS & CERTS ─── */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -410,7 +446,6 @@
       font-size: 0.85rem;
       color: var(--text-secondary);
     }
-
     .cert-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -462,12 +497,12 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      transition: color 0.2s;
       background: var(--glass-bg);
       padding: 8px 20px;
       border-radius: 40px;
       border: 1px solid var(--glass-border);
       backdrop-filter: blur(4px);
+      transition: color 0.2s, border-color 0.2s;
     }
     .contact-links a:hover {
       color: var(--accent);
@@ -492,11 +527,29 @@
       transform: translateY(0);
     }
 
+    /* ─── CURSOR GLOW ─── */
+    .cursor-glow {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: var(--accent-glow);
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: -1;
+      transform: translate(-50%, -50%);
+      opacity: 0.6;
+      mix-blend-mode: soft-light;
+      transition: opacity 0.2s;
+    }
+    [data-theme="dark"] .cursor-glow {
+      mix-blend-mode: screen;
+      opacity: 0.4;
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
-      body {
-        padding-top: 62px;
-      }
+      body { padding-top: 62px; }
       .nav-links {
         display: none;
         flex-direction: column;
@@ -510,75 +563,30 @@
         padding: 24px;
         border-bottom: 1px solid var(--glass-border);
       }
-      .nav-links.open {
-        display: flex;
-      }
-      .hamburger {
-        display: flex;
-      }
-      .hero h1 {
-        font-size: 2.6rem;
-      }
-      .about-grid {
-        grid-template-columns: 1fr;
-      }
-      .about-stats {
-        grid-template-columns: 1fr 1fr;
-      }
-      .exp-grid {
-        grid-template-columns: 1fr;
-      }
-      .exp-item:first-child {
-        grid-column: 1;
-      }
-      .training-item {
-        grid-column: 1;
-      }
-      .section-title {
-        font-size: 1.6rem;
-      }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+      .hero h1 { font-size: 2.6rem; }
+      .hero-terminal { font-size: 1rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+      .exp-grid { grid-template-columns: 1fr; }
+      .exp-item:first-child { grid-column: 1; }
+      .training-item { grid-column: 1; }
+      .section-title { font-size: 1.6rem; }
     }
     @media (max-width: 480px) {
-      .hero h1 {
-        font-size: 2rem;
-      }
-      .hero-buttons {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .btn-primary,
-      .btn-secondary {
-        justify-content: center;
-      }
-    }
-
-    /* ─── CUSTOM CURSOR (The "WOW" Factor) ─── */
-    .cursor-glow {
-      position: fixed;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background: var(--accent-glow);
-      filter: blur(60px);
-      pointer-events: none;
-      z-index: -1;
-      transform: translate(-50%, -50%);
-      transition: opacity 0.2s;
-      opacity: 0.6;
-      mix-blend-mode: soft-light;
-    }
-    [data-theme="dark"] .cursor-glow {
-      mix-blend-mode: screen;
-      opacity: 0.4;
+      .hero h1 { font-size: 2rem; }
+      .hero-buttons { flex-direction: column; align-items: stretch; }
+      .btn-primary, .btn-secondary { justify-content: center; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ═══ CUSTOM GLOWING CURSOR ═══ -->
+  <!-- ═══ CURSOR GLOW ═══ -->
   <div class="cursor-glow" id="cursorGlow"></div>
 
-  <!-- ═══ NAVIGATION ═══ -->
+  <!-- ═══ NAV ═══ -->
   <nav>
     <div class="nav-inner">
       <a href="#" class="nav-logo">Kerwin<span>.</span></a>
@@ -600,7 +608,7 @@
     </div>
   </nav>
 
-  <!-- ═══ HERO ═══ -->
+  <!-- ═══ HERO (Terminal + Live Status) ═══ -->
   <section id="hero">
     <div class="container fade-up">
       <div class="hero-badge">
@@ -610,15 +618,29 @@
         Hi, I'm <span class="highlight">Kerwin</span><br />
         Engineer · Analyst · Builder
       </h1>
+
+      <!-- Terminal Typing Area -->
+      <div class="hero-terminal" id="typingContainer">
+        <span id="typingText"></span><span class="cursor"></span>
+      </div>
+
       <p>
         Civil Engineering student at UP Diliman, bridging the gap between
         structural design and data-driven decisions.
       </p>
+
+      <!-- Live Status Badge -->
+      <div class="live-status">
+        <span class="dot"></span>
+        <span><strong>Currently:</strong> Prepping Thesis · Learning Python · Open to work</span>
+      </div>
+
       <div class="hero-availability">
         <i class="fas fa-calendar-check" style="color: var(--accent); margin-right: 8px;"></i>
         <strong>Light academic load next year:</strong> Thesis I &amp; II + 1 major + 2 PE subjects.<br />
         Fully available for <strong>full-time or heavy part-time work</strong>.
       </div>
+
       <div class="hero-buttons">
         <a href="#contact" class="btn-primary">
           <i class="fas fa-paper-plane"></i> Get in Touch
@@ -678,7 +700,7 @@
     </div>
   </section>
 
-  <!-- ═══ EXPERIENCE (BENTO GRID) ═══ -->
+  <!-- ═══ EXPERIENCE (BENTO) ═══ -->
   <section id="experience">
     <div class="container">
       <div class="section-title fade-up">
@@ -686,7 +708,6 @@
       </div>
       <div class="exp-grid">
 
-        <!-- 1. Swinnerton-Staten (spans full width) -->
         <div class="exp-item fade-up">
           <div class="exp-left">
             <div class="company">Swinnerton-Staten Solutions, Inc.</div>
@@ -703,7 +724,6 @@
           </div>
         </div>
 
-        <!-- 2. Diliman Labs -->
         <div class="exp-item fade-up">
           <div class="exp-left">
             <div class="company">Diliman Labs</div>
@@ -719,7 +739,6 @@
           </div>
         </div>
 
-        <!-- 3. Private Tutor -->
         <div class="exp-item fade-up">
           <div class="exp-left">
             <div class="company">Private Tutoring Practice</div>
@@ -735,7 +754,6 @@
           </div>
         </div>
 
-        <!-- 4. Concentrix -->
         <div class="exp-item fade-up">
           <div class="exp-left">
             <div class="company">Concentrix (AT&amp;T Account)</div>
@@ -751,7 +769,6 @@
           </div>
         </div>
 
-        <!-- 5. Primeart Builders -->
         <div class="exp-item fade-up">
           <div class="exp-left">
             <div class="company">Primeart Builders Inc.</div>
@@ -771,7 +788,7 @@
     </div>
   </section>
 
-  <!-- ═══ TRAINING & PROFESSIONAL DEVELOPMENT ═══ -->
+  <!-- ═══ TRAINING ═══ -->
   <section id="training">
     <div class="container">
       <div class="section-title fade-up">
@@ -907,7 +924,6 @@
       themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
       localStorage.setItem('theme', theme);
     }
-
     applyTheme(currentTheme);
 
     themeToggle.addEventListener('click', () => {
@@ -918,16 +934,27 @@
     // ─── Mobile Hamburger ───
     const hamburger = document.getElementById('hamburgerBtn');
     const navLinks = document.getElementById('navLinks');
-
     hamburger.addEventListener('click', () => {
       navLinks.classList.toggle('open');
     });
-
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('open');
       });
     });
+
+    // ─── Typing Effect (Terminal) ───
+    const text = "> Building bridges between civil engineering and AI.";
+    const typingElement = document.getElementById('typingText');
+    let charIndex = 0;
+
+    function typeEffect() {
+      if (charIndex < text.length) {
+        typingElement.innerHTML += text.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeEffect, 30);
+      }
+    }
 
     // ─── Scroll Animations ───
     const fadeElements = document.querySelectorAll('.fade-up');
@@ -937,14 +964,14 @@
           entry.target.classList.add('visible');
         }
       });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -30px 0px'
-    });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
 
     fadeElements.forEach(el => observer.observe(el));
 
     window.addEventListener('load', () => {
+      // Trigger typing on load
+      typeEffect();
+      // Trigger visible for any already-in-view elements
       fadeElements.forEach(el => {
         const rect = el.getBoundingClientRect();
         if (rect.top < window.innerHeight) {
@@ -953,9 +980,8 @@
       });
     });
 
-    // ─── Glowing Cursor Follower ───
+    // ─── Glowing Cursor ───
     const cursorGlow = document.getElementById('cursorGlow');
-
     document.addEventListener('mousemove', (e) => {
       cursorGlow.style.left = e.clientX + 'px';
       cursorGlow.style.top = e.clientY + 'px';
