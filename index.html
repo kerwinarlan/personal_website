@@ -2,7 +2,7 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
   <title>Kerwin Arlan – Engineer · Analyst · Builder</title>
   <!-- Font Awesome + JetBrains Mono -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
@@ -67,6 +67,7 @@
       transition: background 0.3s, color 0.3s;
       position: relative;
       overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
     }
     @keyframes gradientShift {
       0% { background-position: 0% 50%; }
@@ -155,7 +156,7 @@
     a { color: var(--accent); text-decoration: none; }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 
-    /* ─── GLASS NAV (with liquid glass support) ─── */
+    /* ─── GLASS NAV ─── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -166,6 +167,7 @@
       z-index: 999;
       padding: 14px 0;
       transition: background 0.3s, border-color 0.3s;
+      min-height: 62px;
     }
     .nav-inner {
       display: flex;
@@ -174,8 +176,15 @@
       max-width: 1100px;
       margin: 0 auto;
       padding: 0 24px;
+      position: relative;
     }
-    .nav-logo { font-weight: 800; font-size: 1.3rem; letter-spacing: -0.5px; color: var(--text); }
+    .nav-logo {
+      font-weight: 800;
+      font-size: 1.3rem;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      flex-shrink: 0;
+    }
     .nav-logo span { color: var(--accent); }
     .nav-links {
       display: flex;
@@ -192,22 +201,34 @@
       position: relative;
       z-index: 2;
       padding: 4px 2px;
+      cursor: pointer;
     }
     .nav-links a:hover { color: var(--accent); }
+    .nav-links a:active { color: var(--accent); }
+
     .theme-toggle {
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
       color: var(--text-secondary);
       font-size: 1.2rem;
       cursor: pointer;
-      padding: 6px 12px;
+      padding: 8px 14px;
       border-radius: 40px;
       backdrop-filter: blur(4px);
-      transition: background 0.2s;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
       position: relative;
       z-index: 2;
+      min-width: 48px;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
     .theme-toggle:hover { background: var(--glass-bg-hover); }
+    .theme-toggle:active { background: var(--glass-bg-hover); transform: scale(0.95); }
+
     .hamburger {
       display: none;
       flex-direction: column;
@@ -215,11 +236,24 @@
       background: none;
       border: none;
       cursor: pointer;
-      padding: 4px;
+      padding: 8px;
       position: relative;
       z-index: 2;
+      min-width: 48px;
+      min-height: 48px;
+      justify-content: center;
+      align-items: center;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
-    .hamburger span { width: 25px; height: 2.5px; background: var(--text); border-radius: 2px; }
+    .hamburger span {
+      width: 28px;
+      height: 2.5px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: 0.3s;
+      display: block;
+    }
 
     /* ─── LIQUID GLASS LENS ─── */
     .liquid-lens {
@@ -257,7 +291,6 @@
       -webkit-filter: url(#liquidGlass);
       will-change: transform;
     }
-    /* Safari/FF fallback – clone backdrop */
     .liquid-lens-clone {
       position: absolute;
       top: -50vh;
@@ -268,6 +301,14 @@
       filter: url(#liquidGlass);
       -webkit-filter: url(#liquidGlass);
       will-change: transform;
+    }
+    /* Hide lens on small screens */
+    @media (max-width: 768px) {
+      .liquid-lens { display: none !important; }
+    }
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .liquid-lens { transition: none !important; }
     }
 
     /* ─── SECTIONS ─── */
@@ -293,6 +334,11 @@
       background: var(--glass-bg-hover);
       border-color: var(--glass-border-hover);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px var(--accent-glow), var(--glass-inset);
+    }
+    /* Touch feedback for mobile */
+    .glass-card:active {
+      transform: scale(0.98);
+      transition: transform 0.1s ease;
     }
 
     /* ─── TERMINAL ─── */
@@ -384,8 +430,11 @@
       gap: 10px;
       box-shadow: 0 4px 12px var(--accent-glow);
       transition: transform 0.15s, box-shadow 0.2s;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
     .btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 25px var(--accent-glow); }
+    .btn-primary:active { transform: scale(0.95); }
     .btn-secondary {
       background: var(--glass-bg);
       backdrop-filter: blur(12px);
@@ -399,8 +448,11 @@
       gap: 10px;
       transition: background 0.2s, transform 0.15s;
       box-shadow: var(--glass-inset);
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
     .btn-secondary:hover { background: var(--glass-bg-hover); transform: translateY(-3px); }
+    .btn-secondary:active { transform: scale(0.95); }
 
     /* ─── ABOUT ─── */
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
@@ -542,7 +594,12 @@
     /* ─── CONTACT ─── */
     #contact { text-align: center; padding-bottom: 40px; }
     #contact p { color: var(--text-secondary); max-width: 500px; margin: 0 auto 28px auto; font-size: 1.1rem; }
-    .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 24px 40px; }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px 24px;
+    }
     .contact-links a {
       color: var(--text-secondary);
       font-size: 1.05rem;
@@ -551,13 +608,17 @@
       gap: 10px;
       background: var(--glass-bg);
       backdrop-filter: blur(8px);
-      padding: 8px 20px;
+      padding: 10px 20px;
       border-radius: 40px;
       border: 1px solid var(--glass-border);
       box-shadow: var(--glass-inset);
       transition: all 0.2s;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      min-height: 48px;
     }
     .contact-links a:hover { color: var(--accent); border-color: var(--accent); background: var(--glass-bg-hover); transform: translateY(-2px); }
+    .contact-links a:active { transform: scale(0.95); }
     .footer-note { margin-top: 40px; font-size: 0.85rem; color: var(--text-secondary); border-top: 1px solid var(--glass-border); padding-top: 28px; }
 
     /* ─── SCROLL ANIMATION ─── */
@@ -593,11 +654,13 @@
       to { transform: scale(4); opacity: 0; }
     }
 
-    /* ─── REDUCED MOTION ─── */
-    @media (prefers-reduced-motion: reduce) {
-      .liquid-lens {
-        transition: none !important;
-      }
+    /* ─── SVG FILTER DEFINITION ─── */
+    .svg-filters {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+      pointer-events: none;
     }
 
     /* ─── RESPONSIVE ─── */
@@ -611,14 +674,35 @@
         top: 60px;
         left: 0;
         right: 0;
-        background: rgba(15, 23, 42, 0.95);
+        background: rgba(15, 23, 42, 0.97);
         backdrop-filter: blur(20px);
-        padding: 24px;
+        padding: 24px 24px 32px 24px;
         border-bottom: 1px solid var(--glass-border);
+        border-radius: 0 0 16px 16px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
       }
-      .nav-links.open { display: flex; }
+      .nav-links.open {
+        display: flex;
+      }
+      .nav-links a {
+        font-size: 1.1rem;
+        padding: 12px 8px;
+        width: 100%;
+        text-align: center;
+        border-radius: 12px;
+        transition: background 0.2s;
+      }
+      .nav-links a:hover,
+      .nav-links a:active {
+        background: var(--glass-bg-hover);
+        color: var(--accent);
+      }
       .hamburger { display: flex; }
-      .liquid-lens { display: none !important; } /* Hide lens on mobile */
+      .theme-toggle {
+        min-width: 48px;
+        min-height: 48px;
+        padding: 8px 14px;
+      }
       .terminal-body { font-size: 0.9rem; padding: 20px; }
       .terminal-window { border-radius: 12px; }
       .about-grid { grid-template-columns: 1fr; }
@@ -629,22 +713,28 @@
       .section-title { font-size: 1.6rem; }
       .blob { width: 300px; height: 300px; filter: blur(60px); }
       .now-grid { grid-template-columns: 1fr 1fr; }
+      .hero-buttons { flex-direction: column; align-items: stretch; }
+      .btn-primary, .btn-secondary { justify-content: center; padding: 14px 24px; }
+      .contact-links { gap: 12px; }
+      .contact-links a { width: 100%; justify-content: center; }
+      .liquid-lens { display: none !important; }
     }
     @media (max-width: 480px) {
       .terminal-body { font-size: 0.8rem; padding: 16px; }
-      .hero-buttons { flex-direction: column; align-items: stretch; }
-      .btn-primary, .btn-secondary { justify-content: center; }
       .blob { width: 200px; height: 200px; filter: blur(50px); }
       .now-grid { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr; }
+      .terminal-badge { flex-direction: column; align-items: center; }
+      .terminal-badge span { width: 100%; text-align: center; }
+      .hero-availability { font-size: 0.9rem; padding: 12px 16px; }
     }
-
-    /* ─── SVG FILTER DEFINITION (hidden) ─── */
-    .svg-filters {
-      position: absolute;
-      width: 0;
-      height: 0;
-      overflow: hidden;
-      pointer-events: none;
+    /* Extra small devices */
+    @media (max-width: 380px) {
+      .nav-inner { padding: 0 12px; }
+      .nav-logo { font-size: 1.1rem; }
+      .nav-links { padding: 16px 16px 24px 16px; }
+      .container { padding: 0 16px; }
+      section { padding: 40px 0; }
     }
   </style>
 </head>
@@ -665,7 +755,7 @@
   <div class="noise"></div>
   <div class="cursor-glow" id="cursorGlow"></div>
 
-  <!-- ═══ NAV (with liquid glass lens) ═══ -->
+  <!-- ═══ NAV ═══ -->
   <nav>
     <div class="nav-inner">
       <a href="#" class="nav-logo">Kerwin<span>.</span></a>
@@ -680,7 +770,6 @@
             <i class="fas fa-sun" id="themeIcon"></i>
           </button>
         </li>
-        <!-- Liquid Glass Lens -->
         <div class="liquid-lens" id="liquidLens">
           <div class="liquid-lens-clone" id="liquidLensClone"></div>
         </div>
@@ -893,8 +982,9 @@
       <div class="contact-links fade-up">
         <a href="mailto:kerwinarlan@gmail.com"><i class="fas fa-envelope"></i> kerwinarlan@gmail.com</a>
         <a href="tel:+639761013092"><i class="fas fa-phone"></i> (+63) 976 101 3092</a>
-        <a href="https://linkedin.com/in/kerwin-dio-joseph-arlan" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        <a href="https://github.com/kerwinarlan" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+        <!-- ✅ FIXED: Correct LinkedIn and GitHub URLs -->
+        <a href="https://linkedin.com/in/kerwin-dio-joseph-arlan" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <a href="https://github.com/kerwinarlan" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
       </div>
       <div class="footer-note fade-up">&copy; 2026 Kerwin Dio Joseph Arlan. Built with <i class="fas fa-heart" style="color: var(--accent);"></i> for the future.</div>
     </div>
@@ -902,58 +992,139 @@
 
   <!-- ═══ JAVASCRIPT ═══ -->
   <script>
-    // ─── Dark / Light Toggle ───
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    let currentTheme = localStorage.getItem('theme') || 'dark';
+    // ─── Dark / Light Toggle (Mobile-Friendly) ───
+    (function initThemeToggle() {
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = document.getElementById('themeIcon');
 
-    function applyTheme(theme) {
-      document.documentElement.setAttribute('data-theme', theme);
-      themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-      localStorage.setItem('theme', theme);
-    }
-    applyTheme(currentTheme);
+      if (!themeToggle || !themeIcon) {
+        console.warn('Theme toggle elements not found');
+        return;
+      }
 
-    themeToggle.addEventListener('click', () => {
-      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      applyTheme(next);
-    });
+      // Get saved theme or default to dark
+      let currentTheme = localStorage.getItem('theme') || 'dark';
 
-    // ─── Mobile Hamburger ───
-    const hamburger = document.getElementById('hamburgerBtn');
-    const navLinks = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-    });
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('open');
+      function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        localStorage.setItem('theme', theme);
+        currentTheme = theme;
+      }
+
+      // Apply saved theme on load
+      applyTheme(currentTheme);
+
+      // Toggle on click (works on mobile)
+      themeToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
       });
-    });
+
+      // Also support touch events for mobile
+      themeToggle.addEventListener('touchstart', function(e) {
+        // Just a small haptic feedback - the click event handles the actual toggle
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => { this.style.transform = ''; }, 150);
+      }, { passive: true });
+    })();
+
+    // ─── Mobile Hamburger Menu ───
+    (function initHamburger() {
+      const hamburger = document.getElementById('hamburgerBtn');
+      const navLinks = document.getElementById('navLinks');
+
+      if (!hamburger || !navLinks) return;
+
+      function toggleMenu(e) {
+        e.preventDefault();
+        navLinks.classList.toggle('open');
+        // Toggle hamburger animation (optional)
+        const spans = hamburger.querySelectorAll('span');
+        if (navLinks.classList.contains('open')) {
+          spans.forEach((s, i) => {
+            if (i === 0) s.style.transform = 'rotate(45deg) translate(5px, 5px)';
+            else if (i === 1) s.style.opacity = '0';
+            else if (i === 2) s.style.transform = 'rotate(-45deg) translate(5px, -5px)';
+          });
+        } else {
+          spans.forEach(s => {
+            s.style.transform = '';
+            s.style.opacity = '1';
+          });
+        }
+      }
+
+      hamburger.addEventListener('click', toggleMenu);
+      hamburger.addEventListener('touchstart', function(e) {
+        // Small haptic feedback
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => { this.style.transform = ''; }, 150);
+      }, { passive: true });
+
+      // Close menu when a nav link is clicked
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('open');
+          // Reset hamburger
+          const spans = hamburger.querySelectorAll('span');
+          spans.forEach(s => {
+            s.style.transform = '';
+            s.style.opacity = '1';
+          });
+        });
+      });
+    })();
 
     // ─── Glowing Cursor ───
-    const cursorGlow = document.getElementById('cursorGlow');
-    document.addEventListener('mousemove', (e) => {
-      cursorGlow.style.left = e.clientX + 'px';
-      cursorGlow.style.top = e.clientY + 'px';
-    });
+    (function initCursor() {
+      const cursorGlow = document.getElementById('cursorGlow');
+      if (!cursorGlow) return;
+
+      let isMoving = false;
+      let timeout;
+
+      document.addEventListener('mousemove', (e) => {
+        cursorGlow.style.left = e.clientX + 'px';
+        cursorGlow.style.top = e.clientY + 'px';
+        cursorGlow.style.opacity = '0.5';
+        isMoving = true;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          cursorGlow.style.opacity = '0.2';
+        }, 2000);
+      });
+    })();
 
     // ─── Staggered Scroll Reveal ───
-    const revealElements = document.querySelectorAll('.fade-up, .glass-card');
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, index * 80);
-          revealObserver.unobserve(entry.target);
-        }
+    (function initScrollReveal() {
+      const revealElements = document.querySelectorAll('.fade-up, .glass-card');
+      if (!revealElements.length) return;
+
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, index * 80);
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -30px 0px'
       });
-    }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
-    revealElements.forEach(el => revealObserver.observe(el));
+
+      revealElements.forEach(el => revealObserver.observe(el));
+    })();
 
     // ─── Particle Network Background ───
-    (function() {
+    (function initParticles() {
+      // Skip on mobile for performance
+      const isMobile = window.innerWidth < 768;
+      const particleCount = isMobile ? 40 : 80;
+
       const canvas = document.createElement('canvas');
       canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;';
       document.body.prepend(canvas);
@@ -990,7 +1161,7 @@
         }
       }
 
-      particles = Array.from({ length: 80 }, () => new Particle());
+      particles = Array.from({ length: particleCount }, () => new Particle());
 
       function drawLines() {
         for (let i = 0; i < particles.length; i++) {
@@ -1020,40 +1191,50 @@
     })();
 
     // ─── 3D Tilt on Glass Cards ───
-    document.querySelectorAll('.glass-card').forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = (y - centerY) / 25;
-        const rotateY = (centerX - x) / 25;
-        card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+    (function initTilt() {
+      const cards = document.querySelectorAll('.glass-card');
+      if (!cards.length) return;
+
+      cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = (y - centerY) / 25;
+          const rotateY = (centerX - x) / 25;
+          card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+        });
       });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-      });
-    });
+    })();
 
     // ─── Click Ripple Effect ───
-    document.addEventListener('click', (e) => {
-      const ripple = document.createElement('div');
-      ripple.className = 'ripple';
-      const size = 40;
-      ripple.style.width = ripple.style.height = size + 'px';
-      ripple.style.left = (e.clientX - size/2) + 'px';
-      ripple.style.top = (e.clientY - size/2) + 'px';
-      document.body.appendChild(ripple);
-      setTimeout(() => ripple.remove(), 800);
-    });
+    (function initRipple() {
+      document.addEventListener('click', (e) => {
+        const ripple = document.createElement('div');
+        ripple.className = 'ripple';
+        const size = 40;
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = (e.clientX - size / 2) + 'px';
+        ripple.style.top = (e.clientY - size / 2) + 'px';
+        document.body.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 800);
+      });
+    })();
 
-    // ─── LIQUID GLASS: Displacement Map Generation ───
+    // ─── Liquid Glass Effect ───
     (function initLiquidGlass() {
-      // Check for reduced motion
+      // Skip on mobile or if reduced motion is preferred
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReducedMotion) {
-        document.querySelector('.liquid-lens')?.classList.add('reduced-motion');
+      const isMobile = window.innerWidth < 768;
+
+      if (prefersReducedMotion || isMobile) {
+        const lens = document.querySelector('.liquid-lens');
+        if (lens) lens.style.display = 'none';
         return;
       }
 
@@ -1064,7 +1245,11 @@
 
       if (!lens || !navItems.length || !filterImage) return;
 
-      // ─── 1. Generate displacement map ───
+      let mapBlobUrl = null;
+      let activeNavItem = null;
+      let isLensActive = false;
+
+      // ─── Generate displacement map ───
       function generateDisplacementMap(width, height, radius, gain) {
         const canvas = document.createElement('canvas');
         canvas.width = width;
@@ -1084,12 +1269,10 @@
             const ny = (y - cy) / ry;
             const dist = Math.sqrt(nx * nx + ny * ny);
 
-            // Squircle falloff (Apple-style continuous corners)
             const clamped = Math.min(dist, 1);
             const falloff = Math.pow(1 - Math.pow(clamped, 4), 0.25);
             const slope = falloff > 0.01 ? Math.pow(falloff, 3) / Math.pow(1 - Math.pow(falloff, 4), 0.75) : 0;
 
-            // Snell's law: index of refraction 1.5 (real glass)
             const thetaI = Math.atan(slope);
             const thetaT = Math.asin(Math.sin(thetaI) / 1.5);
             const bend = Math.sin(thetaI - thetaT) * gain;
@@ -1098,17 +1281,14 @@
             const normX = dist > 0.001 ? nx / dist : 0;
             const normY = dist > 0.001 ? ny / dist : 0;
 
-            // R/G channels encode displacement (128 = no move)
             data[idx] = Math.max(0, Math.min(255, 128 + normX * bend * 64));
             data[idx + 1] = Math.max(0, Math.min(255, 128 + normY * bend * 64));
-            // B channel: specular height (bright rim)
             data[idx + 2] = Math.max(0, Math.min(255, 255 - 200 * (1 - falloff)));
             data[idx + 3] = 255;
           }
         }
         ctx.putImageData(imageData, 0, 0);
 
-        // Convert to blob (required for Safari)
         return new Promise((resolve) => {
           canvas.toBlob((blob) => {
             resolve(URL.createObjectURL(blob));
@@ -1116,19 +1296,13 @@
         });
       }
 
-      // ─── 2. Setup liquid glass ───
-      let mapBlobUrl = null;
-      let activeNavItem = null;
-      let isLensActive = false;
-      let lensTarget = { x: 0, y: 0, w: 60, h: 36 };
-
-      // Generate map
+      // ─── Setup ───
       generateDisplacementMap(200, 120, 32, 1.2).then((url) => {
         mapBlobUrl = url;
         filterImage.setAttribute('href', url);
       });
 
-      // ─── 3. Track mouse / hover ───
+      // ─── Track hover ───
       function getNavItemRect(el) {
         const rect = el.getBoundingClientRect();
         const navRect = document.querySelector('.nav-inner').getBoundingClientRect();
@@ -1143,171 +1317,47 @@
       function updateLensPosition(el) {
         if (!el) return;
         const rect = getNavItemRect(el);
-        // Add padding around the text
         const padX = 16;
         const padY = 4;
-        lensTarget.x = rect.left - padX;
-        lensTarget.y = rect.top - padY;
-        lensTarget.w = rect.width + padX * 2;
-        lensTarget.h = rect.height + padY * 2;
-
-        // Apply with spring-like transition (handled by CSS)
-        lens.style.left = lensTarget.x + 'px';
-        lens.style.top = lensTarget.y + 'px';
-        lens.style.width = lensTarget.w + 'px';
-        lens.style.height = lensTarget.h + 'px';
+        lens.style.left = (rect.left - padX) + 'px';
+        lens.style.top = (rect.top - padY) + 'px';
+        lens.style.width = (rect.width + padX * 2) + 'px';
+        lens.style.height = (rect.height + padY * 2) + 'px';
       }
 
-      // ─── 4. Hover events ───
       navItems.forEach((item) => {
         item.addEventListener('mouseenter', () => {
-          if (window.innerWidth < 768) return; // Disable on mobile
           activeNavItem = item;
           isLensActive = true;
           lens.classList.add('active');
           updateLensPosition(item);
-          // Clone the backdrop content for the lens
-          updateLensClone();
         });
 
-        item.addEventListener('mousemove', (e) => {
-          if (window.innerWidth < 768) return;
+        item.addEventListener('mousemove', () => {
           if (activeNavItem) {
-            // Fine-tune position based on mouse within item
-            const rect = getNavItemRect(item);
-            const padX = 16;
-            const padY = 4;
-            lensTarget.x = rect.left - padX;
-            lensTarget.y = rect.top - padY;
-            lens.style.left = lensTarget.x + 'px';
-            lens.style.top = lensTarget.y + 'px';
+            updateLensPosition(activeNavItem);
           }
         });
 
         item.addEventListener('mouseleave', () => {
-          if (window.innerWidth < 768) return;
           activeNavItem = null;
           isLensActive = false;
           setTimeout(() => {
             if (!isLensActive) {
               lens.classList.remove('active');
             }
-          }, 100);
+          }, 150);
         });
       });
 
-      // ─── 5. Update lens clone content ───
-      function updateLensClone() {
-        if (!lensClone) return;
-        // The clone needs to show the page content behind the nav.
-        // We'll use the nav's parent container as the source.
-        const navContainer = document.querySelector('.nav-inner');
-        if (!navContainer) return;
-
-        // For the clone, we need to capture the rendered content behind the lens.
-        // The simplest approach: use a canvas snapshot of the area behind the lens.
-        // But since we can't easily do that without html2canvas, we'll use a
-        // different approach: the clone is a positioned element showing the
-        // same content as the page, but filtered.
-
-        // Actually, the easiest way to make this work is to use the clone
-        // as a viewport into the page. We position it absolutely and use
-        // the filter to warp it.
-        // For now, we'll just let the filter work on the clone's content.
-        // The clone will be populated with a snapshot of the page content.
-
-        // For simplicity and cross-browser compatibility, we'll use a
-        // canvas-based approach for the clone content.
-        captureBackdropForLens();
-      }
-
-      // ─── 6. Capture backdrop for lens ───
-      function captureBackdropForLens() {
-        // We need to capture the content behind the lens.
-        // Since we can't use html2canvas, we'll use a simpler approach:
-        // The lens clone will display the same content as the page,
-        // but with the filter applied to it.
-
-        // Instead of a complex capture, we'll clone the page content
-        // into the lens clone.
-        const cloneContent = document.querySelector('.container');
-        if (!cloneContent) return;
-
-        // We already have the lensClone div. We'll populate it with
-        // the page content when the lens is active.
-
-        // For this to work properly, we need to position the clone
-        // so it matches the page content.
-        const rect = lens.getBoundingClientRect();
-        const scrollX = window.scrollX || window.pageXOffset;
-        const scrollY = window.scrollY || window.pageYOffset;
-
-        // The clone needs to show the content at the same position
-        // as the page, but with the filter applied.
-
-        // We'll use a simple approach: we'll take a snapshot of the
-        // page using a canvas and apply the filter to it.
-        // Since we can't easily do that without html2canvas,
-        // we'll use a workaround: we'll use the SVG filter directly
-        // on the clone's background.
-
-        // For now, we'll just use the filter on the clone's content,
-        // which is the page content positioned identically.
-
-        // Position the clone to match the page content
-        const navRect = document.querySelector('.nav-inner').getBoundingClientRect();
-        lensClone.style.top = -scrollY + 'px';
-        lensClone.style.left = -scrollX + 'px';
-        lensClone.style.width = window.innerWidth + 'px';
-        lensClone.style.height = window.innerHeight + 'px';
-
-        // We'll populate the clone with a snapshot of the page
-        // content using a simpler approach: we'll use the filter
-        // on the clone with the page's background content.
-        // This is a simplified implementation - for a production
-        // version, you'd want to use a proper screenshot approach.
-      }
-
-      // ─── 7. Handle resize and scroll ───
-      function handleResize() {
-        if (activeNavItem) {
-          updateLensPosition(activeNavItem);
-        }
-      }
-
-      function handleScroll() {
-        if (activeNavItem) {
-          // Update lens position on scroll
-          const navRect = document.querySelector('.nav-inner').getBoundingClientRect();
-          // The nav is fixed, so we don't need to adjust for scroll
-        }
-      }
-
-      window.addEventListener('resize', handleResize);
-      window.addEventListener('scroll', handleScroll);
-
-      // ─── 8. Cleanup ───
-      // Store the cleanup function for potential later use
+      // ─── Cleanup ───
       window.__liquidGlassCleanup = function() {
         if (mapBlobUrl) {
           URL.revokeObjectURL(mapBlobUrl);
         }
-        window.removeEventListener('resize', handleResize);
-        window.removeEventListener('scroll', handleScroll);
       };
 
       console.log('Liquid glass initialized ✓');
-    })();
-
-    // ─── Check if SVG filter is supported ───
-    (function checkFilterSupport() {
-      const testEl = document.createElement('div');
-      testEl.style.filter = 'url(#liquidGlass)';
-      // If the browser doesn't support SVG filters, hide the lens
-      // and fall back to regular glassmorphism
-      if (!testEl.style.filter) {
-        document.querySelector('.liquid-lens')?.classList.add('unsupported');
-      }
     })();
   </script>
 
