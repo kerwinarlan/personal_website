@@ -60,7 +60,7 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* ─── BLOBS, NOISE, 3D RING ─── (unchanged) ─── */
+    /* ─── BLOBS, NOISE, 3D RING ─── */
     .blob { position: fixed; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, var(--accent-glow), transparent 70%); filter: blur(100px); z-index: -1; animation: blobMove 25s ease-in-out infinite alternate; opacity: 0.7; pointer-events: none; }
     .blob:nth-child(2) { width: 500px; height: 500px; background: radial-gradient(circle, rgba(168, 85, 247, 0.3), transparent 70%); animation-delay: -8s; animation-duration: 30s; bottom: 0; right: 0; }
     @keyframes blobMove {
@@ -126,7 +126,7 @@
     }
     .hamburger span { width: 28px; height: 2.5px; background: var(--text); border-radius: 2px; transition: 0.3s; display: block; }
 
-    /* ─── LIQUID GLASS LENS ─── */
+    /* ─── LIQUID GLASS LENS (live backdrop + SVG warp) ─── */
     .liquid-lens {
       position: absolute;
       top: 0; left: 0;
@@ -139,44 +139,26 @@
                   left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
                   top 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       z-index: 1;
-      filter: url(#liquidGlass);
-      -webkit-filter: url(#liquidGlass);
-      background: transparent;
+      /* Live backdrop – real‑time transparent background */
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
+      /* SVG displacement warp – applied via JS */
+      filter: url(#glassFilter);
+      -webkit-filter: url(#glassFilter);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 30px rgba(129, 140, 248, 0.15);
       will-change: transform, left, top, width, height, opacity;
-      overflow: hidden;
-      box-shadow: 0 0 30px rgba(129, 140, 248, 0.15);
-      display: none; /* hidden by default, enabled by JS if supported */
     }
     .liquid-lens.active {
       opacity: 1;
-      display: block;
     }
-    .liquid-lens .lens-backdrop {
-      position: absolute;
-      top: -50vh;
-      left: -50vw;
-      width: 200vw;
-      height: 200vh;
-      pointer-events: none;
-      filter: url(#liquidGlass);
-      -webkit-filter: url(#liquidGlass);
-      will-change: transform;
-      background: inherit; /* will be set via JS */
-      background-size: cover;
-      background-position: center;
+    @media (max-width: 768px) {
+      .liquid-lens { display: none !important; }
     }
-    /* Fallback for browsers without SVG filter support: just a subtle blur */
-    .liquid-lens.fallback {
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--glass-shadow), var(--glass-inset);
+    @media (prefers-reduced-motion: reduce) {
+      .liquid-lens { transition: none !important; }
     }
-    .liquid-lens.fallback .lens-backdrop { display: none; }
-
-    @media (max-width: 768px) { .liquid-lens { display: none !important; } }
-    @media (prefers-reduced-motion: reduce) { .liquid-lens { transition: none !important; } }
 
     /* ─── SECTIONS ─── */
     section { padding: 60px 0; }
@@ -201,7 +183,7 @@
     }
     .glass-card:active { transform: scale(0.98); transition: transform 0.1s ease; }
 
-    /* ─── TERMINAL ─── (unchanged) ─── */
+    /* ─── TERMINAL ─── */
     #hero { padding: 20px 0 50px 0; }
     .terminal-window {
       background: #0d1117; border: 1px solid #30363d; border-radius: 16px;
@@ -271,10 +253,6 @@
     }
     .btn-secondary:hover { background: var(--glass-bg-hover); transform: translateY(-3px); }
     .btn-secondary:active { transform: scale(0.95); }
-
-    /* ─── OTHER SECTIONS ─── (About, Now, Experience, Training, Projects, Skills, Certs, Contact) */
-    /* ─── These are unchanged from the previous version ─── */
-    /* ─── To save space, I'll include them but they're identical to the last working version ─── */
 
     /* ─── ABOUT ─── */
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
@@ -350,8 +328,6 @@
     .ripple { position: fixed; border-radius: 50%; background: rgba(129, 140, 248, 0.3); transform: scale(0); animation: rippleAnim 0.8s ease-out forwards; pointer-events: none; z-index: 9999; }
     @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
 
-    .svg-filters { position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none; }
-
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
       body { padding-top: 62px; }
@@ -402,14 +378,6 @@
 </head>
 <body>
 
-  <!-- ═══ SVG FILTERS (for liquid glass) ═══ -->
-  <svg class="svg-filters" aria-hidden="true">
-    <filter id="liquidGlass" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
-      <feImage id="displacementMapImage" result="map" href="" />
-      <feDisplacementMap in="SourceGraphic" in2="map" scale="0" xChannelSelector="R" yChannelSelector="G" />
-    </filter>
-  </svg>
-
   <!-- ═══ BACKGROUND EFFECTS ═══ -->
   <div class="blob"></div>
   <div class="blob"></div>
@@ -433,9 +401,7 @@
           </button>
         </li>
         <!-- Liquid Glass Lens -->
-        <div class="liquid-lens" id="liquidLens">
-          <div class="lens-backdrop" id="lensBackdrop"></div>
-        </div>
+        <div class="liquid-lens" id="liquidLens"></div>
       </ul>
       <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -642,7 +608,7 @@
         <a href="https://linkedin.com/in/kerwin-dio-joseph-arlan" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a>
         <a href="https://github.com/kerwinarlan" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
       </div>
-      <div class="footer-note fade-up">&copy; 2026 Jose Arlan. </div>
+      <div class="footer-note fade-up">&copy; 2026 Jose Arlan. Built with <i class="fas fa-heart" style="color: var(--accent);"></i> for the future.</div>
     </div>
   </section>
 
@@ -674,7 +640,7 @@
       }, { passive: true });
     })();
 
-    // ─── Mobile Menu ───
+    // ─── Mobile Hamburger Menu ───
     (function initHamburger() {
       const hamburger = document.getElementById('hamburgerBtn');
       const navLinks = document.getElementById('navLinks');
@@ -709,7 +675,7 @@
       });
     })();
 
-    // ─── Cursor ───
+    // ─── Glowing Cursor ───
     (function initCursor() {
       const cursorGlow = document.getElementById('cursorGlow');
       if (!cursorGlow) return;
@@ -723,7 +689,7 @@
       });
     })();
 
-    // ─── Scroll Reveal ───
+    // ─── Staggered Scroll Reveal ───
     (function initScrollReveal() {
       const revealElements = document.querySelectorAll('.fade-up, .glass-card');
       if (!revealElements.length) return;
@@ -738,7 +704,7 @@
       revealElements.forEach(el => observer.observe(el));
     })();
 
-    // ─── Particles ───
+    // ─── Particle Network Background ───
     (function initParticles() {
       const isMobile = window.innerWidth < 768;
       const count = isMobile ? 40 : 80;
@@ -802,7 +768,7 @@
       animate();
     })();
 
-    // ─── 3D Tilt ───
+    // ─── 3D Tilt on Glass Cards ───
     (function initTilt() {
       document.querySelectorAll('.glass-card').forEach(card => {
         card.addEventListener('mousemove', (e) => {
@@ -818,7 +784,7 @@
       });
     })();
 
-    // ─── Ripple ───
+    // ─── Click Ripple Effect ───
     (function initRipple() {
       document.addEventListener('click', (e) => {
         const ripple = document.createElement('div');
@@ -832,546 +798,165 @@
       });
     })();
 
-    // ─── LIQUID GLASS (Full Twitter Implementation) ───
-(function initLiquidGlass() {
-  // Skip on mobile or reduced motion
-  const isMobile = window.innerWidth < 768;
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (isMobile || prefersReducedMotion) {
-    const lens = document.getElementById('liquidLens');
-    if (lens) lens.style.display = 'none';
-    return;
-  }
-
-  const lens = document.getElementById('liquidLens');
-  const lensBackdrop = document.getElementById('lensBackdrop');
-  const navItems = document.querySelectorAll('.nav-links a[data-nav]');
-
-  // Check if html2canvas loaded
-  if (typeof html2canvas === 'undefined') {
-    console.warn('html2canvas not loaded. Liquid glass disabled.');
-    return;
-  }
-
-  let activeNavItem = null;
-  let isLensActive = false;
-  let mapBlobUrl = null;
-  let currentFilterId = null;
-
-  // ─── 1. Generate Displacement Map (Squircle + Snell's Law) ───
-  function generateDisplacementMap(width, height, radius, gain) {
-    const canvas = document.createElement('canvas');
-    canvas.width = width;
-    canvas.height = height;
-    const ctx = canvas.getContext('2d');
-    const imageData = ctx.createImageData(width, height);
-    const data = imageData.data;
-
-    const cx = width / 2, cy = height / 2;
-    const rx = Math.max(width / 2 - radius, 1);
-    const ry = Math.max(height / 2 - radius, 1);
-
-    for (let y = 0; y < height; y++) {
-      for (let x = 0; x < width; x++) {
-        const nx = (x - cx) / rx;
-        const ny = (y - cy) / ry;
-        const dist = Math.sqrt(nx * nx + ny * ny);
-        const clamped = Math.min(dist, 1);
-
-        // Squircle dome falloff (Apple-style)
-        const falloff = Math.pow(1 - Math.pow(clamped, 4), 0.25);
-        const slope = falloff > 0.01
-          ? Math.pow(falloff, 3) / Math.pow(1 - Math.pow(falloff, 4), 0.75)
-          : 0;
-
-        // Snell's law: index of refraction 1.5 (real glass)
-        const thetaI = Math.atan(slope);
-        const thetaT = Math.asin(Math.sin(thetaI) / 1.5);
-        const bend = Math.sin(thetaI - thetaT) * gain;
-
-        const idx = (y * width + x) * 4;
-        const normX = dist > 0.001 ? nx / dist : 0;
-        const normY = dist > 0.001 ? ny / dist : 0;
-
-        // R/G channels = displacement (128 = no move)
-        data[idx] = Math.max(0, Math.min(255, 128 + normX * bend * 64));
-        data[idx + 1] = Math.max(0, Math.min(255, 128 + normY * bend * 64));
-        // B channel = specular highlight (bright rim)
-        data[idx + 2] = Math.max(0, Math.min(255, 255 - 200 * (1 - falloff)));
-        data[idx + 3] = 255;
+    // ─── LIQUID GLASS: Live backdrop + SVG displacement ───
+    (function initLiquidGlass() {
+      // Skip on mobile or reduced motion
+      const isMobile = window.innerWidth < 768;
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (isMobile || prefersReducedMotion) {
+        const lens = document.getElementById('liquidLens');
+        if (lens) lens.style.display = 'none';
+        return;
       }
-    }
-    ctx.putImageData(imageData, 0, 0);
 
-    return new Promise((resolve) => {
-      canvas.toBlob((blob) => {
-        resolve(URL.createObjectURL(blob));
-      }, 'image/png');
-    });
-  }
+      const lens = document.getElementById('liquidLens');
+      const navItems = document.querySelectorAll('.nav-links a[data-nav]');
+      if (!lens || !navItems.length) return;
 
-  // ─── 2. Capture the page behind the lens ───
-  function captureBackdrop() {
-    // Capture the main content area (the .container)
-    const target = document.querySelector('.container');
-    if (!target) return Promise.reject('No container found');
+      // ─── 1. Generate displacement map (Squircle dome + Snell's law) ───
+      function generateDisplacementMap(width, height, radius, gain) {
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        const imageData = ctx.createImageData(width, height);
+        const data = imageData.data;
 
-    return html2canvas(target, {
-      scale: 0.8, // Lower scale for performance
-      useCORS: true,
-      backgroundColor: null,
-      allowTaint: true,
-      logging: false,
-      width: window.innerWidth,
-      height: window.innerHeight,
-      x: 0,
-      y: window.scrollY,
-    });
-  }
+        const cx = width / 2, cy = height / 2;
+        const rx = Math.max(width / 2 - radius, 1);
+        const ry = Math.max(height / 2 - radius, 1);
 
-  // ─── 3. Apply filter to captured image ───
-  function applyFilterToImage(canvas, mapUrl) {
-    // Create a fresh filter ID (required for Safari)
-    const filterId = 'glass_' + Date.now();
-    currentFilterId = filterId;
+        for (let y = 0; y < height; y++) {
+          for (let x = 0; x < width; x++) {
+            const nx = (x - cx) / rx;
+            const ny = (y - cy) / ry;
+            const dist = Math.sqrt(nx * nx + ny * ny);
+            const clamped = Math.min(dist, 1);
 
-    // Create SVG with the filter
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('width', canvas.width);
-    svg.setAttribute('height', canvas.height);
-    svg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;';
+            // Squircle dome falloff (Apple‑style continuous corners)
+            const falloff = Math.pow(1 - Math.pow(clamped, 4), 0.25);
+            const slope = falloff > 0.01
+              ? Math.pow(falloff, 3) / Math.pow(1 - Math.pow(falloff, 4), 0.75)
+              : 0;
 
-    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-    const filter = document.createElementNS('http://www.w3.org/2000/svg', 'filter');
-    filter.setAttribute('id', filterId);
-    filter.setAttribute('x', '-20%');
-    filter.setAttribute('y', '-20%');
-    filter.setAttribute('width', '140%');
-    filter.setAttribute('height', '140%');
-    filter.setAttribute('color-interpolation-filters', 'sRGB');
+            // Snell's law: index of refraction 1.5 (real glass)
+            const thetaI = Math.atan(slope);
+            const thetaT = Math.asin(Math.sin(thetaI) / 1.5);
+            const bend = Math.sin(thetaI - thetaT) * gain;
 
-    // feImage for the displacement map
-    const feImage = document.createElementNS('http://www.w3.org/2000/svg', 'feImage');
-    feImage.setAttribute('href', mapUrl);
-    feImage.setAttribute('result', 'map');
+            const idx = (y * width + x) * 4;
+            const normX = dist > 0.001 ? nx / dist : 0;
+            const normY = dist > 0.001 ? ny / dist : 0;
 
-    // feDisplacementMap
-    const feDisplace = document.createElementNS('http://www.w3.org/2000/svg', 'feDisplacementMap');
-    feDisplace.setAttribute('in', 'SourceGraphic');
-    feDisplace.setAttribute('in2', 'map');
-    feDisplace.setAttribute('scale', '0');
-    feDisplace.setAttribute('xChannelSelector', 'R');
-    feDisplace.setAttribute('yChannelSelector', 'G');
-
-    filter.appendChild(feImage);
-    filter.appendChild(feDisplace);
-    defs.appendChild(filter);
-    svg.appendChild(defs);
-
-    // Image element
-    const img = document.createElementNS('http://www.w3.org/2000/svg', 'image');
-    img.setAttribute('x', '0');
-    img.setAttribute('y', '0');
-    img.setAttribute('width', canvas.width);
-    img.setAttribute('height', canvas.height);
-    img.setAttribute('href', canvas.toDataURL('image/png'));
-    img.setAttribute('filter', 'url(#' + filterId + ')');
-    svg.appendChild(img);
-
-    return svg;
-  }
-
-  // ─── 4. Show the lens ───
-  function showLens(svgElement) {
-    // Clear previous content
-    lensBackdrop.innerHTML = '';
-    lensBackdrop.appendChild(svgElement);
-    lens.style.display = 'block';
-    lens.classList.add('active');
-  }
-
-  // ─── 5. Hide the lens ───
-  function hideLens() {
-    isLensActive = false;
-    setTimeout(() => {
-      if (!isLensActive) {
-        lens.classList.remove('active');
-        setTimeout(() => {
-          if (!isLensActive) {
-            lens.style.display = 'none';
-            lensBackdrop.innerHTML = '';
+            // R/G channels = displacement (128 = no move)
+            data[idx]     = Math.max(0, Math.min(255, 128 + normX * bend * 64));
+            data[idx + 1] = Math.max(0, Math.min(255, 128 + normY * bend * 64));
+            // B channel = specular highlight (bright rim)
+            data[idx + 2] = Math.max(0, Math.min(255, 255 - 200 * (1 - falloff)));
+            data[idx + 3] = 255;
           }
-        }, 400);
+        }
+        ctx.putImageData(imageData, 0, 0);
+
+        return new Promise((resolve) => {
+          canvas.toBlob((blob) => {
+            resolve(URL.createObjectURL(blob));
+          }, 'image/png');
+        });
       }
-    }, 100);
-  }
 
-  // ─── 6. Get position of nav item ───
-  function getNavItemRect(el) {
-    const rect = el.getBoundingClientRect();
-    const navRect = document.querySelector('.nav-inner').getBoundingClientRect();
-    return {
-      left: rect.left - navRect.left,
-      top: rect.top - navRect.top,
-      width: rect.width,
-      height: rect.height,
-    };
-  }
+      // ─── 2. Create SVG filter with the map as href ───
+      function createGlassFilter(mapUrl, filterId) {
+        // Remove old filter if it exists
+        const oldSvg = document.getElementById('glassFilterSvg');
+        if (oldSvg) oldSvg.remove();
 
-  // ─── 7. Update lens position ───
-  function updateLensPosition(el) {
-    if (!el) return;
-    const rect = getNavItemRect(el);
-    const padX = 16, padY = 4;
-    lens.style.left = (rect.left - padX) + 'px';
-    lens.style.top = (rect.top - padY) + 'px';
-    lens.style.width = (rect.width + padX * 2) + 'px';
-    lens.style.height = (rect.height + padY * 2) + 'px';
-  }
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('id', 'glassFilterSvg');
+        svg.style.cssText = 'position:absolute;width:0;height:0;';
 
-  // ─── 8. Generate the map once ───
-  let mapReady = false;
-  generateDisplacementMap(200, 120, 32, 1.2).then((url) => {
-    mapBlobUrl = url;
-    mapReady = true;
-    console.log('Liquid glass map ready ✓');
-  });
+        const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+        const filter = document.createElementNS('http://www.w3.org/2000/svg', 'filter');
+        filter.setAttribute('id', filterId);
+        filter.setAttribute('x', '-20%');
+        filter.setAttribute('y', '-20%');
+        filter.setAttribute('width', '140%');
+        filter.setAttribute('height', '140%');
+        filter.setAttribute('color-interpolation-filters', 'sRGB');
 
-  // ─── 9. Hover events ───
-  navItems.forEach((item) => {
-    item.addEventListener('mouseenter', async () => {
-      if (!mapReady) return;
-      activeNavItem = item;
-      isLensActive = true;
+        const feImage = document.createElementNS('http://www.w3.org/2000/svg', 'feImage');
+        feImage.setAttribute('href', mapUrl);
+        feImage.setAttribute('result', 'map');
 
-      // Update position
-      updateLensPosition(item);
+        const feDisplace = document.createElementNS('http://www.w3.org/2000/svg', 'feDisplacementMap');
+        feDisplace.setAttribute('in', 'SourceGraphic');
+        feDisplace.setAttribute('in2', 'map');
+        feDisplace.setAttribute('scale', '0');
+        feDisplace.setAttribute('xChannelSelector', 'R');
+        feDisplace.setAttribute('yChannelSelector', 'G');
 
-      // Capture the backdrop
-      try {
-        const capturedCanvas = await captureBackdrop();
-        if (!capturedCanvas) return;
-
-        // Apply the filter
-        const svg = applyFilterToImage(capturedCanvas, mapBlobUrl);
-        showLens(svg);
-      } catch (e) {
-        console.warn('Backdrop capture failed:', e);
-        // Fallback: just show a blur
-        lensBackdrop.innerHTML = '';
-        lensBackdrop.style.background = 'var(--glass-bg)';
-        lensBackdrop.style.backdropFilter = 'blur(12px)';
-        lensBackdrop.style.webkitBackdropFilter = 'blur(12px)';
-        lensBackdrop.style.width = '100%';
-        lensBackdrop.style.height = '100%';
-        lensBackdrop.style.position = 'absolute';
-        lensBackdrop.style.top = '0';
-        lensBackdrop.style.left = '0';
-        lens.style.display = 'block';
-        lens.classList.add('active');
+        filter.appendChild(feImage);
+        filter.appendChild(feDisplace);
+        defs.appendChild(filter);
+        svg.appendChild(defs);
+        document.body.appendChild(svg);
       }
-    });
 
-    item.addEventListener('mousemove', () => {
-      if (activeNavItem) {
-        updateLensPosition(activeNavItem);
+      // ─── 3. Main init ───
+      async function init() {
+        // Generate the displacement map (one time, stored as a Blob URL)
+        const mapUrl = await generateDisplacementMap(200, 120, 32, 1.2);
+        createGlassFilter(mapUrl, 'glassFilter');
+
+        // Apply filter to the lens via CSS (already in styles)
+        // Track hover
+        let activeItem = null;
+
+        function getNavItemRect(el) {
+          const rect = el.getBoundingClientRect();
+          const navRect = document.querySelector('.nav-inner').getBoundingClientRect();
+          return {
+            left: rect.left - navRect.left,
+            top: rect.top - navRect.top,
+            width: rect.width,
+            height: rect.height,
+          };
+        }
+
+        function updateLens(el) {
+          const rect = getNavItemRect(el);
+          const padX = 16, padY = 4;
+          lens.style.left = (rect.left - padX) + 'px';
+          lens.style.top = (rect.top - padY) + 'px';
+          lens.style.width = (rect.width + padX * 2) + 'px';
+          lens.style.height = (rect.height + padY * 2) + 'px';
+          lens.classList.add('active');
+        }
+
+        navItems.forEach((item) => {
+          item.addEventListener('mouseenter', () => {
+            activeItem = item;
+            updateLens(item);
+          });
+          item.addEventListener('mousemove', () => {
+            if (activeItem) updateLens(activeItem);
+          });
+          item.addEventListener('mouseleave', () => {
+            activeItem = null;
+            lens.classList.remove('active');
+          });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+          if (activeItem) updateLens(activeItem);
+        });
+
+        console.log('✅ Liquid glass initialized (live backdrop + physics warp)');
       }
-    });
 
-    item.addEventListener('mouseleave', hideLens);
-  });
-
-  // ─── 10. Handle scroll ───
-  window.addEventListener('scroll', () => {
-    if (activeNavItem) {
-      updateLensPosition(activeNavItem);
-      // Re-capture on scroll (optional, but keeps it fresh)
-    }
-  });
-
-  // ─── 11. Cleanup ───
-  window.__liquidGlassCleanup = function() {
-    if (mapBlobUrl) URL.revokeObjectURL(mapBlobUrl);
-  };
-
-  console.log('Liquid glass (full implementation) initialized ✓');
-})();
+      init().catch(e => console.warn('Liquid glass init error:', e));
+    })();
   </script>
-<!-- html2canvas: captures the page as an image so we can warp it -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<!-- Hidden canvas used by the liquid glass effect -->
-<canvas id="glassCanvas" style="position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none;z-index:-1;"></canvas>
-<!-- ─── LIQUID GLASS DEPENDENCIES ─── -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
-<!-- Hidden canvas for processing -->
-<canvas id="glassCanvas" style="position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none;z-index:-1;"></canvas>
-
-<!-- ─── LIQUID GLASS JAVASCRIPT ─── -->
-<script>
-// ─── LIQUID GLASS (Full Twitter Implementation) ───
-(function initLiquidGlass() {
-  // Skip on mobile or reduced motion
-  const isMobile = window.innerWidth < 768;
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (isMobile || prefersReducedMotion) {
-    const lens = document.getElementById('liquidLens');
-    if (lens) lens.style.display = 'none';
-    return;
-  }
-
-  const lens = document.getElementById('liquidLens');
-  const lensBackdrop = document.getElementById('lensBackdrop');
-  const navItems = document.querySelectorAll('.nav-links a[data-nav]');
-
-  // Check if html2canvas loaded
-  if (typeof html2canvas === 'undefined') {
-    console.warn('html2canvas not loaded. Liquid glass disabled.');
-    return;
-  }
-
-  let activeNavItem = null;
-  let isLensActive = false;
-  let mapBlobUrl = null;
-  let currentFilterId = null;
-
-  // ─── 1. Generate Displacement Map (Squircle + Snell's Law) ───
-  function generateDisplacementMap(width, height, radius, gain) {
-    const canvas = document.createElement('canvas');
-    canvas.width = width;
-    canvas.height = height;
-    const ctx = canvas.getContext('2d');
-    const imageData = ctx.createImageData(width, height);
-    const data = imageData.data;
-
-    const cx = width / 2, cy = height / 2;
-    const rx = Math.max(width / 2 - radius, 1);
-    const ry = Math.max(height / 2 - radius, 1);
-
-    for (let y = 0; y < height; y++) {
-      for (let x = 0; x < width; x++) {
-        const nx = (x - cx) / rx;
-        const ny = (y - cy) / ry;
-        const dist = Math.sqrt(nx * nx + ny * ny);
-        const clamped = Math.min(dist, 1);
-
-        // Squircle dome falloff (Apple-style)
-        const falloff = Math.pow(1 - Math.pow(clamped, 4), 0.25);
-        const slope = falloff > 0.01
-          ? Math.pow(falloff, 3) / Math.pow(1 - Math.pow(falloff, 4), 0.75)
-          : 0;
-
-        // Snell's law: index of refraction 1.5 (real glass)
-        const thetaI = Math.atan(slope);
-        const thetaT = Math.asin(Math.sin(thetaI) / 1.5);
-        const bend = Math.sin(thetaI - thetaT) * gain;
-
-        const idx = (y * width + x) * 4;
-        const normX = dist > 0.001 ? nx / dist : 0;
-        const normY = dist > 0.001 ? ny / dist : 0;
-
-        // R/G channels = displacement (128 = no move)
-        data[idx] = Math.max(0, Math.min(255, 128 + normX * bend * 64));
-        data[idx + 1] = Math.max(0, Math.min(255, 128 + normY * bend * 64));
-        // B channel = specular highlight (bright rim)
-        data[idx + 2] = Math.max(0, Math.min(255, 255 - 200 * (1 - falloff)));
-        data[idx + 3] = 255;
-      }
-    }
-    ctx.putImageData(imageData, 0, 0);
-
-    return new Promise((resolve) => {
-      canvas.toBlob((blob) => {
-        resolve(URL.createObjectURL(blob));
-      }, 'image/png');
-    });
-  }
-
-  // ─── 2. Capture the page behind the lens ───
-  function captureBackdrop() {
-    // Capture the main content area (the .container)
-    const target = document.querySelector('.container');
-    if (!target) return Promise.reject('No container found');
-
-    return html2canvas(target, {
-      scale: 0.8, // Lower scale for performance
-      useCORS: true,
-      backgroundColor: null,
-      allowTaint: true,
-      logging: false,
-      width: window.innerWidth,
-      height: window.innerHeight,
-      x: 0,
-      y: window.scrollY,
-    });
-  }
-
-  // ─── 3. Apply filter to captured image ───
-  function applyFilterToImage(canvas, mapUrl) {
-    // Create a fresh filter ID (required for Safari)
-    const filterId = 'glass_' + Date.now();
-    currentFilterId = filterId;
-
-    // Create SVG with the filter
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('width', canvas.width);
-    svg.setAttribute('height', canvas.height);
-    svg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;';
-
-    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-    const filter = document.createElementNS('http://www.w3.org/2000/svg', 'filter');
-    filter.setAttribute('id', filterId);
-    filter.setAttribute('x', '-20%');
-    filter.setAttribute('y', '-20%');
-    filter.setAttribute('width', '140%');
-    filter.setAttribute('height', '140%');
-    filter.setAttribute('color-interpolation-filters', 'sRGB');
-
-    // feImage for the displacement map
-    const feImage = document.createElementNS('http://www.w3.org/2000/svg', 'feImage');
-    feImage.setAttribute('href', mapUrl);
-    feImage.setAttribute('result', 'map');
-
-    // feDisplacementMap
-    const feDisplace = document.createElementNS('http://www.w3.org/2000/svg', 'feDisplacementMap');
-    feDisplace.setAttribute('in', 'SourceGraphic');
-    feDisplace.setAttribute('in2', 'map');
-    feDisplace.setAttribute('scale', '0');
-    feDisplace.setAttribute('xChannelSelector', 'R');
-    feDisplace.setAttribute('yChannelSelector', 'G');
-
-    filter.appendChild(feImage);
-    filter.appendChild(feDisplace);
-    defs.appendChild(filter);
-    svg.appendChild(defs);
-
-    // Image element
-    const img = document.createElementNS('http://www.w3.org/2000/svg', 'image');
-    img.setAttribute('x', '0');
-    img.setAttribute('y', '0');
-    img.setAttribute('width', canvas.width);
-    img.setAttribute('height', canvas.height);
-    img.setAttribute('href', canvas.toDataURL('image/png'));
-    img.setAttribute('filter', 'url(#' + filterId + ')');
-    svg.appendChild(img);
-
-    return svg;
-  }
-
-  // ─── 4. Show the lens ───
-  function showLens(svgElement) {
-    // Clear previous content
-    lensBackdrop.innerHTML = '';
-    lensBackdrop.appendChild(svgElement);
-    lens.style.display = 'block';
-    lens.classList.add('active');
-  }
-
-  // ─── 5. Hide the lens ───
-  function hideLens() {
-    isLensActive = false;
-    setTimeout(() => {
-      if (!isLensActive) {
-        lens.classList.remove('active');
-        setTimeout(() => {
-          if (!isLensActive) {
-            lens.style.display = 'none';
-            lensBackdrop.innerHTML = '';
-          }
-        }, 400);
-      }
-    }, 100);
-  }
-
-  // ─── 6. Get position of nav item ───
-  function getNavItemRect(el) {
-    const rect = el.getBoundingClientRect();
-    const navRect = document.querySelector('.nav-inner').getBoundingClientRect();
-    return {
-      left: rect.left - navRect.left,
-      top: rect.top - navRect.top,
-      width: rect.width,
-      height: rect.height,
-    };
-  }
-
-  // ─── 7. Update lens position ───
-  function updateLensPosition(el) {
-    if (!el) return;
-    const rect = getNavItemRect(el);
-    const padX = 16, padY = 4;
-    lens.style.left = (rect.left - padX) + 'px';
-    lens.style.top = (rect.top - padY) + 'px';
-    lens.style.width = (rect.width + padX * 2) + 'px';
-    lens.style.height = (rect.height + padY * 2) + 'px';
-  }
-
-  // ─── 8. Generate the map once ───
-  let mapReady = false;
-  generateDisplacementMap(200, 120, 32, 1.2).then((url) => {
-    mapBlobUrl = url;
-    mapReady = true;
-    console.log('Liquid glass map ready ✓');
-  });
-
-  // ─── 9. Hover events ───
-  navItems.forEach((item) => {
-    item.addEventListener('mouseenter', async () => {
-      if (!mapReady) return;
-      activeNavItem = item;
-      isLensActive = true;
-
-      // Update position
-      updateLensPosition(item);
-
-      // Capture the backdrop
-      try {
-        const capturedCanvas = await captureBackdrop();
-        if (!capturedCanvas) return;
-
-        // Apply the filter
-        const svg = applyFilterToImage(capturedCanvas, mapBlobUrl);
-        showLens(svg);
-      } catch (e) {
-        console.warn('Backdrop capture failed:', e);
-        // Fallback: just show a blur
-        lensBackdrop.innerHTML = '';
-        lensBackdrop.style.background = 'var(--glass-bg)';
-        lensBackdrop.style.backdropFilter = 'blur(12px)';
-        lensBackdrop.style.webkitBackdropFilter = 'blur(12px)';
-        lensBackdrop.style.width = '100%';
-        lensBackdrop.style.height = '100%';
-        lensBackdrop.style.position = 'absolute';
-        lensBackdrop.style.top = '0';
-        lensBackdrop.style.left = '0';
-        lens.style.display = 'block';
-        lens.classList.add('active');
-      }
-    });
-
-    item.addEventListener('mousemove', () => {
-      if (activeNavItem) {
-        updateLensPosition(activeNavItem);
-      }
-    });
-
-    item.addEventListener('mouseleave', hideLens);
-  });
-
-  // ─── 10. Handle scroll ───
-  window.addEventListener('scroll', () => {
-    if (activeNavItem) {
-      updateLensPosition(activeNavItem);
-    }
-  });
-
-  // ─── 11. Cleanup ───
-  window.__liquidGlassCleanup = function() {
-    if (mapBlobUrl) URL.revokeObjectURL(mapBlobUrl);
-  };
-
-  console.log('Liquid glass (full implementation) initialized ✓');
-})();
-</script>
 </body>
 </html>
