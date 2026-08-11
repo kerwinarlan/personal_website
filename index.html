@@ -650,6 +650,105 @@
     }
     .build-card code { color: var(--cyan); font-family: var(--mono); font-size: 0.8rem; }
 
+    .section-heading h2 .gradient-word {
+      color: transparent;
+      background: linear-gradient(100deg, var(--cyan), #d6fbff 48%, var(--violet));
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .project-card {
+      padding: clamp(26px, 4vw, 44px);
+      border-radius: var(--radius-xl);
+    }
+    .project-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: flex-start;
+    }
+    .project-head .terminal-label { color: var(--cyan); font-family: var(--mono); font-size: 0.74rem; }
+    .project-head h3 { margin-top: 12px; font-size: clamp(1.5rem, 3vw, 2.1rem); letter-spacing: -0.03em; }
+    .project-head p { margin-top: 14px; max-width: 720px; color: var(--muted); }
+
+    .trace-log {
+      margin-top: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .trace-log summary {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 18px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+    }
+    .trace-log summary::-webkit-details-marker { display: none; }
+    .trace-log summary::before { content: "▸"; color: var(--cyan); transition: transform 180ms ease; }
+    .trace-log[open] summary::before { transform: rotate(90deg); }
+    .trace-body { padding: 0 18px 18px; display: grid; gap: 8px; }
+    .trace-step {
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--green);
+      border-radius: 10px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .trace-step .ok { color: var(--green); font-weight: 600; }
+
+    .project-card .tag-list { margin-top: 24px; }
+
+    .preview {
+      margin-top: 26px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .preview-tabs {
+      display: flex;
+      gap: 6px;
+      padding: 8px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .preview-tab {
+      min-height: 38px;
+      padding: 0 14px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      color: var(--muted);
+      background: transparent;
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      cursor: pointer;
+      transition: color 160ms ease, background 160ms ease, border-color 160ms ease;
+    }
+    .preview-tab:hover { color: var(--text); background: var(--glass-soft); }
+    .preview-tab.is-active {
+      color: #061018;
+      font-weight: 700;
+      background: linear-gradient(145deg, #d9feff, var(--cyan-strong));
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+    .preview-frame {
+      display: block;
+      width: 100%;
+      height: 520px;
+      border: 0;
+      background: #0b1122;
+    }
+
     .contact-card {
       padding: clamp(30px, 6vw, 64px);
       border-radius: var(--radius-xl);
@@ -823,6 +922,7 @@
       .education-facts { grid-template-columns: 1fr; }
       .build-card { grid-template-columns: 1fr; align-items: start; }
       .contact-actions { grid-template-columns: 1fr; }
+      .preview-frame { height: 420px; }
       footer { flex-direction: column; }
     }
 
@@ -1189,11 +1289,60 @@
       </div>
     </section>
 
+    <section class="section" id="projects">
+      <div class="page-shell">
+        <div class="section-heading reveal">
+          <div>
+            <div class="kicker">05 / Featured project</div>
+            <h2>PAGASA <span class="gradient-word">Track Agent.</span></h2>
+          </div>
+          <p>An autonomous agent that watches PAGASA cyclone bulletins, parses them with an LLM, computes the cone of uncertainty, and ships a live map - fully unattended.</p>
+        </div>
+
+        <article class="project-card glass liquid-card reveal">
+          <div class="project-head">
+            <div>
+              <div class="terminal-label">$ agent status</div>
+              <h3>PAGASA Track Agent</h3>
+              <p>Scrapes the latest PAGASA tropical cyclone bulletin, extracts structured storm data with DeepSeek V3 under Pydantic schema validation, builds the tangential cone of uncertainty in GeoJSON, and auto-deploys an interactive Folium map to GitHub Pages on an hourly cron.</p>
+            </div>
+            <a class="button secondary" href="https://github.com/kerwinarlan/pagasa-track-agent" target="_blank" rel="noopener">View source <span class="arrow" aria-hidden="true">↗</span></a>
+          </div>
+
+          <details class="trace-log" open>
+            <summary>Agent trace log</summary>
+            <div class="trace-body">
+              <div class="trace-step"><span class="ok">[✓]</span> Web Scraper: Extracted latest text bulletin (BeautifulSoup4)</div>
+              <div class="trace-step"><span class="ok">[✓]</span> LLM Parser: DeepSeek V3 + Pydantic schema validation</div>
+              <div class="trace-step"><span class="ok">[✓]</span> GIS Engine: Calculated tangential Cone of Uncertainty</div>
+              <div class="trace-step"><span class="ok">[✓]</span> Auto-Deploy: Published interactive map to GitHub Pages</div>
+            </div>
+          </details>
+
+          <div class="tag-list">
+            <span class="tag">DeepSeek V3</span>
+            <span class="tag">54 Pytest Checks Passed</span>
+            <span class="tag">Hourly Cron</span>
+            <span class="tag">GeoJSON</span>
+            <span class="tag">Folium/Leaflet</span>
+          </div>
+
+          <div class="preview">
+            <div class="preview-tabs" role="group" aria-label="Preview view">
+              <button class="preview-tab is-active" type="button" data-src="https://kerwinarlan.github.io/pagasa-track-agent/data/output/storm_map.html" data-title="PAGASA Track Agent live storm map">Live map</button>
+              <button class="preview-tab" type="button" data-src="https://kerwinarlan.github.io/pagasa-track-agent/data/output/storm_track.geojson" data-title="PAGASA Track Agent raw GeoJSON">Raw GeoJSON</button>
+            </div>
+            <iframe id="stormPreview" class="preview-frame" src="https://kerwinarlan.github.io/pagasa-track-agent/data/output/storm_map.html" title="PAGASA Track Agent live storm map" loading="lazy"></iframe>
+          </div>
+        </article>
+      </div>
+    </section>
+
     <section class="section" id="contact">
       <div class="page-shell">
         <article class="contact-card glass liquid-card reveal">
           <div>
-            <div class="kicker">05 / Contact</div>
+            <div class="kicker">06 / Contact</div>
             <h2>Need someone who can bridge technical detail and operational reality?</h2>
             <p>I am open to data, engineering, operations, and AI data roles starting August 2026. Reach out for opportunities, project conversations, or a straightforward introduction.</p>
             <div class="contact-links">
@@ -1235,6 +1384,7 @@
         <button class="command-option" type="button" data-command="contact"><code>contact</code><span>Jump to contact details</span></button>
         <button class="command-option" type="button" data-command="resume"><code>resume</code><span>Open the PDF resume</span></button>
         <button class="command-option" type="button" data-command="theme"><code>theme</code><span>Switch dark or light mode</span></button>
+        <button class="command-option" type="button" data-command="project"><code>project</code><span>View PAGASA Track Agent</span></button>
       </div>
       <div class="command-feedback" id="commandFeedback">Press Enter to run a command.</div>
     </div>
@@ -1317,6 +1467,14 @@
         });
       }
 
+      const previewTabs = document.querySelectorAll('.preview-tab');
+      const previewFrame = document.getElementById('stormPreview');
+      previewTabs.forEach(tab => tab.addEventListener('click', () => {
+        previewTabs.forEach(t => t.classList.toggle('is-active', t === tab));
+        previewFrame.src = tab.dataset.src;
+        previewFrame.title = tab.dataset.title;
+      }));
+
       const timeElement = document.getElementById('localTime');
       function updateManilaTime() {
         timeElement.textContent = new Intl.DateTimeFormat('en-PH', {
@@ -1346,13 +1504,15 @@
         toolkit: () => navigateTo('toolkit'),
         skills: () => navigateTo('toolkit'),
         education: () => navigateTo('education'),
+        project: () => navigateTo('projects'),
+        pagasa: () => navigateTo('projects'),
         contact: () => navigateTo('contact'),
         resume: () => window.open('./resume.pdf', '_blank', 'noopener'),
         theme: () => {
           applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
           commandFeedback.textContent = `Theme changed to ${root.dataset.theme}.`;
         },
-        help: () => { commandFeedback.textContent = 'Commands: profile, experience, toolkit, education, contact, resume, theme'; }
+        help: () => { commandFeedback.textContent = 'Commands: profile, experience, toolkit, education, project, contact, resume, theme'; }
       };
 
       function navigateTo(id) {
