@@ -139,24 +139,5 @@
     "language": null,
     "topics": [],
     "stars": 0
-  },
-  {
-    "id": "watch-vault",
-    "description": "The Watch Alley PH - luxury watch reseller catalog and admin broadcast hub. Next.js 16 + Supabase; bypasses the EUR 100/mo Viber bot fee with web-native deep links.",
-    "url": "https://github.com/kerwinarlan/watch-vault",
-    "homepage": "https://watch-vault-pi.vercel.app",
-    "language": "TypeScript",
-    "topics": [
-      "deep-linking",
-      "ecommerce",
-      "nextjs",
-      "portfolio",
-      "react",
-      "supabase",
-      "tailwindcss",
-      "typescript",
-      "viber"
-    ],
-    "stars": 0
   }
 ]

@@ -12,7 +12,7 @@ USER = "kerwinarlan"
 EXCLUDE = {
     "personal_website", "dotfiles", "random", "website", "wezterm",
     "engineering-comeback-2025", "manila-bay-storm-surge-thesis",
-    "watch-alley", "budget-bot-skill",
+    "watch-alley", "budget-bot-skill", "watch-vault",
 }
 # Forks that are real, credited work (e.g. the PythonAsia 2026 talk).
 ALLOW_FORKS = {"midasgennx_2d_truss_example"}

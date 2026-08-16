@@ -707,6 +707,8 @@
       background: rgba(255, 255, 255, 0.02);
     }
     .trace-step .ok { color: var(--green); font-weight: 600; }
+    .trace-step a { text-decoration: underline; text-underline-offset: 2px; }
+    .trace-step a:hover { color: var(--cyan); }
 
     @keyframes trace-cascade {
       from { opacity: 0.2; transform: translateX(8px); }
@@ -1502,30 +1504,31 @@
             </div>
           </article>
 
-          <article class="project-card glass liquid-card reveal-on-scroll" id="watchvault-project">
+          <article class="project-card glass liquid-card reveal-on-scroll" id="watchalley-project">
             <div class="project-head">
               <div>
-                <div class="terminal-label">$ vault status</div>
-                <h3>The Watch Alley PH - Luxury Watch Reseller Portal</h3>
-                <p>Luxury watch inventory catalog and admin broadcast hub that bypasses the EUR 100/mo Viber bot fee with web-native deep links.</p>
+                <div class="terminal-label">$ contribution status</div>
+                <h3>Watch Alley - Zero-Cost Viber Broadcast</h3>
+                <p>Three merged PRs in the official Watch Alley repo. The flagship replaces a €100/mo Viber Business API with a native viber://forward deep link: one click opens Viber pre-filled with the watch name, the canonical URL on line 2 so Viber's crawler fetches the og:image, and specs truncated at word boundaries to fit OS URI limits.</p>
               </div>
-              <a class="button secondary" href="https://github.com/kerwinarlan/watch-vault" target="_blank" rel="noopener">View source <span class="arrow" aria-hidden="true">↗</span></a>
+              <a class="button secondary" href="https://github.com/gerdguerrero/watch-alley/pulls?q=is%3Apr+author%3Akerwinarlan" target="_blank" rel="noopener">Merged PRs <span class="arrow" aria-hidden="true">↗</span></a>
             </div>
 
             <details class="trace-log" open>
-              <summary>Capability trace log</summary>
+              <summary>Merged pull requests</summary>
               <div class="trace-body">
-                <div class="trace-step"><span class="ok">[✓]</span> Public Catalog with Filters and Photo Gallery</div>
-                <div class="trace-step"><span class="ok">[✓]</span> Admin Broadcast Hub with Viber/Facebook/X Deep Links</div>
-                <div class="trace-step"><span class="ok">[✓]</span> Supabase RLS - Public Read, Admin Write</div>
+                <div class="trace-step"><span class="ok">[✓]</span> PR <a href="https://github.com/gerdguerrero/watch-alley/pull/7">#7</a> - Zero-Cost Viber Broadcast Integration (native deep link, no €100/mo API)</div>
+                <div class="trace-step"><span class="ok">[✓]</span> PR <a href="https://github.com/gerdguerrero/watch-alley/pull/8">#8</a> - Same-origin Viber og image + clean caption</div>
+                <div class="trace-step"><span class="ok">[✓]</span> PR <a href="https://github.com/gerdguerrero/watch-alley/pull/9">#9</a> - Short /w link + full saved description in Viber caption</div>
               </div>
             </details>
 
             <div class="tag-list">
-              <span class="tag">Next.js 16</span>
-              <span class="tag">Supabase</span>
+              <span class="tag">Open Source</span>
+              <span class="tag">viber://forward</span>
               <span class="tag">Deep Linking</span>
-              <span class="tag">Tailwind CSS</span>
+              <span class="tag">og:image</span>
+              <span class="tag">Contribution</span>
             </div>
           </article>
         </div>
@@ -1590,7 +1593,7 @@
         <button class="command-option" type="button" data-command="project"><code>project</code><span>Open PAGASA Track Agent repo</span></button>
         <button class="command-option" type="button" data-command="surge"><code>surge</code><span>Open Surge Surrogate repo</span></button>
         <button class="command-option" type="button" data-command="photobooth"><code>photobooth</code><span>Open Photobooth App repo</span></button>
-        <button class="command-option" type="button" data-command="watchvault"><code>watchvault</code><span>Open The Watch Alley portal repo - Viber deep links</span></button>
+        <button class="command-option" type="button" data-command="watchalley"><code>watchalley</code><span>Open merged Watch Alley PRs - Viber workaround</span></button>
         <button class="command-option" type="button" data-command="thesis"><code>thesis</code><span>Request access to the Manila Bay thesis repo</span></button>
         <button class="command-option" type="button" data-command="github"><code>github</code><span>Jump to the auto-synced GitHub projects</span></button>
       </div>
@@ -1732,10 +1735,7 @@
         surge: () => window.open('https://github.com/kerwinarlan/surge-surrogate', '_blank', 'noopener'),
         surrogate: () => window.open('https://github.com/kerwinarlan/surge-surrogate', '_blank', 'noopener'),
         photobooth: () => window.open('https://github.com/kerwinarlan/photobooth-app', '_blank', 'noopener'),
-        watchvault: () => window.open('https://github.com/kerwinarlan/watch-vault', '_blank', 'noopener'),
-        chronovault: () => window.open('https://github.com/kerwinarlan/watch-vault', '_blank', 'noopener'),
-        watch: () => window.open('https://github.com/kerwinarlan/watch-vault', '_blank', 'noopener'),
-        viber: () => window.open('https://github.com/kerwinarlan/watch-vault', '_blank', 'noopener'),
+        watchalley: () => window.open('https://github.com/gerdguerrero/watch-alley/pulls?q=is%3Apr+author%3Akerwinarlan', '_blank', 'noopener'),
         thesis: () => window.location.href = 'mailto:kerwinarlan@gmail.com?subject=Thesis%20repo%20access',
         github: () => navigateTo('githubProjects'),
         contact: () => navigateTo('contact'),
@@ -1744,7 +1744,7 @@
           applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
           commandFeedback.textContent = `Theme changed to ${root.dataset.theme}.`;
         },
-        help: () => { commandFeedback.textContent = 'Commands: profile, experience, toolkit, education, project, surge, photobooth, watchvault, thesis, github, contact, resume, theme'; }
+        help: () => { commandFeedback.textContent = 'Commands: profile, experience, toolkit, education, project, surge, photobooth, watchalley, thesis, github, contact, resume, theme'; }
       };
 
       function navigateTo(id) {
@@ -1798,7 +1798,7 @@
         }
       });
 
-      const featuredProjects = ['pagasa-track-agent', 'surge-surrogate', 'photobooth-app', 'watch-vault'];
+      const featuredProjects = ['pagasa-track-agent', 'surge-surrogate', 'photobooth-app'];
       const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
       fetch('./projects.json')
         .then(r => r.json())
