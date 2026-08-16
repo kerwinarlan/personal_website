@@ -809,6 +809,16 @@
       font-family: var(--mono);
       font-size: 0.7rem;
     }
+    .auto-projects { margin-top: 48px; }
+    .auto-heading { display: grid; gap: 4px; margin-bottom: 20px; }
+    .auto-heading h3 { font-size: clamp(1.4rem, 3vw, 1.9rem); letter-spacing: -0.03em; }
+    .github-card { padding: 26px; border-radius: var(--radius-lg); }
+    .github-card h3 { margin-top: 10px; font-size: 1.12rem; letter-spacing: -0.02em; }
+    .github-card p { margin-top: 8px; color: var(--muted); font-size: 0.9rem; }
+    .github-card .tag-list { margin-top: 16px; }
+    .github-card .card-links { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 16px; font-family: var(--mono); font-size: 0.72rem; }
+    .github-card .card-links a { color: var(--cyan); }
+    .github-card .card-links a:hover { text-decoration: underline; }
 
     .contact-card {
       padding: clamp(30px, 6vw, 64px);
@@ -1049,7 +1059,7 @@
           <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Available for full-time work from August 2026</div>
           <h1>Engineering rigor. <span class="gradient-word">Data clarity.</span> Reliable execution.</h1>
           <p>
-            I am Kerwin Dio Joseph Arlan, a continuing Civil Engineering student at UP Diliman with hands-on experience across data analysis, AI data operations, construction quality control, tutoring, and client support.
+            I am Kerwin Dio Joseph Arlan, a continuing Civil Engineering student at UP Diliman. I automate PAGASA cyclone tracking, calibrate storm-surge models for Manila Bay, and bring hands-on data analysis, AI data operations, and construction quality control to every team I join.
           </p>
 
           <div class="hero-actions">
@@ -1355,7 +1365,7 @@
           <div>
             <code>portfolio_v1.0 / build log</code>
             <h3>This website is also part of the proof.</h3>
-            <p>A lightweight static portfolio designed with liquid-glass surfaces, semantic HTML, responsive CSS, vanilla JavaScript, accessible motion, and a working command palette.</p>
+            <p>A lightweight static portfolio designed with liquid-glass surfaces, semantic HTML, responsive CSS, vanilla JavaScript, accessible motion, a working command palette, and a projects grid auto-synced from GitHub.</p>
           </div>
           <a class="button secondary" href="https://github.com/kerwinarlan" target="_blank" rel="noopener">GitHub profile <span class="arrow" aria-hidden="true">↗</span></a>
         </article>
@@ -1366,7 +1376,7 @@
       <div class="page-shell">
         <div class="section-heading reveal-on-scroll">
           <div>
-            <div class="kicker">05 / Featured project</div>
+            <div class="kicker">05 / Projects</div>
             <h2>PAGASA <span class="gradient-word">Track Agent.</span></h2>
           </div>
           <p>An autonomous agent that watches PAGASA cyclone bulletins, parses them with an LLM, computes the cone of uncertainty, and ships a live map - fully unattended.</p>
@@ -1410,6 +1420,35 @@
         </article>
 
         <div class="project-grid">
+          <article class="project-card glass liquid-card reveal-on-scroll" id="thesis-project">
+            <div class="project-head">
+              <div>
+                <div class="terminal-label">$ thesis status</div>
+                <h3>Manila Bay Storm Surge - Delft3D Calibration</h3>
+                <p>Automated calibration of the wind drag coefficient for storm surge prediction in Manila Bay. A Python-assisted Delft3D workflow with a reproducible, station-validated protocol - the research core of my undergraduate thesis at UP ICE. Repository is private; request access.</p>
+              </div>
+              <a class="button secondary" href="mailto:kerwinarlan@gmail.com?subject=Thesis%20repo%20access">Request access <span class="arrow" aria-hidden="true">↗</span></a>
+            </div>
+
+            <details class="trace-log" open>
+              <summary>Capability trace log</summary>
+              <div class="trace-body">
+                <div class="trace-step"><span class="ok">[✓]</span> Delft3D hydrodynamic model of Manila Bay</div>
+                <div class="trace-step"><span class="ok">[✓]</span> Automated wind drag coefficient calibration</div>
+                <div class="trace-step"><span class="ok">[✓]</span> Station-validated surge predictions</div>
+                <div class="trace-step"><span class="ok">[✓]</span> Literature-grounded, reproducible workflow</div>
+              </div>
+            </details>
+
+            <div class="tag-list">
+              <span class="tag">Python</span>
+              <span class="tag">Delft3D</span>
+              <span class="tag">Calibration</span>
+              <span class="tag">Storm Surge</span>
+              <span class="tag">Thesis</span>
+            </div>
+          </article>
+
           <article class="project-card glass liquid-card reveal-on-scroll" id="surge-project">
             <div class="project-head">
               <div>
@@ -1462,6 +1501,42 @@
               <span class="tag">UI/UX</span>
             </div>
           </article>
+
+          <article class="project-card glass liquid-card reveal-on-scroll" id="watchvault-project">
+            <div class="project-head">
+              <div>
+                <div class="terminal-label">$ vault status</div>
+                <h3>The Watch Alley PH - Luxury Watch Reseller Portal</h3>
+                <p>Luxury watch inventory catalog and admin broadcast hub that bypasses the EUR 100/mo Viber bot fee with web-native deep links.</p>
+              </div>
+              <a class="button secondary" href="https://github.com/kerwinarlan/watch-vault" target="_blank" rel="noopener">View source <span class="arrow" aria-hidden="true">↗</span></a>
+            </div>
+
+            <details class="trace-log" open>
+              <summary>Capability trace log</summary>
+              <div class="trace-body">
+                <div class="trace-step"><span class="ok">[✓]</span> Public Catalog with Filters and Photo Gallery</div>
+                <div class="trace-step"><span class="ok">[✓]</span> Admin Broadcast Hub with Viber/Facebook/X Deep Links</div>
+                <div class="trace-step"><span class="ok">[✓]</span> Supabase RLS - Public Read, Admin Write</div>
+              </div>
+            </details>
+
+            <div class="tag-list">
+              <span class="tag">Next.js 16</span>
+              <span class="tag">Supabase</span>
+              <span class="tag">Deep Linking</span>
+              <span class="tag">Tailwind CSS</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="auto-projects">
+          <div class="auto-heading">
+            <span class="kicker">Auto-synced from GitHub</span>
+            <h3>Everything else I ship.</h3>
+          </div>
+          <div class="project-grid" id="githubProjects" aria-label="More projects from GitHub"></div>
+          <p class="photobooth-note" style="margin-top: 16px;">This grid regenerates from my GitHub profile - no manual upkeep. <a href="https://github.com/kerwinarlan" target="_blank" rel="noopener">See all repos ↗</a></p>
         </div>
       </div>
     </section>
@@ -1515,6 +1590,9 @@
         <button class="command-option" type="button" data-command="project"><code>project</code><span>Open PAGASA Track Agent repo</span></button>
         <button class="command-option" type="button" data-command="surge"><code>surge</code><span>Open Surge Surrogate repo</span></button>
         <button class="command-option" type="button" data-command="photobooth"><code>photobooth</code><span>Open Photobooth App repo</span></button>
+        <button class="command-option" type="button" data-command="watchvault"><code>watchvault</code><span>Open The Watch Alley portal repo - Viber deep links</span></button>
+        <button class="command-option" type="button" data-command="thesis"><code>thesis</code><span>Request access to the Manila Bay thesis repo</span></button>
+        <button class="command-option" type="button" data-command="github"><code>github</code><span>Jump to the auto-synced GitHub projects</span></button>
       </div>
       <div class="command-feedback" id="commandFeedback">Press Enter to run a command.</div>
     </div>
@@ -1598,19 +1676,19 @@
       }, { threshold: 0.1, rootMargin: '0px 0px -40px' });
       document.querySelectorAll('.reveal-on-scroll').forEach(element => revealObserver.observe(element));
 
-      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-        document.querySelectorAll('.liquid-card').forEach(card => {
-          card.addEventListener('pointermove', event => {
-            const rect = card.getBoundingClientRect();
-            const px = (event.clientX - rect.left) / rect.width;
-            const py = (event.clientY - rect.top) / rect.height;
-            card.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`);
-            card.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);
-            card.style.setProperty('--tilt-x', `${((0.5 - py) * 10).toFixed(2)}deg`);
-            card.style.setProperty('--tilt-y', `${((px - 0.5) * 10).toFixed(2)}deg`);
-          });
+      const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      function wireLiquid(card) {
+        card.addEventListener('pointermove', event => {
+          const rect = card.getBoundingClientRect();
+          const px = (event.clientX - rect.left) / rect.width;
+          const py = (event.clientY - rect.top) / rect.height;
+          card.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`);
+          card.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);
+          card.style.setProperty('--tilt-x', `${((0.5 - py) * 10).toFixed(2)}deg`);
+          card.style.setProperty('--tilt-y', `${((px - 0.5) * 10).toFixed(2)}deg`);
         });
       }
+      if (finePointer) document.querySelectorAll('.liquid-card').forEach(wireLiquid);
 
       const previewTabs = document.querySelectorAll('.preview-tab');
       const previewFrame = document.getElementById('stormPreview');
@@ -1654,13 +1732,19 @@
         surge: () => window.open('https://github.com/kerwinarlan/surge-surrogate', '_blank', 'noopener'),
         surrogate: () => window.open('https://github.com/kerwinarlan/surge-surrogate', '_blank', 'noopener'),
         photobooth: () => window.open('https://github.com/kerwinarlan/photobooth-app', '_blank', 'noopener'),
+        watchvault: () => window.open('https://github.com/kerwinarlan/watch-vault', '_blank', 'noopener'),
+        chronovault: () => window.open('https://github.com/kerwinarlan/watch-vault', '_blank', 'noopener'),
+        watch: () => window.open('https://github.com/kerwinarlan/watch-vault', '_blank', 'noopener'),
+        viber: () => window.open('https://github.com/kerwinarlan/watch-vault', '_blank', 'noopener'),
+        thesis: () => window.location.href = 'mailto:kerwinarlan@gmail.com?subject=Thesis%20repo%20access',
+        github: () => navigateTo('githubProjects'),
         contact: () => navigateTo('contact'),
         resume: () => window.open('./resume.pdf', '_blank', 'noopener'),
         theme: () => {
           applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
           commandFeedback.textContent = `Theme changed to ${root.dataset.theme}.`;
         },
-        help: () => { commandFeedback.textContent = 'Commands: profile, experience, toolkit, education, project, surge, photobooth, contact, resume, theme'; }
+        help: () => { commandFeedback.textContent = 'Commands: profile, experience, toolkit, education, project, surge, photobooth, watchvault, thesis, github, contact, resume, theme'; }
       };
 
       function navigateTo(id) {
@@ -1695,6 +1779,13 @@
           runCommand(commandInput.value);
         }
       });
+      commandInput.addEventListener('input', () => {
+        const query = commandInput.value.trim().toLowerCase();
+        document.querySelectorAll('.command-option').forEach(button => {
+          const haystack = `${button.dataset.command} ${button.textContent}`.toLowerCase();
+          button.style.display = query && !haystack.includes(query) ? 'none' : '';
+        });
+      });
       document.querySelectorAll('[data-command]').forEach(button => {
         button.addEventListener('click', () => runCommand(button.dataset.command));
       });
@@ -1706,6 +1797,35 @@
           openPalette();
         }
       });
+
+      const featuredProjects = ['pagasa-track-agent', 'surge-surrogate', 'photobooth-app', 'watch-vault'];
+      const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+      fetch('./projects.json')
+        .then(r => r.json())
+        .then(projects => {
+          const grid = document.getElementById('githubProjects');
+          if (!grid) return;
+          const rest = projects.filter(p => !featuredProjects.includes(p.id));
+          grid.innerHTML = rest.map(p => {
+            const name = esc(p.id).replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+            const tags = [...(p.topics || []).slice(0, 3), p.language].filter(Boolean);
+            const star = p.stars ? ` · ★ ${p.stars}` : '';
+            const links = [
+              `<a href="${esc(p.url)}" target="_blank" rel="noopener">source ↗</a>`,
+              p.homepage ? `<a href="${esc(p.homepage)}" target="_blank" rel="noopener">live demo ↗</a>` : ''
+            ].join('');
+            return `<article class="project-card glass liquid-card reveal-on-scroll github-card">
+              <div class="terminal-label">${esc(p.language || 'repo')}${star}</div>
+              <h3>${name}</h3>
+              <p>${esc(p.description)}</p>
+              <div class="tag-list">${tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+              <div class="card-links">${links}</div>
+            </article>`;
+          }).join('');
+          if (finePointer) grid.querySelectorAll('.liquid-card').forEach(wireLiquid);
+          grid.querySelectorAll('.reveal-on-scroll').forEach(el => revealObserver.observe(el));
+        })
+        .catch(() => {});
     })();
   </script>
 </body>

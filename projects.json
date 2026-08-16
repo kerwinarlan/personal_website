@@ -1,0 +1,162 @@
+[
+  {
+    "id": "pinas-itinerary",
+    "description": "Family trip itinerary Dec 22, 2026 \u2013 Jan 4+ \u00b7 one-file boarding-pass tickets with QR codes and a live countdown \u2014 zero server, zero build",
+    "url": "https://github.com/kerwinarlan/pinas-itinerary",
+    "homepage": "",
+    "language": "HTML",
+    "topics": [
+      "countdown",
+      "family-trip",
+      "github-pages",
+      "itinerary",
+      "manila",
+      "pins-trip",
+      "qr-code",
+      "single-file",
+      "static-site",
+      "travel"
+    ],
+    "stars": 0
+  },
+  {
+    "id": "sa-schedule-tracker",
+    "description": "SA shift-coverage calendar from OCR'd class schedules - one static HTML file on GitHub Pages, Supabase-backed live overrides, no server, no cold start, mobile-first.",
+    "url": "https://github.com/kerwinarlan/sa-schedule-tracker",
+    "homepage": "",
+    "language": "Python",
+    "topics": [
+      "availability",
+      "github-pages",
+      "heatmap",
+      "mobile-first",
+      "python",
+      "scheduler",
+      "static-site",
+      "supabase",
+      "vanilla-js"
+    ],
+    "stars": 0
+  },
+  {
+    "id": "seismic-nscp2015",
+    "description": "NSCP 2015 Sec. 208 Equivalent Lateral Force seismic solver - Streamlit app with worked example, reference tables, 2D frame analysis, and animated earthquake response.",
+    "url": "https://github.com/kerwinarlan/seismic-nscp2015",
+    "homepage": "",
+    "language": "Python",
+    "topics": [
+      "base-shear",
+      "civil-engineering",
+      "earthquake-engineering",
+      "equivalent-lateral-force",
+      "nscp-2015",
+      "philippines",
+      "plotly",
+      "seismic-design",
+      "streamlit",
+      "structural-engineering"
+    ],
+    "stars": 1
+  },
+  {
+    "id": "pagasa-track-agent",
+    "description": "PAGASA Track Agent - structured storm tracking pipeline. DeepSeek + Instructor + Pydantic v2 turn PAGASA Severe Weather Bulletins into validated GeoJSON and interactive Leaflet maps.",
+    "url": "https://github.com/kerwinarlan/pagasa-track-agent",
+    "homepage": "",
+    "language": "Python",
+    "topics": [
+      "deepseek",
+      "geojson",
+      "leaflet",
+      "pagasa",
+      "philippines",
+      "pydantic",
+      "storm-tracking",
+      "typhoon",
+      "weather"
+    ],
+    "stars": 1
+  },
+  {
+    "id": "photobooth-app",
+    "description": "TogetherBooth - a two-person online photobooth for long-distance couples. Node.js + Socket.IO + WebRTC; two phones become one synchronized photostrip booth, zero frontend dependencies.",
+    "url": "https://github.com/kerwinarlan/photobooth-app",
+    "homepage": "",
+    "language": "HTML",
+    "topics": [
+      "canvas",
+      "javascript",
+      "long-distance",
+      "nodejs",
+      "photobooth",
+      "realtime",
+      "socketio",
+      "video-chat",
+      "webrtc"
+    ],
+    "stars": 1
+  },
+  {
+    "id": "surge-surrogate",
+    "description": "SurgeSurrogate - fast ML surrogate for storm surge forecasting in Manila Bay. XGBoost replaces hours of hydrodynamic simulation with sub-millisecond predictions, trained on typhoons Ketsana, Nesat, Rammasun, Vamco.",
+    "url": "https://github.com/kerwinarlan/surge-surrogate",
+    "homepage": "",
+    "language": "Python",
+    "topics": [
+      "flood-forecasting",
+      "gradient-boosting",
+      "machine-learning",
+      "manila-bay",
+      "python",
+      "storm-surge",
+      "tropical-cyclones"
+    ],
+    "stars": 1
+  },
+  {
+    "id": "rc-matrix-solver",
+    "description": "RC Matrix Solver - Excel-driven reinforced concrete analysis and design. Python Direct Stiffness Method frame analysis plus NSCP 2015 / ACI 318 beam and column design, all from one .xlsx workbook.",
+    "url": "https://github.com/kerwinarlan/rc-matrix-solver",
+    "homepage": "",
+    "language": "Python",
+    "topics": [
+      "civil-engineering",
+      "direct-stiffness-method",
+      "excel",
+      "numpy",
+      "openpyxl",
+      "python",
+      "reinforced-concrete",
+      "structural-engineering"
+    ],
+    "stars": 1
+  },
+  {
+    "id": "midasgennx_2d_truss_example",
+    "description": "A Python code that uses MIDAS Gen NX 2026 midas_civil library to programmatically create, analyze, design and automatically optimize a two-dimensional steel truss structure in accordance with NSCP 2015 provisions. This was presented by the author to the audiences of MIDAS Gen NX 2026 Launch Event and PythonAsia 2026 on March 21, 2026.",
+    "url": "https://github.com/kerwinarlan/midasgennx_2d_truss_example",
+    "homepage": "",
+    "language": null,
+    "topics": [],
+    "stars": 0
+  },
+  {
+    "id": "watch-vault",
+    "description": "The Watch Alley PH - luxury watch reseller catalog and admin broadcast hub. Next.js 16 + Supabase; bypasses the EUR 100/mo Viber bot fee with web-native deep links.",
+    "url": "https://github.com/kerwinarlan/watch-vault",
+    "homepage": "https://watch-vault-pi.vercel.app",
+    "language": "TypeScript",
+    "topics": [
+      "deep-linking",
+      "ecommerce",
+      "nextjs",
+      "portfolio",
+      "react",
+      "supabase",
+      "tailwindcss",
+      "typescript",
+      "viber"
+    ],
+    "stars": 0
+  }
+]
