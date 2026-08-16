@@ -14,8 +14,6 @@ EXCLUDE = {
     "engineering-comeback-2025", "manila-bay-storm-surge-thesis",
     "watch-alley", "budget-bot-skill", "watch-vault",
 }
-# Forks that are real, credited work (e.g. the PythonAsia 2026 talk).
-ALLOW_FORKS = {"midasgennx_2d_truss_example"}
 
 repos = json.load(urllib.request.urlopen(
     f"https://api.github.com/users/{USER}/repos?sort=updated&per_page=100"))
@@ -28,9 +26,7 @@ projects = [{
     "language": r["language"],
     "topics": r["topics"],
     "stars": r["stargazers_count"],
-} for r in repos
-    if r["name"] not in EXCLUDE
-    and (not r["fork"] or r["name"] in ALLOW_FORKS)]
+} for r in repos if not r["fork"] and r["name"] not in EXCLUDE]
 
 with open("projects.json", "w") as f:
     json.dump(projects, f, indent=2)

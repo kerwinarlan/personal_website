@@ -37,6 +37,16 @@ The script pulls your public repos from the GitHub API and applies a curated
 exclude/allow list. Repo descriptions and topics become card copy, so write
 good ones.
 
+## Building the Resume PDF
+
+`resume.pdf` is generated from `resume.html` - never edited by hand:
+
+```bash
+./build_resume.sh   # headless Chrome renders resume.html to resume.pdf
+```
+
+Run it after any resume.html edit and commit the regenerated PDF.
+
 ## Run Locally
 
 ```bash
@@ -48,9 +58,10 @@ python3 -m http.server 8080
 
 ```
 index.html          - single-page portfolio (markup, styles, script)
-resume.html         - printable resume page
-resume.pdf          - PDF resume
+resume.html         - printable resume page (source of truth)
+resume.pdf          - generated from resume.html by build_resume.sh
 build_projects.py   - regenerates projects.json from the GitHub API
+build_resume.sh     - regenerates resume.pdf from resume.html
 projects.json       - project data consumed by the auto-synced grid
 assets/             - project preview media
 ```

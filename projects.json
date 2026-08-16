@@ -130,14 +130,5 @@
       "structural-engineering"
     ],
     "stars": 1
-  },
-  {
-    "id": "midasgennx_2d_truss_example",
-    "description": "A Python code that uses MIDAS Gen NX 2026 midas_civil library to programmatically create, analyze, design and automatically optimize a two-dimensional steel truss structure in accordance with NSCP 2015 provisions. This was presented by the author to the audiences of MIDAS Gen NX 2026 Launch Event and PythonAsia 2026 on March 21, 2026.",
-    "url": "https://github.com/kerwinarlan/midasgennx_2d_truss_example",
-    "homepage": "",
-    "language": null,
-    "topics": [],
-    "stars": 0
   }
 ]
