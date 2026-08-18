@@ -27,15 +27,24 @@ Live at: https://kerwinarlan.github.io/personal-website/
 The featured cards are hand-authored because they carry trace logs and live
 embeds. Everything else renders from `projects.json` at runtime.
 
-Regenerate the data and commit the result:
+`projects.json` is regenerated automatically every Monday (03:17 UTC) and on
+demand by the `sync-projects` GitHub Action - new public repos appear on the
+site without manual steps. To force a sync now:
 
 ```bash
-python3 build_projects.py
+gh workflow run sync-projects.yml
+```
+
+Manual regeneration is still possible:
+
+```bash
+python3 build_projects.py   # then commit projects.json
 ```
 
 The script pulls your public repos from the GitHub API and applies a curated
-exclude/allow list. Repo descriptions and topics become card copy, so write
-good ones.
+exclude list. Repo descriptions and topics become card copy, so write good
+ones. If you rename a repo, update the `featuredProjects` list in
+`index.html` to match - stale names cause duplicate cards and dead links.
 
 ## Building the Resume PDF
 

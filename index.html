@@ -1490,7 +1490,7 @@
                 <h3>Interactive Photobooth Web Application</h3>
                 <p>Feature-rich event photobooth application with real-time camera processing and instant output generation.</p>
               </div>
-              <a class="button secondary" href="https://github.com/kerwinarlan/photobooth-app" target="_blank" rel="noopener">View source <span class="arrow" aria-hidden="true">↗</span></a>
+              <a class="button secondary" href="https://github.com/kerwinarlan/photobooth" target="_blank" rel="noopener">View source <span class="arrow" aria-hidden="true">↗</span></a>
             </div>
 
             <iframe class="photobooth-frame" src="https://togetherbooth-68hx.onrender.com" title="TogetherBooth - synchronized photobooth live demo" loading="lazy"></iframe>
@@ -1734,7 +1734,7 @@
         pagasa: () => window.open('https://github.com/kerwinarlan/pagasa-track-agent', '_blank', 'noopener'),
         surge: () => window.open('https://github.com/kerwinarlan/surge-surrogate', '_blank', 'noopener'),
         surrogate: () => window.open('https://github.com/kerwinarlan/surge-surrogate', '_blank', 'noopener'),
-        photobooth: () => window.open('https://github.com/kerwinarlan/photobooth-app', '_blank', 'noopener'),
+        photobooth: () => window.open('https://github.com/kerwinarlan/photobooth', '_blank', 'noopener'),
         watchalley: () => window.open('https://github.com/gerdguerrero/watch-alley/pulls?q=is%3Apr+author%3Akerwinarlan', '_blank', 'noopener'),
         thesis: () => window.location.href = 'mailto:kerwinarlan@gmail.com?subject=Thesis%20repo%20access',
         github: () => navigateTo('githubProjects'),
@@ -1798,7 +1798,7 @@
         }
       });
 
-      const featuredProjects = ['pagasa-track-agent', 'surge-surrogate', 'photobooth-app'];
+      const featuredProjects = ['pagasa-track-agent', 'surge-surrogate', 'photobooth'];
       const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
       fetch('./projects.json')
         .then(r => r.json())

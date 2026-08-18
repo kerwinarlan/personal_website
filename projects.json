@@ -1,5 +1,64 @@
 [
   {
+    "id": "hardcore-programmer",
+    "description": "Competitive-programming problem-solving protocol for the pi coding agent, distilled from top LeetCode solvers and IOI champions. Includes a brute-force stress-testing tool.",
+    "url": "https://github.com/kerwinarlan/hardcore-programmer",
+    "homepage": "",
+    "language": "Python",
+    "topics": [
+      "agentskills",
+      "algorithms",
+      "coding-interview",
+      "competitive-programming",
+      "data-structures",
+      "ioi",
+      "leetcode",
+      "pi-agent",
+      "problem-solving",
+      "stress-testing"
+    ],
+    "stars": 1
+  },
+  {
+    "id": "pagasa-track-agent",
+    "description": "Parse PAGASA severe weather bulletins into validated storm tracks: deterministic-first parser with LLM fallback, series tracker with forecast-skill verification, GeoJSON + Leaflet maps.",
+    "url": "https://github.com/kerwinarlan/pagasa-track-agent",
+    "homepage": "",
+    "language": "Python",
+    "topics": [
+      "deepseek",
+      "geojson",
+      "leaflet",
+      "pagasa",
+      "philippines",
+      "pydantic",
+      "storm-tracking",
+      "tropical-cyclone",
+      "typhoon",
+      "weather"
+    ],
+    "stars": 1
+  },
+  {
+    "id": "photobooth",
+    "description": "Photobooth - a two-person online photobooth for long-distance couples. Node.js + Socket.IO + WebRTC; two phones become one synchronized photostrip booth, zero frontend dependencies.",
+    "url": "https://github.com/kerwinarlan/photobooth",
+    "homepage": "",
+    "language": "HTML",
+    "topics": [
+      "canvas",
+      "javascript",
+      "long-distance",
+      "nodejs",
+      "photobooth",
+      "realtime",
+      "socketio",
+      "video-chat",
+      "webrtc"
+    ],
+    "stars": 1
+  },
+  {
     "id": "pinas-itinerary",
     "description": "Family trip itinerary Dec 22, 2026 \u2013 Jan 4+ \u00b7 one-file boarding-pass tickets with QR codes and a live countdown \u2014 zero server, zero build",
     "url": "https://github.com/kerwinarlan/pinas-itinerary",
@@ -55,44 +114,6 @@
       "seismic-design",
       "streamlit",
       "structural-engineering"
-    ],
-    "stars": 1
-  },
-  {
-    "id": "pagasa-track-agent",
-    "description": "PAGASA Track Agent - structured storm tracking pipeline. DeepSeek + Instructor + Pydantic v2 turn PAGASA Severe Weather Bulletins into validated GeoJSON and interactive Leaflet maps.",
-    "url": "https://github.com/kerwinarlan/pagasa-track-agent",
-    "homepage": "",
-    "language": "Python",
-    "topics": [
-      "deepseek",
-      "geojson",
-      "leaflet",
-      "pagasa",
-      "philippines",
-      "pydantic",
-      "storm-tracking",
-      "typhoon",
-      "weather"
-    ],
-    "stars": 1
-  },
-  {
-    "id": "photobooth-app",
-    "description": "TogetherBooth - a two-person online photobooth for long-distance couples. Node.js + Socket.IO + WebRTC; two phones become one synchronized photostrip booth, zero frontend dependencies.",
-    "url": "https://github.com/kerwinarlan/photobooth-app",
-    "homepage": "",
-    "language": "HTML",
-    "topics": [
-      "canvas",
-      "javascript",
-      "long-distance",
-      "nodejs",
-      "photobooth",
-      "realtime",
-      "socketio",
-      "video-chat",
-      "webrtc"
     ],
     "stars": 1
   },
