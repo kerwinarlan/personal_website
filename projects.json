@@ -1,23 +1,44 @@
 [
   {
-    "id": "hardcore-programmer",
-    "description": "Competitive-programming problem-solving protocol for the pi coding agent, distilled from top LeetCode solvers and IOI champions. Includes a brute-force stress-testing tool.",
-    "url": "https://github.com/kerwinarlan/hardcore-programmer",
+    "id": "rc-matrix-solver",
+    "description": "RC Matrix Solver - Python Direct Stiffness Method 2D frame analysis, NSCP 2015 / ACI 318 RC design, and seismic loads (NSCP 2015 ELF), from one Excel workbook or the browser step-by-step reviewer.",
+    "url": "https://github.com/kerwinarlan/rc-matrix-solver",
     "homepage": "",
     "language": "Python",
     "topics": [
-      "agentskills",
-      "algorithms",
-      "coding-interview",
-      "competitive-programming",
-      "data-structures",
-      "ioi",
-      "leetcode",
-      "pi-agent",
-      "problem-solving",
-      "stress-testing"
+      "civil-engineering",
+      "direct-stiffness-method",
+      "earthquake-engineering",
+      "educational-tool",
+      "excel",
+      "numpy",
+      "openpyxl",
+      "python",
+      "reinforced-concrete",
+      "seismic-analysis",
+      "structural-engineering",
+      "webapp"
     ],
     "stars": 1
+  },
+  {
+    "id": "sa-schedule-tracker",
+    "description": "SA shift-coverage calendar from OCR'd class schedules - one static HTML file on GitHub Pages, Supabase-backed live overrides, no server, no cold start, mobile-first.",
+    "url": "https://github.com/kerwinarlan/sa-schedule-tracker",
+    "homepage": "",
+    "language": "Python",
+    "topics": [
+      "availability",
+      "github-pages",
+      "heatmap",
+      "mobile-first",
+      "python",
+      "scheduler",
+      "static-site",
+      "supabase",
+      "vanilla-js"
+    ],
+    "stars": 0
   },
   {
     "id": "pagasa-track-agent",
@@ -36,6 +57,26 @@
       "tropical-cyclone",
       "typhoon",
       "weather"
+    ],
+    "stars": 1
+  },
+  {
+    "id": "hardcore-programmer",
+    "description": "Competitive-programming problem-solving protocol for the pi coding agent, distilled from top LeetCode solvers and IOI champions. Includes a brute-force stress-testing tool.",
+    "url": "https://github.com/kerwinarlan/hardcore-programmer",
+    "homepage": "",
+    "language": "Python",
+    "topics": [
+      "agentskills",
+      "algorithms",
+      "coding-interview",
+      "competitive-programming",
+      "data-structures",
+      "ioi",
+      "leetcode",
+      "pi-agent",
+      "problem-solving",
+      "stress-testing"
     ],
     "stars": 1
   },
@@ -79,25 +120,6 @@
     "stars": 0
   },
   {
-    "id": "sa-schedule-tracker",
-    "description": "SA shift-coverage calendar from OCR'd class schedules - one static HTML file on GitHub Pages, Supabase-backed live overrides, no server, no cold start, mobile-first.",
-    "url": "https://github.com/kerwinarlan/sa-schedule-tracker",
-    "homepage": "",
-    "language": "Python",
-    "topics": [
-      "availability",
-      "github-pages",
-      "heatmap",
-      "mobile-first",
-      "python",
-      "scheduler",
-      "static-site",
-      "supabase",
-      "vanilla-js"
-    ],
-    "stars": 0
-  },
-  {
     "id": "seismic-nscp2015",
     "description": "NSCP 2015 Sec. 208 Equivalent Lateral Force seismic solver - Streamlit app with worked example, reference tables, 2D frame analysis, and animated earthquake response.",
     "url": "https://github.com/kerwinarlan/seismic-nscp2015",
@@ -131,24 +153,6 @@
       "python",
       "storm-surge",
       "tropical-cyclones"
-    ],
-    "stars": 1
-  },
-  {
-    "id": "rc-matrix-solver",
-    "description": "RC Matrix Solver - Excel-driven reinforced concrete analysis and design. Python Direct Stiffness Method frame analysis plus NSCP 2015 / ACI 318 beam and column design, all from one .xlsx workbook.",
-    "url": "https://github.com/kerwinarlan/rc-matrix-solver",
-    "homepage": "",
-    "language": "Python",
-    "topics": [
-      "civil-engineering",
-      "direct-stiffness-method",
-      "excel",
-      "numpy",
-      "openpyxl",
-      "python",
-      "reinforced-concrete",
-      "structural-engineering"
     ],
     "stars": 1
   }
