@@ -1,5 +1,116 @@
 [
   {
+    "id": "gcash-spend-tracker",
+    "description": "Local macOS iMessage parser and dashboard for GCash SMS spend tracking",
+    "url": "https://github.com/kerwinarlan/gcash-spend-tracker",
+    "homepage": "",
+    "language": "HTML",
+    "topics": [
+      "dashboard",
+      "gcash",
+      "imessage",
+      "macos",
+      "privacy-first",
+      "python",
+      "spend-tracker"
+    ],
+    "stars": 1
+  },
+  {
+    "id": "matrix-structural-analysis",
+    "description": "Matrix Structural Analysis (CE 152) framework element stiffness formulation, coordinate transformations, and solver pipeline",
+    "url": "https://github.com/kerwinarlan/matrix-structural-analysis",
+    "homepage": "",
+    "language": null,
+    "topics": [
+      "civil-engineering",
+      "direct-stiffness-method",
+      "matrix-structural-analysis",
+      "stiffness-matrix",
+      "structural-analysis"
+    ],
+    "stars": 1
+  },
+  {
+    "id": "sa-schedule-tracker",
+    "description": "Static SA duty-shift availability calendar on GitHub Pages; live Supabase overrides",
+    "url": "https://github.com/kerwinarlan/sa-schedule-tracker",
+    "homepage": "https://kerwinarlan.github.io/sa-schedule-tracker/",
+    "language": "Python",
+    "topics": [
+      "availability",
+      "github-pages",
+      "heatmap",
+      "mobile-first",
+      "python",
+      "schedule",
+      "scheduler",
+      "static-site",
+      "supabase",
+      "vanilla-js"
+    ],
+    "stars": 1
+  },
+  {
+    "id": "photobooth",
+    "description": "Photobooth - a two-person online photobooth for long-distance couples. Node.js + Socket.IO + WebRTC; two phones become one synchronized photostrip booth, zero frontend dependencies.",
+    "url": "https://github.com/kerwinarlan/photobooth",
+    "homepage": "https://photobooth-rztk.onrender.com",
+    "language": "HTML",
+    "topics": [
+      "canvas",
+      "javascript",
+      "long-distance",
+      "nodejs",
+      "photobooth",
+      "realtime",
+      "socketio",
+      "video-chat",
+      "webrtc"
+    ],
+    "stars": 1
+  },
+  {
+    "id": "pinas-itinerary",
+    "description": "Family trip itinerary Dec 22, 2026 \u2013 Jan 4+ \u00b7 one-file boarding-pass tickets with QR codes and a live countdown \u2014 zero server, zero build",
+    "url": "https://github.com/kerwinarlan/pinas-itinerary",
+    "homepage": "https://kerwinarlan.github.io/pinas-itinerary/",
+    "language": "HTML",
+    "topics": [
+      "countdown",
+      "family-trip",
+      "github-pages",
+      "itinerary",
+      "manila",
+      "pins-trip",
+      "qr-code",
+      "single-file",
+      "static-site",
+      "travel"
+    ],
+    "stars": 0
+  },
+  {
+    "id": "pagasa-track-agent",
+    "description": "Parse PAGASA severe weather bulletins into validated storm tracks: deterministic-first parser with LLM fallback, series tracker with forecast-skill verification, GeoJSON + Leaflet maps.",
+    "url": "https://github.com/kerwinarlan/pagasa-track-agent",
+    "homepage": "https://kerwinarlan.github.io/pagasa-track-agent/",
+    "language": "Python",
+    "topics": [
+      "deepseek",
+      "geojson",
+      "leaflet",
+      "pagasa",
+      "philippines",
+      "pydantic",
+      "storm-tracking",
+      "tropical-cyclone",
+      "typhoon",
+      "weather"
+    ],
+    "stars": 1
+  },
+  {
     "id": "rc-matrix-solver",
     "description": "RC Matrix Solver - Python Direct Stiffness Method 2D frame analysis, NSCP 2015 / ACI 318 RC design, and seismic loads (NSCP 2015 ELF), from one Excel workbook or the browser step-by-step reviewer.",
     "url": "https://github.com/kerwinarlan/rc-matrix-solver",
@@ -22,45 +133,6 @@
     "stars": 1
   },
   {
-    "id": "sa-schedule-tracker",
-    "description": "SA shift-coverage calendar from OCR'd class schedules - one static HTML file on GitHub Pages, Supabase-backed live overrides, no server, no cold start, mobile-first.",
-    "url": "https://github.com/kerwinarlan/sa-schedule-tracker",
-    "homepage": "",
-    "language": "Python",
-    "topics": [
-      "availability",
-      "github-pages",
-      "heatmap",
-      "mobile-first",
-      "python",
-      "scheduler",
-      "static-site",
-      "supabase",
-      "vanilla-js"
-    ],
-    "stars": 0
-  },
-  {
-    "id": "pagasa-track-agent",
-    "description": "Parse PAGASA severe weather bulletins into validated storm tracks: deterministic-first parser with LLM fallback, series tracker with forecast-skill verification, GeoJSON + Leaflet maps.",
-    "url": "https://github.com/kerwinarlan/pagasa-track-agent",
-    "homepage": "",
-    "language": "Python",
-    "topics": [
-      "deepseek",
-      "geojson",
-      "leaflet",
-      "pagasa",
-      "philippines",
-      "pydantic",
-      "storm-tracking",
-      "tropical-cyclone",
-      "typhoon",
-      "weather"
-    ],
-    "stars": 1
-  },
-  {
     "id": "hardcore-programmer",
     "description": "Competitive-programming problem-solving protocol for the pi coding agent, distilled from top LeetCode solvers and IOI champions. Includes a brute-force stress-testing tool.",
     "url": "https://github.com/kerwinarlan/hardcore-programmer",
@@ -79,45 +151,6 @@
       "stress-testing"
     ],
     "stars": 1
-  },
-  {
-    "id": "photobooth",
-    "description": "Photobooth - a two-person online photobooth for long-distance couples. Node.js + Socket.IO + WebRTC; two phones become one synchronized photostrip booth, zero frontend dependencies.",
-    "url": "https://github.com/kerwinarlan/photobooth",
-    "homepage": "",
-    "language": "HTML",
-    "topics": [
-      "canvas",
-      "javascript",
-      "long-distance",
-      "nodejs",
-      "photobooth",
-      "realtime",
-      "socketio",
-      "video-chat",
-      "webrtc"
-    ],
-    "stars": 1
-  },
-  {
-    "id": "pinas-itinerary",
-    "description": "Family trip itinerary Dec 22, 2026 \u2013 Jan 4+ \u00b7 one-file boarding-pass tickets with QR codes and a live countdown \u2014 zero server, zero build",
-    "url": "https://github.com/kerwinarlan/pinas-itinerary",
-    "homepage": "",
-    "language": "HTML",
-    "topics": [
-      "countdown",
-      "family-trip",
-      "github-pages",
-      "itinerary",
-      "manila",
-      "pins-trip",
-      "qr-code",
-      "single-file",
-      "static-site",
-      "travel"
-    ],
-    "stars": 0
   },
   {
     "id": "seismic-nscp2015",
