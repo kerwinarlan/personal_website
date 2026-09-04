@@ -12,13 +12,18 @@
       box-sizing: border-box;
     }
 
+    @page {
+      size: letter;
+      margin: 0.2in 0.3in;
+    }
+
     body {
       background: #e6e9ef;
       display: flex;
       justify-content: center;
-      padding: 40px 20px;
+      padding: 20px 10px;
       font-family: 'Times New Roman', Times, serif;
-      line-height: 1.45;
+      line-height: 1.18;
       color: #1e1e1e;
     }
 
@@ -26,43 +31,43 @@
       max-width: 900px;
       width: 100%;
       background: white;
-      padding: 44px 52px 48px 52px;
+      padding: 20px 28px;
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
     }
 
     /* ─── HEADER ─── */
     h1 {
-      font-size: 3.2em;
+      font-size: 1.85em;
       font-weight: 700;
       text-align: center;
-      letter-spacing: 2px;
-      margin-bottom: 2px;
+      letter-spacing: 1px;
+      margin-bottom: 1px;
     }
 
     .contact-info {
       text-align: center;
-      font-size: 1.0em;
-      padding-bottom: 12px;
-      border-bottom: 2.5px solid #111;
-      margin-bottom: 22px;
+      font-size: 0.88em;
+      padding-bottom: 3px;
+      border-bottom: 1.8px solid #111;
+      margin-bottom: 6px;
     }
     .contact-info span {
-      margin: 0 6px;
+      margin: 0 4px;
     }
 
     /* ─── SECTIONS ─── */
     .section {
-      margin-bottom: 18px;
+      margin-bottom: 5px;
     }
 
     .section-title {
-      font-size: 1.25em;
+      font-size: 1.02em;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       border-bottom: 1px solid #222;
-      padding-bottom: 3px;
-      margin-bottom: 12px;
+      padding-bottom: 1px;
+      margin-bottom: 3px;
     }
 
     /* ─── EDUCATION ─── */
@@ -71,7 +76,7 @@
       justify-content: space-between;
       flex-wrap: wrap;
       font-weight: 700;
-      font-size: 1.05em;
+      font-size: 0.96em;
     }
     .edu-item .edu-date {
       font-weight: 400;
@@ -80,13 +85,13 @@
     .edu-detail {
       font-weight: 400;
       margin-top: 1px;
-      margin-bottom: 4px;
-      font-size: 0.98em;
+      margin-bottom: 1px;
+      font-size: 0.91em;
     }
 
     /* ─── EXPERIENCE & TRAINING ─── */
     .job {
-      margin-bottom: 14px;
+      margin-bottom: 4px;
     }
 
     .job-header {
@@ -94,7 +99,7 @@
       justify-content: space-between;
       flex-wrap: wrap;
       font-weight: 700;
-      font-size: 1.05em;
+      font-size: 0.96em;
     }
     .job-header .date {
       font-weight: 400;
@@ -105,19 +110,20 @@
       font-style: italic;
       font-weight: 600;
       margin-top: 1px;
-      margin-bottom: 2px;
-      font-size: 0.98em;
+      margin-bottom: 1px;
+      font-size: 0.90em;
     }
 
     .job-details {
       list-style: none;
-      padding-left: 18px;
+      padding-left: 0;
     }
     .job-details li {
-      text-align: justify;
+      text-align: left;
       margin-bottom: 1px;
       position: relative;
-      padding-left: 18px;
+      padding-left: 12px;
+      font-size: 0.90em;
     }
     .job-details li::before {
       content: "•";
@@ -131,11 +137,12 @@
       display: flex;
       flex-wrap: wrap;
       align-items: baseline;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
+      font-size: 0.90em;
     }
     .skill-row .cat {
       font-weight: 700;
-      width: 130px;
+      width: 95px;
       flex-shrink: 0;
     }
     .skill-row .items {
@@ -145,11 +152,15 @@
     /* ─── CERTS ─── */
     .cert-list {
       list-style: none;
-      padding-left: 18px;
+      padding-left: 0;
+      font-size: 0.90em;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 16px;
     }
     .cert-list li {
       position: relative;
-      padding-left: 18px;
+      padding-left: 12px;
       margin-bottom: 1px;
     }
     .cert-list li::before {
@@ -167,7 +178,7 @@
     @media print {
       body {
         background: white;
-        padding: 0.2in;
+        padding: 0;
       }
       .resume {
         box-shadow: none;
@@ -202,9 +213,7 @@
   <!-- ═══ HEADER ═══ -->
   <h1>Kerwin Dio Joseph Arlan</h1>
   <div class="contact-info">
-    kerwinarlan@gmail.com <span>|</span> (+63) 976 101 3092 <span>|</span> Quezon City, Philippines
-    <br />
-    linkedin.com/in/kerwin-dio-joseph-arlan <span>|</span> github.com/kerwinarlan
+    kerwinarlan@gmail.com <span>|</span> (+63) 976 101 3092 <span>|</span> Quezon City, Philippines <span>|</span> linkedin.com/in/kerwin-dio-joseph-arlan <span>|</span> github.com/kerwinarlan
   </div>
 
   <!-- ═══ EDUCATION ═══ -->
@@ -212,13 +221,13 @@
     <div class="section-title">Education</div>
     <div class="edu-item">
       <span><strong>University of the Philippines Diliman</strong></span>
-      <span class="edu-date">Feb 2026 – Present</span>
+      <span class="edu-date">Expected Graduation: July 2027</span>
     </div>
     <div class="edu-detail">
-      <strong>B.S. Civil Engineering</strong> (Continuing Student) – Expected Graduation: <strong>July 2027</strong>
+      <strong>B.S. Civil Engineering</strong>
     </div>
-    <div style="font-size:0.92rem; color:#444; margin-top:2px;">
-      <em>Light academic load starting Aug 2026:</em> Thesis I &amp; II + 1 major + 2 PE subjects. Fully available for full-time work.
+    <div style="font-size:0.88rem; color:#444; margin-top:1px;">
+      <em>Final coursework remaining:</em> Thesis + 1 major subject. Fully available for full-time work.
     </div>
   </section>
 
@@ -231,12 +240,12 @@
         <span><strong>Swinnerton-Staten Solutions, Inc.</strong></span>
         <span class="date">May 2024 – Jan 2026</span>
       </div>
-      <div class="job-title">Junior Data Analyst</div>
+      <div class="job-title">Junior Data &amp; GIS Analyst</div>
       <ul class="job-details">
-        <li>Extracted and analyzed operational data from CRM systems and client databases, building repeatable analyses in Excel.</li>
-        <li>Performed structured data-quality audits on client databases, catching inconsistencies before data reached reporting and decision-making.</li>
-        <li>Built weekly performance dashboards and reports that directly informed operational and strategic decisions.</li>
-        <li>Worked with cross-functional teams to streamline repetitive data-entry workflows, reducing manual handling in routine operations.</li>
+        <li>Extracted, analyzed, and mapped CRM and spatial database operational data using Excel and ArcGIS Pro.</li>
+        <li>Performed GIS spatial analysis and database quality audits, resolving data inconsistencies prior to reporting.</li>
+        <li>Built weekly performance dashboards and spatial reports that directly informed operational and strategic decisions.</li>
+        <li>Partnered cross-functionally to streamline repetitive data and GIS workflows, reducing manual handling in routine operations.</li>
       </ul>
     </div>
 
@@ -247,10 +256,10 @@
       </div>
       <div class="job-title">AI Data Operations Associate</div>
       <ul class="job-details">
-        <li>Prepared, cleaned, and validated training datasets for machine-learning models, applying quality gates before handoff to engineering.</li>
-        <li>Executed annotation and labeling guidelines at scale, resolving ambiguous edge cases through systematic quality audits.</li>
-        <li>Audited data integrity across systems, tracked recurring defect patterns, and documented process improvements.</li>
-        <li>Worked directly with data engineers to refine annotation protocols, feeding error patterns back into model performance.</li>
+        <li>Prepared, cleaned, and validated ML training datasets, enforcing quality gates before engineering handoff.</li>
+        <li>Executed large-scale dataset annotation guidelines and resolved complex edge cases via systematic audits.</li>
+        <li>Audited cross-system data integrity, tracked recurring defect patterns, and documented process optimizations.</li>
+        <li>Collaborated with data engineers to refine annotation protocols and feed error analysis into model iteration.</li>
       </ul>
     </div>
 
@@ -261,9 +270,9 @@
       </div>
       <div class="job-title">Academic Tutor – Mathematics &amp; Sciences</div>
       <ul class="job-details">
-        <li>Tutored a student from Grade 7 through senior high, achieving 100% admission success to UP Diliman, Ateneo, and DLSU.</li>
-        <li>Developed customized learning plans and transitioned instruction seamlessly to online platforms.</li>
-        <li>Emphasized deep conceptual understanding over rote memorization.</li>
+        <li>Tutored student Grade 7–12, securing 100% admission success to UP Diliman, Ateneo, and DLSU.</li>
+        <li>Designed customized STEM learning plans and transitioned instruction seamlessly to online formats.</li>
+        <li>Emphasized deep conceptual understanding and problem-solving mastery over rote memorization.</li>
       </ul>
     </div>
 
@@ -274,8 +283,8 @@
       </div>
       <div class="job-title">Customer Service Representative</div>
       <ul class="job-details">
-        <li>Resolved complex billing and service issues using systematic problem-solving and Salesforce CRM.</li>
-        <li>Managed escalations and tracked customer data to identify recurring service issues.</li>
+        <li>Resolved complex billing and service issues using Salesforce CRM and systematic troubleshooting.</li>
+        <li>Managed customer escalations and analyzed service data to identify recurring system issues.</li>
       </ul>
     </div>
 
@@ -286,8 +295,8 @@
       </div>
       <div class="job-title">Assistant to Site Engineer (OJT)</div>
       <ul class="job-details">
-        <li>Supervised quality control for tiling, plastering, and ceiling work on a 5-storey school building.</li>
-        <li>Documented daily progress of structural elements and verified fixture installations.</li>
+        <li>Supervised QC for structural elements, tiling, plastering, and ceiling work on a 5-storey building.</li>
+        <li>Documented daily structural progress and verified fixture installation quality against engineering specs.</li>
       </ul>
     </div>
   </section>
@@ -302,9 +311,9 @@
       </div>
       <div class="job-title">Japanese Language &amp; Nursing Care Training</div>
       <ul class="job-details">
-        <li>Completed a 6‑month rigorous online program focused on technical Japanese vocabulary and caregiving protocols.</li>
-        <li>Passed the <strong>Nursing Care Language Evaluation</strong> and <strong>Nursing Care Skills Test</strong>.</li>
-        <li>Balanced training alongside full-time data analyst responsibilities, demonstrating strong time management.</li>
+        <li>Completed rigorous 6-month online program in technical Japanese vocabulary and caregiving protocols.</li>
+        <li>Passed Nursing Care Language Evaluation and Nursing Care Skills Test certifications.</li>
+        <li>Maintained top program performance while working full-time as a Junior Data Analyst.</li>
       </ul>
     </div>
   </section>
@@ -314,7 +323,7 @@
     <div class="section-title">Skills</div>
     <div class="skill-row">
       <span class="cat">Technical</span>
-      <span class="items">Python (Intermediate), Data Analysis, Excel / Spreadsheets, Salesforce CRM, HTML &amp; CSS, Data Quality Assurance</span>
+      <span class="items">ArcGIS Pro / ArcGIS, GIS Spatial Analysis, Python (Intermediate), Data Analysis, Excel / Spreadsheets, Salesforce CRM, HTML &amp; CSS, Data Quality Assurance</span>
     </div>
     <div class="skill-row">
       <span class="cat">Professional</span>
