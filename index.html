@@ -515,43 +515,21 @@
     .signal-card p { color: var(--muted); font-size: 0.95rem; }
     .signal-tag { margin-top: 26px; color: var(--cyan); font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; }
 
-    .timeline { position: relative; display: grid; gap: 16px; }
-    .timeline::before {
-      content: "";
-      position: absolute;
-      left: 158px;
-      top: 18px;
-      bottom: 18px;
-      width: 1px;
-      background: linear-gradient(var(--cyan), rgba(142,244,255,0.08));
-    }
+    .timeline { display: grid; gap: 16px; }
 
     .role-card {
       display: grid;
       grid-template-columns: 135px 1fr;
-      gap: 34px;
+      gap: 24px;
       padding: 26px 28px;
       border-radius: var(--radius-lg);
     }
 
     .role-date {
-      position: relative;
       color: var(--faint);
       font-family: var(--mono);
       font-size: 0.72rem;
       line-height: 1.5;
-    }
-    .role-date::after {
-      content: "";
-      position: absolute;
-      right: -40px;
-      top: 4px;
-      width: 11px;
-      height: 11px;
-      border-radius: 999px;
-      background: var(--bg-elevated);
-      border: 2px solid var(--cyan);
-      box-shadow: 0 0 16px rgba(142,244,255,0.5);
     }
 
     .role-title-row {
@@ -996,10 +974,8 @@
       .signal-grid,
       .toolkit-grid { grid-template-columns: 1fr; }
       .signal-card { min-height: 200px; }
-      .timeline::before { left: 12px; }
-      .role-card { grid-template-columns: 1fr; gap: 12px; padding: 24px 20px 24px 34px; }
+      .role-card { grid-template-columns: 1fr; gap: 12px; padding: 24px 20px; }
       .role-date { padding-left: 0; }
-      .role-date::after { left: -27px; right: auto; top: 3px; }
       .role-title-row { display: block; }
       .company { margin-top: 5px; text-align: left; }
       .education-facts { grid-template-columns: 1fr; }
