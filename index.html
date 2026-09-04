@@ -1066,7 +1066,7 @@
 
           <div class="hero-actions">
             <a class="button primary" href="#experience">Explore experience <span class="arrow" aria-hidden="true">→</span></a>
-            <a class="button secondary" href="./resume.pdf" target="_blank" rel="noopener">View resume <span class="arrow" aria-hidden="true">↗</span></a>
+            <a class="button secondary" href="./resume.pdf?v=3" target="_blank" rel="noopener">View resume <span class="arrow" aria-hidden="true">↗</span></a>
           </div>
 
           <div class="hero-meta" aria-label="Profile summary">
@@ -1558,7 +1558,7 @@
           </div>
           <div class="contact-actions">
             <a class="button primary" href="mailto:kerwinarlan@gmail.com">Send an email <span class="arrow" aria-hidden="true">→</span></a>
-            <a class="button secondary" href="./resume.pdf" target="_blank" rel="noopener">Open resume <span class="arrow" aria-hidden="true">↗</span></a>
+            <a class="button secondary" href="./resume.pdf?v=3" target="_blank" rel="noopener">Open resume <span class="arrow" aria-hidden="true">↗</span></a>
           </div>
         </article>
       </div>
@@ -1737,7 +1737,7 @@
         thesis: () => window.location.href = 'mailto:kerwinarlan@gmail.com?subject=Thesis%20repo%20access',
         github: () => navigateTo('githubProjects'),
         contact: () => navigateTo('contact'),
-        resume: () => window.open('./resume.pdf', '_blank', 'noopener'),
+        resume: () => window.open('./resume.pdf?v=3', '_blank', 'noopener'),
         theme: () => {
           applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
           commandFeedback.textContent = `Theme changed to ${root.dataset.theme}.`;
