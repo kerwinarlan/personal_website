@@ -41,13 +41,13 @@
       --green: #7cf5b2;
       --amber: #ffd687;
       --rose: #ff98b8;
-      --glass: rgba(12, 20, 40, 0.68);
-      --glass-strong: rgba(15, 26, 51, 0.85);
+      --glass: rgba(12, 20, 40, 0.75);
+      --glass-strong: rgba(15, 26, 51, 0.9);
       --glass-soft: rgba(255, 255, 255, 0.055);
       --line: rgba(255, 255, 255, 0.12);
       --line-strong: rgba(255, 255, 255, 0.25);
-      --shadow: 0 30px 90px rgba(0, 0, 0, 0.48);
-      --shadow-soft: 0 18px 50px rgba(0, 0, 0, 0.28);
+      --shadow: 0 30px 90px rgba(0, 0, 0, 0.5);
+      --shadow-soft: 0 18px 50px rgba(0, 0, 0, 0.3);
       --radius-xl: 34px;
       --radius-lg: 24px;
       --radius-md: 18px;
@@ -70,8 +70,8 @@
       --green: #0a7b4c;
       --amber: #8b5c00;
       --rose: #c02654;
-      --glass: rgba(255, 255, 255, 0.68);
-      --glass-strong: rgba(255, 255, 255, 0.9);
+      --glass: rgba(255, 255, 255, 0.75);
+      --glass-strong: rgba(255, 255, 255, 0.92);
       --glass-soft: rgba(0, 0, 0, 0.04);
       --line: rgba(45, 58, 90, 0.14);
       --line-strong: rgba(45, 58, 90, 0.25);
@@ -86,6 +86,20 @@
     .tabular-nums, .role-date, .signal-index, .status-pill, .time-badge, .stat-value, .project-tag, .tag, .terminal-prompt {
       font-variant-numeric: tabular-nums;
       font-feature-settings: "tnum";
+    }
+
+    /* Scroll Progress Bar at Top */
+    .scroll-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--cyan-strong), var(--violet), var(--green));
+      transform-origin: 0%;
+      transform: scaleX(0);
+      z-index: 1000;
+      transition: transform 50ms linear;
     }
 
     /* Skip link for Accessibility */
@@ -155,7 +169,7 @@
       margin-inline: auto;
     }
 
-    /* Universal 5-State Interactive Focus Rings */
+    /* Universal 5-State Focus Rings */
     a, button, input, select, textarea, summary {
       transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
     }
@@ -165,18 +179,18 @@
       border-radius: 6px;
     }
 
-    /* Header Navigation */
+    /* Navigation Header */
     .nav-header {
       position: sticky;
       top: 0;
       z-index: 100;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      background: rgba(7, 11, 24, 0.68);
+      background: rgba(7, 11, 24, 0.72);
       border-bottom: 1px solid var(--line);
     }
     html[data-theme="light"] .nav-header {
-      background: rgba(234, 240, 255, 0.8);
+      background: rgba(234, 240, 255, 0.85);
     }
 
     .nav-inner {
@@ -226,6 +240,7 @@
     }
     .nav-links a:hover, .nav-links a[aria-current="page"] {
       color: var(--text);
+      font-weight: 700;
     }
 
     .nav-actions {
@@ -265,22 +280,55 @@
 
     .menu-toggle { display: none; }
 
-    /* Hero Section with Split Grid: Copy + Terminal Window */
+    /* Sticky Card Deck Layout Mechanism */
+    .stacked-deck-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      perspective: 1200px;
+      padding-bottom: 4rem;
+    }
+
+    /* Sticky Panel Section Deck Cards */
+    .sticky-deck-card {
+      position: sticky;
+      top: 88px; /* Sticky offset below nav */
+      background: var(--glass-strong);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius-xl);
+      padding: 3rem 2.5rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+      transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1), filter 350ms ease, opacity 350ms ease, box-shadow 350ms ease;
+      will-change: transform, filter, opacity;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stacked Under Layer Style */
+    .sticky-deck-card.is-stacked-under {
+      transform: scale(0.96) translateY(-12px);
+      opacity: 0.82;
+      filter: blur(1.5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Hero Section */
     .hero {
-      padding-block: 4rem 3rem;
+      padding-block: 3.5rem 2.5rem;
     }
 
     .hero-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 3rem;
+      gap: 2.5rem;
       align-items: center;
     }
 
     @media (max-width: 960px) {
       .hero-grid {
         grid-template-columns: 1fr;
-        gap: 2.5rem;
+        gap: 2rem;
       }
     }
 
@@ -424,9 +472,9 @@
       border-color: var(--line-strong);
     }
 
-    /* macOS Interactive Terminal Component */
+    /* macOS Terminal Component */
     .terminal-window {
-      background: rgba(10, 16, 32, 0.88);
+      background: rgba(10, 16, 32, 0.92);
       border: 1px solid var(--line-strong);
       border-radius: var(--radius-lg);
       overflow: hidden;
@@ -437,7 +485,7 @@
     }
 
     .terminal-bar {
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(15, 23, 42, 0.92);
       padding: 0.7rem 1rem;
       border-bottom: 1px solid var(--line);
       display: flex;
@@ -467,8 +515,8 @@
 
     .terminal-body {
       padding: 1.25rem;
-      min-height: 280px;
-      max-height: 340px;
+      min-height: 270px;
+      max-height: 330px;
       overflow-y: auto;
       font-size: 0.85rem;
       line-height: 1.6;
@@ -505,7 +553,7 @@
 
     .terminal-toolbar {
       padding: 0.6rem 1rem;
-      background: rgba(12, 19, 38, 0.9);
+      background: rgba(12, 19, 38, 0.92);
       border-top: 1px solid var(--line);
       display: flex;
       flex-wrap: wrap;
@@ -528,7 +576,22 @@
       border-color: var(--cyan-strong);
     }
 
-    /* Common Card Styles & Glassmorphism */
+    /* 3D Card Fan Out Containers for Capability Signals & Toolkit */
+    .card-deck-fan {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      perspective: 1000px;
+    }
+
+    .fan-card {
+      transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), border-color 300ms ease, box-shadow 300ms ease;
+    }
+    .card-deck-fan:hover .fan-card:nth-child(1) { transform: rotate(-2.5deg) translateY(-4px); }
+    .card-deck-fan:hover .fan-card:nth-child(2) { transform: translateY(-8px) scale(1.02); }
+    .card-deck-fan:hover .fan-card:nth-child(3) { transform: rotate(2.5deg) translateY(-4px); }
+    .card-deck-fan:hover .fan-card:nth-child(4) { transform: rotate(-1.5deg) translateY(-6px); }
+
     .glass {
       background: var(--glass);
       backdrop-filter: blur(16px);
@@ -545,16 +608,11 @@
     .liquid-card:hover {
       border-color: var(--cyan-strong);
       box-shadow: var(--shadow-soft);
-      transform: translateY(-3px);
     }
 
     /* Section Headings */
-    .section {
-      padding-block: 4.5rem;
-    }
-
     .section-heading {
-      margin-bottom: 3rem;
+      margin-bottom: 2.5rem;
     }
 
     .kicker {
@@ -582,12 +640,6 @@
     }
 
     /* Signal / Proof Cards */
-    .signal-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
-
     .signal-card {
       padding: 1.8rem;
       display: flex;
@@ -998,7 +1050,7 @@
     footer {
       padding-block: 3rem;
       border-top: 1px solid var(--line);
-      margin-top: 4rem;
+      margin-top: 2rem;
       color: var(--faint);
       font-family: var(--mono);
       font-size: 0.82rem;
@@ -1108,11 +1160,15 @@
       body::before { animation: none !important; }
       .status-dot { animation: none !important; }
       .liquid-card:hover { transform: none !important; }
+      .sticky-deck-card { position: relative !important; top: 0 !important; }
     }
   </style>
 </head>
 
 <body>
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+
   <!-- Accessibility Skip Link -->
   <a href="#main" class="skip-link">Skip to main content</a>
 
@@ -1153,7 +1209,7 @@
   </header>
 
   <main id="main">
-    <!-- Hero / Profile with Interactive Terminal -->
+    <!-- Hero / Profile Section (Non-sticky intro banner) -->
     <section class="hero" id="profile">
       <div class="page-shell hero-grid">
         <div class="hero-copy">
@@ -1230,17 +1286,19 @@
       </div>
     </section>
 
-    <!-- Capability Signals / Proof -->
-    <section class="section" id="proof">
-      <div class="page-shell">
+    <!-- STACKED DECK CONTAINER: Sections Stack Smoothly Over Each Other on Scroll -->
+    <div class="page-shell stacked-deck-container" id="stackedDeck">
+
+      <!-- Deck Card 1: Capability Signals / Proof -->
+      <section class="sticky-deck-card" id="proof">
         <div class="section-heading">
           <div class="kicker">01 / Capability Signals</div>
           <h2>Evidence over buzzwords.</h2>
           <p>A cross-disciplinary foundation built through real operational work, technical QA, client support, and long-term academic teaching.</p>
         </div>
 
-        <div class="signal-grid">
-          <article class="signal-card glass liquid-card">
+        <div class="card-deck-fan">
+          <article class="signal-card glass fan-card">
             <span class="signal-index">01. DATA ANALYTICS</span>
             <div>
               <h3>Operational Analysis</h3>
@@ -1249,7 +1307,7 @@
             <span class="signal-tag">$ analysis / reporting / QA</span>
           </article>
 
-          <article class="signal-card glass liquid-card">
+          <article class="signal-card glass fan-card">
             <span class="signal-index">02. AI DATA OPS</span>
             <div>
               <h3>ML Data Readiness</h3>
@@ -1258,7 +1316,7 @@
             <span class="signal-tag">$ annotation / validation / QA</span>
           </article>
 
-          <article class="signal-card glass liquid-card">
+          <article class="signal-card glass fan-card">
             <span class="signal-index">03. CIVIL ENGINEERING</span>
             <div>
               <h3>Site &amp; Model Rigor</h3>
@@ -1267,7 +1325,7 @@
             <span class="signal-tag">$ hydrodynamics / structural</span>
           </article>
 
-          <article class="signal-card glass liquid-card">
+          <article class="signal-card glass fan-card">
             <span class="signal-index">04. INSTRUCTION</span>
             <div>
               <h3>Teaching &amp; Support</h3>
@@ -1276,12 +1334,10 @@
             <span class="signal-tag">$ teaching / mentorship</span>
           </article>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Experience Timeline -->
-    <section class="section" id="experience">
-      <div class="page-shell">
+      <!-- Deck Card 2: Experience Timeline -->
+      <section class="sticky-deck-card" id="experience">
         <div class="section-heading">
           <div class="kicker">02 / Experience</div>
           <h2>A non-linear path with a consistent pattern.</h2>
@@ -1374,20 +1430,18 @@
             </div>
           </article>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Toolkit -->
-    <section class="section" id="toolkit">
-      <div class="page-shell">
+      <!-- Deck Card 3: Toolkit -->
+      <section class="sticky-deck-card" id="toolkit">
         <div class="section-heading">
           <div class="kicker">03 / Toolkit</div>
           <h2>Technical fluency, grounded in operations.</h2>
           <p>Practical tools applied to analyze data, maintain quality, and keep workflows moving.</p>
         </div>
 
-        <div class="toolkit-grid">
-          <article class="toolkit-card glass liquid-card">
+        <div class="card-deck-fan">
+          <article class="toolkit-card glass fan-card">
             <div class="terminal-label">$ list technical</div>
             <h3>Technical &amp; Engineering</h3>
             <div class="tag-list">
@@ -1403,7 +1457,7 @@
             </div>
           </article>
 
-          <article class="toolkit-card glass liquid-card">
+          <article class="toolkit-card glass fan-card">
             <div class="terminal-label">$ list professional</div>
             <h3>Professional &amp; Operations</h3>
             <div class="tag-list">
@@ -1417,12 +1471,10 @@
             </div>
           </article>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Education -->
-    <section class="section" id="education">
-      <div class="page-shell">
+      <!-- Deck Card 4: Education -->
+      <section class="sticky-deck-card" id="education">
         <div class="section-heading">
           <div class="kicker">04 / Education &amp; Development</div>
           <h2>Building the next layer.</h2>
@@ -1430,7 +1482,7 @@
         </div>
 
         <div class="education-grid">
-          <article class="education-card glass liquid-card">
+          <article class="education-card glass">
             <div class="kicker">University of the Philippines Diliman</div>
             <h3>B.S. Civil Engineering</h3>
             <div class="degree">Degree Candidate</div>
@@ -1440,7 +1492,7 @@
             </div>
           </article>
 
-          <article class="training-card glass liquid-card">
+          <article class="training-card glass">
             <div class="kicker">Professional Development</div>
             <h3>Languages &amp; Certifications</h3>
             <p style="color: var(--muted); font-size: 0.92rem; margin-top: 0.5rem;">
@@ -1448,12 +1500,10 @@
             </p>
           </article>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Projects / Case Studies -->
-    <section class="section" id="projects">
-      <div class="page-shell">
+      <!-- Deck Card 5: Projects / Case Studies -->
+      <section class="sticky-deck-card" id="projects">
         <div class="section-heading">
           <div class="kicker">05 / Featured Case Studies</div>
           <h2>Engineering projects with <span class="gradient-word">real impact.</span></h2>
@@ -1533,13 +1583,11 @@
             <!-- Rendered dynamically by JS -->
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Contact -->
-    <section class="section" id="contact">
-      <div class="page-shell">
-        <article class="contact-card glass liquid-card">
+      <!-- Deck Card 6: Contact -->
+      <section class="sticky-deck-card" id="contact">
+        <article class="contact-card glass">
           <div>
             <div class="kicker">06 / Contact</div>
             <h2>Need someone who bridges technical rigor and operational reality?</h2>
@@ -1556,8 +1604,9 @@
             <a class="button primary" href="mailto:kerwinarlan@gmail.com">Send Email ✉</a>
           </div>
         </article>
-      </div>
-    </section>
+      </section>
+
+    </div><!-- end .stacked-deck-container -->
   </main>
 
   <!-- Footer -->
@@ -1684,6 +1733,55 @@
       setInterval(updateManilaTime, 1000);
 
       document.getElementById('currentYear').textContent = String(new Date().getFullYear());
+
+      // Scroll Read Progress Bar Indicator
+      const progressBar = document.getElementById('scrollProgressBar');
+      window.addEventListener('scroll', () => {
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = totalHeight > 0 ? (window.scrollY / totalHeight) : 0;
+        if (progressBar) progressBar.style.transform = `scaleX(${progress})`;
+      }, { passive: true });
+
+      // Sticky Deck Panel Stacking Effect Mechanics
+      const deckCards = Array.from(document.querySelectorAll('.sticky-deck-card'));
+      function handleDeckStacking() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        
+        const offset = 90; // Header offset
+        deckCards.forEach((card, index) => {
+          const rect = card.getBoundingClientRect();
+          const nextCard = deckCards[index + 1];
+          
+          if (nextCard) {
+            const nextRect = nextCard.getBoundingClientRect();
+            // If next card is sliding over current card
+            if (nextRect.top <= offset + 60) {
+              card.classList.add('is-stacked-under');
+            } else {
+              card.classList.remove('is-stacked-under');
+            }
+          }
+        });
+      }
+
+      window.addEventListener('scroll', handleDeckStacking, { passive: true });
+      handleDeckStacking();
+
+      // Scrollspy Navigation Highlight
+      const navAnchors = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+      const spyObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            navAnchors.forEach(a => {
+              if (a.getAttribute('href') === `#${id}`) a.setAttribute('aria-current', 'page');
+              else a.removeAttribute('aria-current');
+            });
+          }
+        });
+      }, { rootMargin: '-30% 0px -60% 0px' });
+
+      deckCards.forEach(card => spyObserver.observe(card));
 
       // Interactive macOS Terminal Component Logic
       const termHistory = document.getElementById('terminalHistory');
