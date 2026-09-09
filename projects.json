@@ -1,149 +1,5 @@
 [
   {
-    "id": "backend-engineering-intelligence",
-    "description": "Backend engineering intelligence for coding agents. Audit, architect, debug, secure, optimize, and production-harden APIs, databases, workers, and services with reusable Pi Agent skills.",
-    "url": "https://github.com/kerwinarlan/backend-engineering-intelligence",
-    "homepage": "",
-    "language": "TypeScript",
-    "topics": [
-      "api-architecture",
-      "backend-engineering",
-      "database-engineering",
-      "pi-agent",
-      "pi-skills",
-      "reliability-engineering",
-      "security-pass"
-    ],
-    "stars": 0
-  },
-  {
-    "id": "budget-bot-hackathon-budget-inspector",
-    "description": "",
-    "url": "https://github.com/kerwinarlan/budget-bot-hackathon-budget-inspector",
-    "homepage": "",
-    "language": "HTML",
-    "topics": [],
-    "stars": 0
-  },
-  {
-    "id": "lgu-ph-web",
-    "description": "Standardized, lightweight digital portal framework for Philippine Local Government Units (DILG FDP & ARTA Citizen's Charter compliant)",
-    "url": "https://github.com/kerwinarlan/lgu-ph-web",
-    "homepage": "",
-    "language": "CSS",
-    "topics": [
-      "accessibility",
-      "arta-citizens-charter",
-      "cavite",
-      "civic-tech",
-      "dilg-fdp",
-      "egovernment",
-      "glassmorphism",
-      "gov-ph",
-      "governance",
-      "government-portal",
-      "lgu",
-      "lgu-philippines",
-      "lgu-portal",
-      "philippines",
-      "public-services",
-      "static-site",
-      "tanza",
-      "tanza-cavite",
-      "vanilla-js"
-    ],
-    "stars": 0
-  },
-  {
-    "id": "frontend-design-intelligence",
-    "description": "Design and motion intelligence for coding agents. Audit, redesign, animate, and portfolio-polish frontend projects with reusable Pi Agent skills.",
-    "url": "https://github.com/kerwinarlan/frontend-design-intelligence",
-    "homepage": "",
-    "language": "TypeScript",
-    "topics": [
-      "agent-skills",
-      "design-systems",
-      "frontend",
-      "frontend-design",
-      "gsap",
-      "lottie",
-      "motion-design",
-      "nextjs",
-      "pi-agent",
-      "playwright",
-      "portfolio",
-      "react",
-      "tailwindcss",
-      "typescript",
-      "web-animation"
-    ],
-    "stars": 0
-  },
-  {
-    "id": "rc-flexure-theory",
-    "description": "Basic flexure theory calculations for Reinforced Concrete (E_c = 4700 sqrt(f'c), modular ratio n = E_s / E_c)",
-    "url": "https://github.com/kerwinarlan/rc-flexure-theory",
-    "homepage": "",
-    "language": "Python",
-    "topics": [
-      "aci318",
-      "civil-engineering",
-      "flexure-theory",
-      "modular-ratio",
-      "nscp2015",
-      "python",
-      "reinforced-concrete",
-      "structural-engineering"
-    ],
-    "stars": 0
-  },
-  {
-    "id": "dorm-hub",
-    "description": "Central knowledge hub, design tokens, building floorplans, SA protocols, and project index for student residence hall management",
-    "url": "https://github.com/kerwinarlan/dorm-hub",
-    "homepage": "",
-    "language": "CSS",
-    "topics": [
-      "design-system",
-      "dorm-management",
-      "dormitory",
-      "knowledge-base",
-      "residence-hall",
-      "sampaloc-residence-hall",
-      "student-assistant",
-      "student-housing",
-      "up-diliman"
-    ],
-    "stars": 0
-  },
-  {
-    "id": "dorm-bike-tag",
-    "description": "",
-    "url": "https://github.com/kerwinarlan/dorm-bike-tag",
-    "homepage": "",
-    "language": "HTML",
-    "topics": [],
-    "stars": 0
-  },
-  {
-    "id": "sa-bedcheck-errand",
-    "description": "",
-    "url": "https://github.com/kerwinarlan/sa-bedcheck-errand",
-    "homepage": "",
-    "language": "HTML",
-    "topics": [],
-    "stars": 0
-  },
-  {
-    "id": "dorm-sa-presentation-ga-1",
-    "description": "",
-    "url": "https://github.com/kerwinarlan/dorm-sa-presentation-ga-1",
-    "homepage": "",
-    "language": "HTML",
-    "topics": [],
-    "stars": 0
-  },
-  {
     "id": "dorm-evacuation-signage",
     "description": "Automated A4 vector evacuation signage generator & room-by-room PDF batch printer for dormitories and residential buildings.",
     "url": "https://github.com/kerwinarlan/dorm-evacuation-signage",
@@ -182,6 +38,26 @@
     "stars": 1
   },
   {
+    "id": "hardcore-programmer",
+    "description": "Competitive-programming problem-solving protocol for the pi coding agent, distilled from top LeetCode solvers and IOI champions. Includes a brute-force stress-testing tool.",
+    "url": "https://github.com/kerwinarlan/hardcore-programmer",
+    "homepage": "",
+    "language": "Python",
+    "topics": [
+      "agentskills",
+      "algorithms",
+      "coding-interview",
+      "competitive-programming",
+      "data-structures",
+      "ioi",
+      "leetcode",
+      "pi-agent",
+      "problem-solving",
+      "stress-testing"
+    ],
+    "stars": 1
+  },
+  {
     "id": "matrix-structural-analysis",
     "description": "Matrix Structural Analysis (CE 152) framework element stiffness formulation, coordinate transformations, and solver pipeline",
     "url": "https://github.com/kerwinarlan/matrix-structural-analysis",
@@ -197,22 +73,22 @@
     "stars": 1
   },
   {
-    "id": "sa-schedule-tracker",
-    "description": "Static SA duty-shift availability calendar on GitHub Pages; live Supabase overrides",
-    "url": "https://github.com/kerwinarlan/sa-schedule-tracker",
-    "homepage": "https://kerwinarlan.github.io/sa-schedule-tracker/",
+    "id": "pagasa-track-agent",
+    "description": "Parse PAGASA severe weather bulletins into validated storm tracks: deterministic-first parser with LLM fallback, series tracker with forecast-skill verification, GeoJSON + Leaflet maps.",
+    "url": "https://github.com/kerwinarlan/pagasa-track-agent",
+    "homepage": "https://kerwinarlan.github.io/pagasa-track-agent/",
     "language": "Python",
     "topics": [
-      "availability",
-      "github-pages",
-      "heatmap",
-      "mobile-first",
-      "python",
-      "schedule",
-      "scheduler",
-      "static-site",
-      "supabase",
-      "vanilla-js"
+      "deepseek",
+      "geojson",
+      "leaflet",
+      "pagasa",
+      "philippines",
+      "pydantic",
+      "storm-tracking",
+      "tropical-cyclone",
+      "typhoon",
+      "weather"
     ],
     "stars": 1
   },
@@ -232,46 +108,6 @@
       "socketio",
       "video-chat",
       "webrtc"
-    ],
-    "stars": 1
-  },
-  {
-    "id": "pinas-itinerary",
-    "description": "Family trip itinerary Dec 22, 2026 \u2013 Jan 4+ \u00b7 one-file boarding-pass tickets with QR codes and a live countdown \u2014 zero server, zero build",
-    "url": "https://github.com/kerwinarlan/pinas-itinerary",
-    "homepage": "https://kerwinarlan.github.io/pinas-itinerary/",
-    "language": "HTML",
-    "topics": [
-      "countdown",
-      "family-trip",
-      "github-pages",
-      "itinerary",
-      "manila",
-      "pins-trip",
-      "qr-code",
-      "single-file",
-      "static-site",
-      "travel"
-    ],
-    "stars": 0
-  },
-  {
-    "id": "pagasa-track-agent",
-    "description": "Parse PAGASA severe weather bulletins into validated storm tracks: deterministic-first parser with LLM fallback, series tracker with forecast-skill verification, GeoJSON + Leaflet maps.",
-    "url": "https://github.com/kerwinarlan/pagasa-track-agent",
-    "homepage": "https://kerwinarlan.github.io/pagasa-track-agent/",
-    "language": "Python",
-    "topics": [
-      "deepseek",
-      "geojson",
-      "leaflet",
-      "pagasa",
-      "philippines",
-      "pydantic",
-      "storm-tracking",
-      "tropical-cyclone",
-      "typhoon",
-      "weather"
     ],
     "stars": 1
   },
@@ -298,22 +134,22 @@
     "stars": 1
   },
   {
-    "id": "hardcore-programmer",
-    "description": "Competitive-programming problem-solving protocol for the pi coding agent, distilled from top LeetCode solvers and IOI champions. Includes a brute-force stress-testing tool.",
-    "url": "https://github.com/kerwinarlan/hardcore-programmer",
-    "homepage": "",
+    "id": "sa-schedule-tracker",
+    "description": "Static SA duty-shift availability calendar on GitHub Pages; live Supabase overrides",
+    "url": "https://github.com/kerwinarlan/sa-schedule-tracker",
+    "homepage": "https://kerwinarlan.github.io/sa-schedule-tracker/",
     "language": "Python",
     "topics": [
-      "agentskills",
-      "algorithms",
-      "coding-interview",
-      "competitive-programming",
-      "data-structures",
-      "ioi",
-      "leetcode",
-      "pi-agent",
-      "problem-solving",
-      "stress-testing"
+      "availability",
+      "github-pages",
+      "heatmap",
+      "mobile-first",
+      "python",
+      "schedule",
+      "scheduler",
+      "static-site",
+      "supabase",
+      "vanilla-js"
     ],
     "stars": 1
   },
@@ -353,5 +189,169 @@
       "tropical-cyclones"
     ],
     "stars": 1
+  },
+  {
+    "id": "backend-engineering-intelligence",
+    "description": "Backend engineering intelligence for coding agents. Audit, architect, debug, secure, optimize, and production-harden APIs, databases, workers, and services with reusable Pi Agent skills.",
+    "url": "https://github.com/kerwinarlan/backend-engineering-intelligence",
+    "homepage": "",
+    "language": "TypeScript",
+    "topics": [
+      "api-architecture",
+      "backend-engineering",
+      "database-engineering",
+      "pi-agent",
+      "pi-skills",
+      "reliability-engineering",
+      "security-pass"
+    ],
+    "stars": 0
+  },
+  {
+    "id": "budget-bot-hackathon-budget-inspector",
+    "description": "",
+    "url": "https://github.com/kerwinarlan/budget-bot-hackathon-budget-inspector",
+    "homepage": "",
+    "language": "HTML",
+    "topics": [],
+    "stars": 0
+  },
+  {
+    "id": "dorm-bike-tag",
+    "description": "",
+    "url": "https://github.com/kerwinarlan/dorm-bike-tag",
+    "homepage": "",
+    "language": "HTML",
+    "topics": [],
+    "stars": 0
+  },
+  {
+    "id": "dorm-hub",
+    "description": "Central knowledge hub, design tokens, building floorplans, SA protocols, and project index for student residence hall management",
+    "url": "https://github.com/kerwinarlan/dorm-hub",
+    "homepage": "",
+    "language": "CSS",
+    "topics": [
+      "design-system",
+      "dorm-management",
+      "dormitory",
+      "knowledge-base",
+      "residence-hall",
+      "sampaloc-residence-hall",
+      "student-assistant",
+      "student-housing",
+      "up-diliman"
+    ],
+    "stars": 0
+  },
+  {
+    "id": "dorm-sa-presentation-ga-1",
+    "description": "",
+    "url": "https://github.com/kerwinarlan/dorm-sa-presentation-ga-1",
+    "homepage": "",
+    "language": "HTML",
+    "topics": [],
+    "stars": 0
+  },
+  {
+    "id": "frontend-design-intelligence",
+    "description": "Design and motion intelligence for coding agents. Audit, redesign, animate, and portfolio-polish frontend projects with reusable Pi Agent skills.",
+    "url": "https://github.com/kerwinarlan/frontend-design-intelligence",
+    "homepage": "",
+    "language": "TypeScript",
+    "topics": [
+      "agent-skills",
+      "design-systems",
+      "frontend",
+      "frontend-design",
+      "gsap",
+      "lottie",
+      "motion-design",
+      "nextjs",
+      "pi-agent",
+      "playwright",
+      "portfolio",
+      "react",
+      "tailwindcss",
+      "typescript",
+      "web-animation"
+    ],
+    "stars": 0
+  },
+  {
+    "id": "lgu-ph-web",
+    "description": "Standardized, lightweight digital portal framework for Philippine Local Government Units (DILG FDP & ARTA Citizen's Charter compliant)",
+    "url": "https://github.com/kerwinarlan/lgu-ph-web",
+    "homepage": "",
+    "language": "CSS",
+    "topics": [
+      "accessibility",
+      "arta-citizens-charter",
+      "cavite",
+      "civic-tech",
+      "dilg-fdp",
+      "egovernment",
+      "glassmorphism",
+      "gov-ph",
+      "governance",
+      "government-portal",
+      "lgu",
+      "lgu-philippines",
+      "lgu-portal",
+      "philippines",
+      "public-services",
+      "static-site",
+      "tanza",
+      "tanza-cavite",
+      "vanilla-js"
+    ],
+    "stars": 0
+  },
+  {
+    "id": "pinas-itinerary",
+    "description": "Family trip itinerary Dec 22, 2026 \u2013 Jan 4+ \u00b7 one-file boarding-pass tickets with QR codes and a live countdown \u2014 zero server, zero build",
+    "url": "https://github.com/kerwinarlan/pinas-itinerary",
+    "homepage": "https://kerwinarlan.github.io/pinas-itinerary/",
+    "language": "HTML",
+    "topics": [
+      "countdown",
+      "family-trip",
+      "github-pages",
+      "itinerary",
+      "manila",
+      "pins-trip",
+      "qr-code",
+      "single-file",
+      "static-site",
+      "travel"
+    ],
+    "stars": 0
+  },
+  {
+    "id": "rc-flexure-theory",
+    "description": "Basic flexure theory calculations for Reinforced Concrete (E_c = 4700 sqrt(f'c), modular ratio n = E_s / E_c)",
+    "url": "https://github.com/kerwinarlan/rc-flexure-theory",
+    "homepage": "",
+    "language": "Python",
+    "topics": [
+      "aci318",
+      "civil-engineering",
+      "flexure-theory",
+      "modular-ratio",
+      "nscp2015",
+      "python",
+      "reinforced-concrete",
+      "structural-engineering"
+    ],
+    "stars": 0
+  },
+  {
+    "id": "sa-bedcheck-errand",
+    "description": "",
+    "url": "https://github.com/kerwinarlan/sa-bedcheck-errand",
+    "homepage": "",
+    "language": "HTML",
+    "topics": [],
+    "stars": 0
   }
 ]
