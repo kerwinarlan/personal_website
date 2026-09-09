@@ -10,21 +10,21 @@
 
   <!-- Open Graph / Social Sharing -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://kerwinarlan.github.io/" />
-  <meta property="og:title" content="Kerwin Arlan | Engineering, Data, Hydrodynamics, AI Ops" />
-  <meta property="og:description" content="Civil Engineering candidate at UP Diliman. Automating storm surge modeling, GIS analysis, and AI data operations." />
-  <meta property="og:image" content="https://kerwinarlan.github.io/assets/surge_animation_map.gif" />
+  <meta property="og:url" content="https://kerwinarlan.github.io/personal_website/" />
+  <meta property="og:title" content="Kerwin Arlan | Civil Engineering, GIS & AI Operations" />
+  <meta property="og:description" content="UP Diliman Civil Engineering candidate. Hydrodynamics, storm surge modeling, GIS analysis, and AI data operations." />
+  <meta property="og:image" content="https://kerwinarlan.github.io/personal_website/assets/surge_animation_map.gif" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Kerwin Arlan | Civil Engineering & Data Portfolio" />
-  <meta name="twitter:description" content="Civil Engineering candidate at UP Diliman. Hydrodynamics, GIS, Python, and AI Data Operations." />
+  <meta name="twitter:description" content="UP Diliman Civil Engineering candidate. Hydrodynamics, storm surge modeling, GIS analysis, and AI data operations." />
 
   <title>Kerwin Arlan | Engineering, Data, Operations</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23070b18'/%3E%3Cpath d='M17 45V19h7v11l10-11h9L31 31l13 14h-9L24 33v12z' fill='%238ef4ff'/%3E%3C/svg%3E" />
 
   <style>
@@ -41,12 +41,12 @@
       --green: #7cf5b2;
       --amber: #ffd687;
       --rose: #ff98b8;
-      --glass: rgba(12, 20, 40, 0.65);
-      --glass-strong: rgba(15, 26, 51, 0.82);
+      --glass: rgba(12, 20, 40, 0.68);
+      --glass-strong: rgba(15, 26, 51, 0.85);
       --glass-soft: rgba(255, 255, 255, 0.055);
       --line: rgba(255, 255, 255, 0.12);
-      --line-strong: rgba(255, 255, 255, 0.24);
-      --shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+      --line-strong: rgba(255, 255, 255, 0.25);
+      --shadow: 0 30px 90px rgba(0, 0, 0, 0.48);
       --shadow-soft: 0 18px 50px rgba(0, 0, 0, 0.28);
       --radius-xl: 34px;
       --radius-lg: 24px;
@@ -70,8 +70,8 @@
       --green: #0a7b4c;
       --amber: #8b5c00;
       --rose: #c02654;
-      --glass: rgba(255, 255, 255, 0.65);
-      --glass-strong: rgba(255, 255, 255, 0.88);
+      --glass: rgba(255, 255, 255, 0.68);
+      --glass-strong: rgba(255, 255, 255, 0.9);
       --glass-soft: rgba(0, 0, 0, 0.04);
       --line: rgba(45, 58, 90, 0.14);
       --line-strong: rgba(45, 58, 90, 0.25);
@@ -83,8 +83,7 @@
     * { margin: 0; }
     html { scroll-behavior: smooth; }
 
-    /* Tabular numbers across dates, clocks, stats */
-    .tabular-nums, .role-date, .signal-index, .status-pill, .time-badge, .stat-value, .project-tag, .tag {
+    .tabular-nums, .role-date, .signal-index, .status-pill, .time-badge, .stat-value, .project-tag, .tag, .terminal-prompt {
       font-variant-numeric: tabular-nums;
       font-feature-settings: "tnum";
     }
@@ -173,11 +172,11 @@
       z-index: 100;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      background: rgba(7, 11, 24, 0.62);
+      background: rgba(7, 11, 24, 0.68);
       border-bottom: 1px solid var(--line);
     }
     html[data-theme="light"] .nav-header {
-      background: rgba(234, 240, 255, 0.75);
+      background: rgba(234, 240, 255, 0.8);
     }
 
     .nav-inner {
@@ -264,19 +263,25 @@
       color: var(--cyan);
     }
 
-    .menu-toggle {
-      display: none;
-    }
+    .menu-toggle { display: none; }
 
-    /* Hero Section */
+    /* Hero Section with Split Grid: Copy + Terminal Window */
     .hero {
-      padding-block: 5rem 4rem;
+      padding-block: 4rem 3rem;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
     }
 
     .status-pill {
@@ -290,7 +295,7 @@
       color: var(--green);
       font-size: 0.82rem;
       font-weight: 600;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
     }
 
     .status-dot {
@@ -322,11 +327,11 @@
     }
 
     h1 {
-      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-size: clamp(2.2rem, 4.2vw, 3.5rem);
       line-height: 1.12;
       font-weight: 800;
       letter-spacing: -0.03em;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.2rem;
     }
 
     .gradient-word {
@@ -336,26 +341,25 @@
     }
 
     .hero-p {
-      font-size: clamp(1.05rem, 2vw, 1.22rem);
+      font-size: 1.08rem;
       color: var(--muted);
-      max-width: 760px;
       line-height: 1.65;
-      margin-bottom: 2rem;
+      margin-bottom: 1.8rem;
     }
 
     /* Stack Pills in Hero */
     .hero-stack-pills {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 2.2rem;
+      gap: 0.45rem;
+      margin-bottom: 1.8rem;
     }
 
     .stack-pill {
       font-family: var(--mono);
       font-size: 0.78rem;
       font-weight: 600;
-      padding: 0.35rem 0.75rem;
+      padding: 0.3rem 0.7rem;
       border-radius: 8px;
       background: var(--glass-strong);
       border: 1px solid var(--line);
@@ -372,19 +376,19 @@
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 0.8rem;
       align-items: center;
-      margin-bottom: 2.5rem;
+      margin-bottom: 1.8rem;
     }
 
     .button {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.85rem 1.6rem;
+      padding: 0.75rem 1.4rem;
       border-radius: var(--radius-md);
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       text-decoration: none;
       cursor: pointer;
       border: 1px solid transparent;
@@ -420,15 +424,108 @@
       border-color: var(--line-strong);
     }
 
-    .hero-meta {
+    /* macOS Interactive Terminal Component */
+    .terminal-window {
+      background: rgba(10, 16, 32, 0.88);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      font-family: var(--mono);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .terminal-bar {
+      background: rgba(15, 23, 42, 0.9);
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 0.45rem;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dot.red { background: #ff5f56; }
+    .dot.yellow { background: #ffbd2e; }
+    .dot.green { background: #27c93f; }
+
+    .terminal-title {
+      font-size: 0.78rem;
+      color: var(--faint);
+      font-weight: 500;
+    }
+
+    .terminal-body {
+      padding: 1.25rem;
+      min-height: 280px;
+      max-height: 340px;
+      overflow-y: auto;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    .terminal-prompt {
+      color: var(--cyan);
+      font-weight: 700;
+    }
+
+    .terminal-output {
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+      white-space: pre-wrap;
+    }
+
+    .terminal-input-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.4rem;
+    }
+
+    .terminal-input-row input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      flex: 1;
+    }
+
+    .terminal-toolbar {
+      padding: 0.6rem 1rem;
+      background: rgba(12, 19, 38, 0.9);
+      border-top: 1px solid var(--line);
       display: flex;
       flex-wrap: wrap;
-      gap: 1.5rem;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .terminal-pill {
+      background: var(--glass-soft);
+      border: 1px solid var(--line);
+      color: var(--cyan);
       font-family: var(--mono);
-      font-size: 0.8rem;
-      color: var(--faint);
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--line);
+      font-size: 0.72rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .terminal-pill:hover {
+      background: rgba(142, 244, 255, 0.15);
+      border-color: var(--cyan-strong);
     }
 
     /* Common Card Styles & Glassmorphism */
@@ -864,9 +961,7 @@
       color: var(--cyan);
       text-decoration: none;
     }
-    .card-links a:hover {
-      text-decoration: underline;
-    }
+    .card-links a:hover { text-decoration: underline; }
 
     /* Contact Card */
     .contact-card {
@@ -877,9 +972,7 @@
       align-items: center;
     }
     @media (max-width: 768px) {
-      .contact-card {
-        grid-template-columns: 1fr;
-      }
+      .contact-card { grid-template-columns: 1fr; }
     }
 
     .contact-card h2 {
@@ -1060,7 +1153,7 @@
   </header>
 
   <main id="main">
-    <!-- Hero / Profile -->
+    <!-- Hero / Profile with Interactive Terminal -->
     <section class="hero" id="profile">
       <div class="page-shell hero-grid">
         <div class="hero-copy">
@@ -1073,7 +1166,7 @@
           <h1>Engineering rigor. <span class="gradient-word">Data clarity.</span> Reliable execution.</h1>
 
           <p class="hero-p">
-            I am Kerwin Dio Joseph Arlan, a Civil Engineering candidate at UP Diliman. I automate PAGASA cyclone tracking, calibrate storm-surge models for Manila Bay, and bring hands-on GIS, data analysis, AI operations, and structural mechanics rigor to every team I join.
+            I am Kerwin Dio Joseph Arlan, a Civil Engineering candidate at UP Diliman. I automate PAGASA cyclone tracking, calibrate storm-surge models for Manila Bay, and bring hands-on GIS, data analysis, AI data operations, and structural mechanics rigor to every team I join.
           </p>
 
           <!-- Core Stack Pills -->
@@ -1092,10 +1185,46 @@
             <a class="button secondary" href="#projects">View Case Studies <span aria-hidden="true">↓</span></a>
             <a class="button ghost" href="./resume.pdf" target="_blank" rel="noopener">Resume (PDF) <span aria-hidden="true">↗</span></a>
           </div>
+        </div>
 
-          <div class="hero-meta" aria-label="Profile Details">
-            <span>LOCATION: QUEZON CITY, PHILIPPINES</span>
-            <span>AFFILIATION: UP DILIMAN / BS CIVIL ENGINEERING</span>
+        <!-- Interactive Terminal Component -->
+        <div class="terminal-window">
+          <div class="terminal-bar">
+            <div class="terminal-dots">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <div class="terminal-title">zsh — kerwinarlan@upd-ce: ~/portfolio</div>
+            <div style="font-size: 0.7rem; color: var(--green); font-weight: 700;">● ONLINE</div>
+          </div>
+
+          <div class="terminal-body" id="terminalOutput">
+            <div><span class="terminal-prompt">kerwin@upd-ce:~$</span> whoami</div>
+            <div class="terminal-output">> Kerwin Dio Joseph Arlan — Civil Engineering Candidate @ UP Diliman
+> Focus: Hydrodynamics, GIS Analysis, Python Automation & AI Data Ops</div>
+
+            <div><span class="terminal-prompt">kerwin@upd-ce:~$</span> status</div>
+            <div class="terminal-output">> Availability: Open for full-time roles (August 2026)
+> Active Agent: PAGASA Track Agent (Leaflet + DeepSeek V3)
+> Active Model: Manila Bay Surge Surrogate (Delft3D + XGBoost)</div>
+
+            <div id="terminalHistory"></div>
+
+            <div class="terminal-input-row">
+              <span class="terminal-prompt">kerwin@upd-ce:~$</span>
+              <input type="text" id="terminalInput" placeholder="Type command (help, stack, contact)..." aria-label="Interactive terminal prompt" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="terminal-toolbar">
+            <span style="font-size: 0.7rem; color: var(--faint);">Prompts:</span>
+            <button class="terminal-pill" data-term-cmd="whoami" type="button">$ whoami</button>
+            <button class="terminal-pill" data-term-cmd="status" type="button">$ status</button>
+            <button class="terminal-pill" data-term-cmd="stack" type="button">$ stack</button>
+            <button class="terminal-pill" data-term-cmd="projects" type="button">$ projects</button>
+            <button class="terminal-pill" data-term-cmd="contact" type="button">$ contact</button>
+            <button class="terminal-pill" data-term-cmd="clear" type="button">$ clear</button>
           </div>
         </div>
       </div>
@@ -1117,7 +1246,7 @@
               <h3>Operational Analysis</h3>
               <p>Extracted and mapped spatial data using ArcGIS Pro and Excel, executed database quality audits, and delivered executive performance dashboards.</p>
             </div>
-            <span class="signal-tag">analysis / reporting / QA</span>
+            <span class="signal-tag">$ analysis / reporting / QA</span>
           </article>
 
           <article class="signal-card glass liquid-card">
@@ -1126,25 +1255,25 @@
               <h3>ML Data Readiness</h3>
               <p>Cleaned, validated, annotated, and audited complex datasets for AI operations while helping refine human-in-the-loop workflows.</p>
             </div>
-            <span class="signal-tag">annotation / validation / QA</span>
+            <span class="signal-tag">$ annotation / validation / QA</span>
           </article>
 
           <article class="signal-card glass liquid-card">
             <span class="signal-index">03. CIVIL ENGINEERING</span>
             <div>
-              <h3>Site & Model Rigor</h3>
+              <h3>Site &amp; Model Rigor</h3>
               <p>Handled site inspection, quantity takeoffs, and structural mechanics calculations alongside hydrodynamic storm surge modeling in Delft3D.</p>
             </div>
-            <span class="signal-tag">hydrodynamics / inspection / structural</span>
+            <span class="signal-tag">$ hydrodynamics / structural</span>
           </article>
 
           <article class="signal-card glass liquid-card">
             <span class="signal-index">04. INSTRUCTION</span>
             <div>
-              <h3>Teaching & Support</h3>
+              <h3>Teaching &amp; Support</h3>
               <p>Taught mathematics, science, and technical concepts to diverse students over several years, sharpening communication under pressure.</p>
             </div>
-            <span class="signal-tag">teaching / mentorship / docs</span>
+            <span class="signal-tag">$ teaching / mentorship</span>
           </article>
         </div>
       </div>
@@ -1556,6 +1685,67 @@
 
       document.getElementById('currentYear').textContent = String(new Date().getFullYear());
 
+      // Interactive macOS Terminal Component Logic
+      const termHistory = document.getElementById('terminalHistory');
+      const termInput = document.getElementById('terminalInput');
+
+      const termCommands = {
+        whoami: `> Kerwin Dio Joseph Arlan — Civil Engineering Candidate @ UP Diliman
+> Focus: Hydrodynamics, GIS Analysis, Python Automation & AI Data Ops`,
+        status: `> Availability: Open for full-time roles (August 2026)
+> Active Agent: PAGASA Track Agent (Leaflet + DeepSeek V3)
+> Active Model: Manila Bay Surge Surrogate (Delft3D + XGBoost)`,
+        stack: `> Core Languages: Python, TypeScript, HTML5/CSS3, SQL
+> Engineering/GIS: ArcGIS Pro, QGIS, Delft3D, HEC-RAS
+> Frameworks/Tools: FastAPI, Pydantic, GitHub Actions, Docker`,
+        projects: `> [1] PAGASA Track Agent (github.com/kerwinarlan/pagasa-track-agent)
+> [2] Manila Bay Surge Surrogate (github.com/kerwinarlan/surge-surrogate)
+> [3] Matrix Structural Analysis (github.com/kerwinarlan/matrix-structural-analysis)
+> [4] GCash Spend Tracker (github.com/kerwinarlan/gcash-spend-tracker)`,
+        contact: `> Email: kerwinarlan@gmail.com
+> LinkedIn: linkedin.com/in/kerwin-dio-joseph-arlan
+> GitHub: github.com/kerwinarlan`,
+        help: `Available commands: whoami, status, stack, projects, contact, clear`
+      };
+
+      function runTermCommand(cmdStr) {
+        const cmd = cmdStr.trim().toLowerCase();
+        if (!cmd) return;
+
+        if (cmd === 'clear') {
+          termHistory.innerHTML = '';
+          return;
+        }
+
+        const promptDiv = document.createElement('div');
+        promptDiv.innerHTML = `<span class="terminal-prompt">kerwin@upd-ce:~$</span> ${esc(cmd)}`;
+        termHistory.appendChild(promptDiv);
+
+        const outputDiv = document.createElement('div');
+        outputDiv.className = 'terminal-output';
+        outputDiv.textContent = termCommands[cmd] || `> command not found: ${cmd}. Type 'help' for available commands.`;
+        termHistory.appendChild(outputDiv);
+
+        const termBody = document.getElementById('terminalOutput');
+        termBody.scrollTop = termBody.scrollHeight;
+      }
+
+      if (termInput) {
+        termInput.addEventListener('keydown', e => {
+          if (e.key === 'Enter') {
+            runTermCommand(termInput.value);
+            termInput.value = '';
+          }
+        });
+      }
+
+      document.querySelectorAll('[data-term-cmd]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const c = btn.dataset.termCmd;
+          runTermCommand(c);
+        });
+      });
+
       // Command Palette Logic
       const dialog = document.getElementById('commandDialog');
       const openCommand = document.getElementById('openCommand');
@@ -1656,13 +1846,11 @@
         const filtered = allProjects.filter(p => {
           const cat = categorize(p);
 
-          // Category filter
           let matchesCategory = true;
           if (filter === 'python') matchesCategory = cat.isPython;
           else if (filter === 'civil') matchesCategory = cat.isCivil;
           else if (filter === 'web') matchesCategory = cat.isWeb;
 
-          // Search query
           let matchesSearch = true;
           if (q) {
             const haystack = `${p.id} ${p.description} ${p.language} ${(p.topics || []).join(' ')}`.toLowerCase();
@@ -1705,7 +1893,6 @@
         }).join('');
       }
 
-      // Fetch projects.json
       fetch('./projects.json')
         .then(r => r.json())
         .then(data => {
@@ -1717,7 +1904,6 @@
           console.error('Failed to load projects.json:', err);
         });
 
-      // Wire Filter Buttons
       let currentFilter = 'all';
       const filterBtns = document.querySelectorAll('.filter-btn');
       filterBtns.forEach(btn => {
@@ -1730,7 +1916,6 @@
         });
       });
 
-      // Wire Search Input
       const searchInput = document.getElementById('repoSearchInput');
       if (searchInput) {
         searchInput.addEventListener('input', () => {

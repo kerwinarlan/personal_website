@@ -1,60 +1,43 @@
 # Personal Website
 
-Portfolio of Kerwin Dio Joseph Arlan - engineering, data, and operations.
+Portfolio of Kerwin Dio Joseph Arlan — Civil Engineering candidate at UP Diliman specializing in GIS, hydrodynamic modeling, data analysis, and AI operations.
 
-Live at: https://kerwinarlan.github.io/personal-website/
+Live at: https://kerwinarlan.github.io/personal_website/
 
-## Tech Stack
+## Tech Stack & Design System
 
-- **Vanilla HTML5** - semantic markup, no framework
-- **Modern CSS** - custom property design tokens, dark/light themes, glassmorphism
-- **Vanilla JavaScript** - zero dependencies
-- **Zero build step** - the page opens directly in any browser
-- **GitHub Pages** - deployed as a static site from the `main` branch
+- **Vanilla HTML5 & Modern CSS3** — custom property design tokens, dark/light theme switching, glassmorphism surfaces
+- **Interactive macOS Terminal** — interactive shell window with live prompt commands (`whoami`, `status`, `stack`, `projects`, `contact`)
+- **Vanilla JavaScript** — zero framework dependencies, fast load time
+- **GitHub Pages & Actions** — automated deployment workflow (`.github/workflows/deploy-gh-pages.yml`) deploying on every push to `main`
 
 ## Key Features
 
-- **Light/Dark theme toggle** - persisted in `localStorage`
-- **Ctrl+K command palette** - keyboard-driven navigation to every section and project
-- **Liquid-card effects** - pointer-tracked hover glow on glass surfaces
-- Scroll-reveal animations with `prefers-reduced-motion` support
-- Live Asia/Manila clock and scrollspy navigation
-- Accessible: skip link, ARIA labels, focus-visible styles, semantic landmarks
-- **Auto-synced projects grid** - long-tail projects render from `projects.json`
+- **Interactive Terminal Hero Component** — run commands directly in the embedded shell or click quick prompt pills
+- **Light/Dark theme toggle** — persisted in `localStorage`
+- **⌘K / Ctrl+K command palette** — keyboard-driven modal navigation
+- **Liquid-card spotlight effects** — pointer-tracked hover glow and subtle 3D tilt
+- **Live Asia/Manila Clock** — real-time PHT clock with pulse status dot
+- **Filterable Repositories Showcase** — category tabs (Python & ML, Civil & Hydro, Web & Tools) and live search
+- **WCAG Accessibility & Motion Safeguards** — skip links, explicit `:focus-visible` rings, `@media (prefers-reduced-motion: reduce)` fallback
 
 ## Syncing Projects
 
-The featured cards are hand-authored because they carry trace logs and live
-embeds. Everything else renders from `projects.json` at runtime.
+`projects.json` is regenerated automatically every Monday (03:17 UTC) and on demand by the `sync-projects` GitHub Action.
 
-`projects.json` is regenerated automatically every Monday (03:17 UTC) and on
-demand by the `sync-projects` GitHub Action - new public repos appear on the
-site without manual steps. To force a sync now:
+To force a sync manually:
 
 ```bash
-gh workflow run sync-projects.yml
+python3 build_projects.py --verbose   # then commit projects.json
 ```
-
-Manual regeneration is still possible:
-
-```bash
-python3 build_projects.py   # then commit projects.json
-```
-
-The script pulls your public repos from the GitHub API and applies a curated
-exclude list. Repo descriptions and topics become card copy, so write good
-ones. If you rename a repo, update the `featuredProjects` list in
-`index.html` to match - stale names cause duplicate cards and dead links.
 
 ## Building the Resume PDF
 
-`resume.pdf` is generated from `resume.html` - never edited by hand:
+`resume.pdf` is generated from `resume.html` via headless Chrome/Chromium:
 
 ```bash
-./build_resume.sh   # headless Chrome renders resume.html to resume.pdf
+./build_resume.sh
 ```
-
-Run it after any resume.html edit and commit the regenerated PDF.
 
 ## Run Locally
 
@@ -63,14 +46,14 @@ python3 -m http.server 8080
 # visit http://localhost:8080
 ```
 
-## Structure
+## Repository Structure
 
 ```
 index.html          - single-page portfolio (markup, styles, script)
-resume.html         - printable resume page (source of truth)
-resume.pdf          - generated from resume.html by build_resume.sh
-build_projects.py   - regenerates projects.json from the GitHub API
-build_resume.sh     - regenerates resume.pdf from resume.html
-projects.json       - project data consumed by the auto-synced grid
-assets/             - project preview media
+resume.html         - printable resume source page
+resume.pdf          - generated resume PDF artifact
+build_projects.py   - CLI tool syncing repositories from GitHub API
+build_resume.sh     - cross-platform script building resume.pdf
+projects.json       - project data payload consumed by the showcase
+.github/workflows/  - GitHub Actions deployment & sync workflows
 ```
