@@ -297,6 +297,26 @@
       padding: 3rem 2.5rem;
       box-shadow: var(--shadow-soft);
       margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+
+    .sticky-deck-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: radial-gradient(450px circle at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(77, 227, 242, 0.45), transparent 60%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 250ms ease;
+    }
+
+    .sticky-deck-card:hover::before {
+      opacity: 1;
     }
 
     /* Hero Section */
@@ -1767,6 +1787,15 @@
 
       deckCards.forEach(card => spyObserver.observe(card));
 
+      // Global Spotlight Card Cursor Tracking (GPU Custom Properties)
+      deckCards.forEach(card => {
+        card.addEventListener('pointermove', (e) => {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+          card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        }, { passive: true });
+      });
+
       // Interactive macOS Terminal Component Logic
       const termHistory = document.getElementById('terminalHistory');
       const termInput = document.getElementById('terminalInput');
@@ -2005,9 +2034,9 @@
         });
       }
 
-      // ==========================================
-      // Procedural Hydrodynamic Wave & Surge Field
-      // ==========================================
+      // =========================================================================
+      // Procedural Great Wave of Kanagawa — Hydrodynamic Vaporwave Simulation
+      // =========================================================================
       const waveCanvas = document.getElementById('heroWaveCanvas');
       if (waveCanvas) {
         const ctx = waveCanvas.getContext('2d');
@@ -2036,21 +2065,21 @@
           window.addEventListener('pointermove', onPointerMove, { passive: true });
           document.addEventListener('pointerleave', onPointerLeave, { passive: true });
 
-          // Pre-allocated typed array for surge particles
+          // Pre-allocated flat buffer for spray & foam particles
           // Layout per particle (stride 6): [x, y, vx, vy, radius, alpha]
-          const PARTICLE_COUNT = 90;
+          const FOAM_COUNT = 110;
           const STRIDE = 6;
-          const particleData = new Float32Array(PARTICLE_COUNT * STRIDE);
+          const foamData = new Float32Array(FOAM_COUNT * STRIDE);
 
-          const initParticles = (w, h) => {
-            for (let i = 0; i < PARTICLE_COUNT; i++) {
+          const initFoam = (w, h) => {
+            for (let i = 0; i < FOAM_COUNT; i++) {
               const o = i * STRIDE;
-              particleData[o + 0] = Math.random() * w;
-              particleData[o + 1] = Math.random() * h;
-              particleData[o + 2] = 12 + Math.random() * 24;
-              particleData[o + 3] = (Math.random() - 0.5) * 6;
-              particleData[o + 4] = 1.0 + Math.random() * 2.0;
-              particleData[o + 5] = 0.15 + Math.random() * 0.45;
+              foamData[o + 0] = w * 0.1 + Math.random() * (w * 0.6);
+              foamData[o + 1] = h * 0.2 + Math.random() * (h * 0.5);
+              foamData[o + 2] = 20 + Math.random() * 45;
+              foamData[o + 3] = (Math.random() - 0.7) * 35;
+              foamData[o + 4] = 1.0 + Math.random() * 2.2;
+              foamData[o + 5] = 0.2 + Math.random() * 0.6;
             }
           };
 
@@ -2063,7 +2092,7 @@
             waveCanvas.height = Math.floor(height * dpr);
             ctx.setTransform(1, 0, 0, 1, 0, 0);
             ctx.scale(dpr, dpr);
-            initParticles(width, height);
+            initFoam(width, height);
             if (prefersReduced) drawFrame(0, 0);
           };
 
@@ -2076,6 +2105,221 @@
           });
           io.observe(waveCanvas);
 
+          // Draw Vaporwave Synth Sun and Mount Fuji in the background
+          const drawFujiAndHorizon = (isDark, t) => {
+            const fujiX = width * 0.68;
+            const horizonY = height * 0.72;
+            const sunRadius = Math.min(width, height) * 0.22;
+            const sunY = horizonY - sunRadius * 0.45;
+
+            // 1. Synthwave Striped Sun
+            const sunGrad = ctx.createLinearGradient(fujiX, sunY - sunRadius, fujiX, sunY + sunRadius);
+            if (isDark) {
+              sunGrad.addColorStop(0, 'rgba(255, 112, 166, 0.40)'); // Neon Rose
+              sunGrad.addColorStop(0.6, 'rgba(169, 152, 255, 0.25)'); // Violet
+              sunGrad.addColorStop(1, 'rgba(255, 214, 135, 0.10)'); // Warm Amber
+            } else {
+              sunGrad.addColorStop(0, 'rgba(192, 38, 84, 0.20)');
+              sunGrad.addColorStop(1, 'rgba(255, 152, 184, 0.06)');
+            }
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(fujiX, sunY, sunRadius, 0, Math.PI * 2);
+            ctx.fillStyle = sunGrad;
+            ctx.fill();
+
+            // Horizontal synthwave scanline slats
+            ctx.fillStyle = isDark ? '#070b18' : '#eaf0ff';
+            for (let y = sunY + 5; y < sunY + sunRadius; y += 8) {
+              const barHeight = 2.8 * ((y - sunY) / sunRadius);
+              ctx.fillRect(fujiX - sunRadius - 10, y, (sunRadius + 10) * 2, barHeight);
+            }
+            ctx.restore();
+
+            // 2. Iconic Mount Fuji Contour
+            const fujiBaseW = width * 0.24;
+            const fujiPeakH = height * 0.26;
+            const peakY = horizonY - fujiPeakH;
+
+            ctx.beginPath();
+            ctx.moveTo(fujiX - fujiBaseW, horizonY);
+            ctx.bezierCurveTo(fujiX - fujiBaseW * 0.45, horizonY - 15, fujiX - 35, peakY + 16, fujiX - 18, peakY);
+            ctx.lineTo(fujiX + 18, peakY);
+            ctx.bezierCurveTo(fujiX + 35, peakY + 16, fujiX + fujiBaseW * 0.45, horizonY - 15, fujiX + fujiBaseW, horizonY);
+            ctx.closePath();
+
+            ctx.fillStyle = isDark ? 'rgba(11, 20, 42, 0.85)' : 'rgba(240, 245, 255, 0.75)';
+            ctx.fill();
+            ctx.strokeStyle = isDark ? 'rgba(169, 152, 255, 0.45)' : 'rgba(90, 69, 214, 0.25)';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            // Snow Cap Contour (Neon highlights)
+            ctx.beginPath();
+            ctx.moveTo(fujiX - 32, peakY + 32);
+            ctx.lineTo(fujiX - 18, peakY);
+            ctx.lineTo(fujiX + 18, peakY);
+            ctx.lineTo(fujiX + 32, peakY + 32);
+            ctx.lineTo(fujiX + 12, peakY + 22);
+            ctx.lineTo(fujiX, peakY + 28);
+            ctx.lineTo(fujiX - 12, peakY + 22);
+            ctx.closePath();
+            ctx.fillStyle = isDark ? 'rgba(77, 227, 242, 0.30)' : 'rgba(0, 124, 137, 0.15)';
+            ctx.fill();
+            ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.8)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          };
+
+          // Draw the Great Wave Barrel & Claw Foam Tendrils
+          const drawKanagawaGreatWave = (isDark, t, p) => {
+            const waveBaseY = height * 0.94;
+            const crestX = width * (0.44 + Math.sin(t * 0.4) * 0.03);
+            const crestY = height * (0.18 + Math.cos(t * 0.5) * 0.025);
+
+            let pointerOffset = 0;
+            if (p.active) {
+              const dx = crestX - p.x;
+              const dy = crestY - p.y;
+              const d = Math.sqrt(dx * dx + dy * dy);
+              if (d < 220) {
+                pointerOffset = (1 - d / 220) * 40;
+              }
+            }
+
+            // 1. Mid-Ground Rolling Wave Swell
+            ctx.beginPath();
+            ctx.moveTo(0, waveBaseY);
+            for (let x = 0; x <= width; x += 25) {
+              const waveY = height * 0.62 + Math.sin(t * 0.7 + x * 0.007) * 25 + Math.cos(t * 0.35 + x * 0.004) * 16;
+              ctx.lineTo(x, waveY);
+            }
+            ctx.lineTo(width, height);
+            ctx.lineTo(0, height);
+            ctx.closePath();
+            ctx.fillStyle = isDark ? 'rgba(10, 18, 40, 0.65)' : 'rgba(215, 230, 255, 0.45)';
+            ctx.fill();
+
+            // 2. Secondary Left Crest (Hokusai foreground child wave)
+            const leftCrestX = width * 0.16;
+            const leftCrestY = height * 0.52;
+            ctx.beginPath();
+            ctx.moveTo(0, waveBaseY);
+            ctx.bezierCurveTo(width * 0.05, waveBaseY - 40, leftCrestX - 30, leftCrestY + 20, leftCrestX, leftCrestY);
+            ctx.bezierCurveTo(leftCrestX + 35, leftCrestY - 15, leftCrestX + 60, leftCrestY + 40, leftCrestX + 50, leftCrestY + 80);
+            ctx.bezierCurveTo(leftCrestX + 20, leftCrestY + 50, width * 0.06, waveBaseY - 20, 0, waveBaseY);
+            ctx.closePath();
+            ctx.fillStyle = isDark ? 'rgba(14, 28, 58, 0.8)' : 'rgba(230, 240, 255, 0.6)';
+            ctx.fill();
+            ctx.strokeStyle = isDark ? 'rgba(77, 227, 242, 0.6)' : 'rgba(0, 124, 137, 0.4)';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            // 3. Main Great Wave Body (Sweeping Spiral Arch)
+            ctx.beginPath();
+            ctx.moveTo(0, waveBaseY);
+            // Deep rising surge wall from bottom-left up to soaring crest
+            ctx.bezierCurveTo(
+              width * 0.12, waveBaseY - 60,
+              width * 0.25, crestY + 80,
+              crestX - 25, crestY - pointerOffset
+            );
+            // Curling wave lip arching right and curving downward into barrel
+            const barrelEndX = crestX + width * 0.16;
+            const barrelEndY = crestY + height * 0.28 - pointerOffset * 0.4;
+            ctx.bezierCurveTo(
+              crestX + width * 0.10, crestY - 55 - pointerOffset,
+              barrelEndX + 25, crestY + 15,
+              barrelEndX, barrelEndY
+            );
+            // Inner hollow cavity of the wave
+            ctx.bezierCurveTo(
+              crestX + width * 0.05, crestY + height * 0.16,
+              width * 0.20, waveBaseY - 60,
+              0, waveBaseY + 30
+            );
+            ctx.closePath();
+
+            // Vaporwave Deep Ocean Gradient
+            const waveGrad = ctx.createLinearGradient(0, crestY, width * 0.55, waveBaseY);
+            if (isDark) {
+              waveGrad.addColorStop(0, 'rgba(77, 227, 242, 0.45)'); // Electric Cyan
+              waveGrad.addColorStop(0.35, 'rgba(169, 152, 255, 0.35)'); // Neon Violet
+              waveGrad.addColorStop(0.7, 'rgba(255, 112, 166, 0.22)'); // Rose
+              waveGrad.addColorStop(1, 'rgba(12, 24, 52, 0.90)'); // Obsidian Indigo
+            } else {
+              waveGrad.addColorStop(0, 'rgba(0, 124, 137, 0.30)');
+              waveGrad.addColorStop(0.5, 'rgba(90, 69, 214, 0.20)');
+              waveGrad.addColorStop(1, 'rgba(255, 255, 255, 0.85)');
+            }
+            ctx.fillStyle = waveGrad;
+            ctx.fill();
+
+            ctx.strokeStyle = isDark ? 'rgba(77, 227, 242, 0.85)' : 'rgba(0, 124, 137, 0.6)';
+            ctx.lineWidth = 2.2;
+            ctx.stroke();
+
+            // Internal hydrodynamic flow lines within wave barrel
+            for (let fl = 1; fl <= 3; fl++) {
+              ctx.beginPath();
+              const fRatio = fl * 0.22;
+              ctx.moveTo(width * 0.05, waveBaseY - fl * 20);
+              ctx.bezierCurveTo(
+                width * 0.18, waveBaseY - 50 - fl * 15,
+                width * 0.28, crestY + 70 + fl * 20,
+                crestX - 20 + fl * 10, crestY + fl * 18 - pointerOffset
+              );
+              ctx.strokeStyle = isDark 
+                ? (fl === 1 ? 'rgba(124, 245, 178, 0.45)' : 'rgba(77, 227, 242, 0.35)') 
+                : 'rgba(0, 124, 137, 0.25)';
+              ctx.lineWidth = 1.2;
+              ctx.stroke();
+            }
+
+            // 4. Iconic Ukiyo-e Wave Claws (Parametric Foam Tendrils)
+            const clawCount = 11;
+            ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.98)';
+            ctx.fillStyle = isDark ? 'rgba(255, 255, 255, 0.90)' : 'rgba(255, 255, 255, 0.95)';
+            ctx.lineWidth = 1.8;
+
+            for (let c = 0; c < clawCount; c++) {
+              const u = c / (clawCount - 1);
+              const clawOriginX = crestX - 45 + u * (barrelEndX - crestX + 55);
+              const clawOriginY = crestY - 18 + Math.sin(u * Math.PI) * 35 - pointerOffset * (1 - u * 0.5);
+
+              const curlAngle = 1.1 + u * 1.7 + Math.sin(t * 1.6 + c * 0.8) * 0.28;
+              const clawLen = 24 + (1 - Math.abs(u - 0.45)) * 28;
+              const tipX = clawOriginX + Math.cos(curlAngle) * clawLen;
+              const tipY = clawOriginY + Math.sin(curlAngle) * clawLen;
+
+              ctx.beginPath();
+              ctx.moveTo(clawOriginX, clawOriginY);
+              ctx.quadraticCurveTo(
+                clawOriginX + Math.cos(curlAngle - 0.65) * (clawLen * 0.65),
+                clawOriginY + Math.sin(curlAngle - 0.65) * (clawLen * 0.65),
+                tipX, tipY
+              );
+              ctx.stroke();
+
+              // Glowing foam droplets at claw tips
+              ctx.beginPath();
+              ctx.arc(tipX, tipY, 2.4, 0, Math.PI * 2);
+              ctx.fill();
+            }
+
+            // 5. Secondary Foreground Surge Streamlines
+            ctx.beginPath();
+            ctx.moveTo(0, waveBaseY - 25);
+            for (let x = 0; x <= width; x += 20) {
+              const y = waveBaseY + Math.sin(t * 1.3 + x * 0.012) * 20 + Math.cos(t * 0.6 + x * 0.006) * 14;
+              ctx.lineTo(x, y);
+            }
+            ctx.strokeStyle = isDark ? 'rgba(124, 245, 178, 0.50)' : 'rgba(10, 123, 76, 0.35)';
+            ctx.lineWidth = 1.8;
+            ctx.stroke();
+          };
+
           const drawFrame = (dt, t) => {
             const isDark = root.dataset.theme === 'dark';
             ctx.clearRect(0, 0, width, height);
@@ -2083,88 +2327,55 @@
             pointer.x += (pointer.targetX - pointer.x) * 0.1;
             pointer.y += (pointer.targetY - pointer.y) * 0.1;
 
-            // 1. Hydrodynamic Streamline Ribbons
-            const ribbonCount = 4;
-            const points = 12;
-            const stepX = width / (points - 1);
+            // Layer 1: Retro Horizon, Sun & Mount Fuji
+            drawFujiAndHorizon(isDark, t);
 
-            for (let r = 0; r < ribbonCount; r++) {
-              const rOffset = r * 0.75;
-              const baseY = height * (0.35 + r * 0.16);
-              const alpha = isDark ? (0.08 + r * 0.04) : (0.04 + r * 0.03);
-              const color = r % 2 === 0 ? `rgba(77, 227, 242, ${alpha})` : `rgba(169, 152, 255, ${alpha})`;
+            // Layer 2: The Great Wave of Kanagawa (Vaporwave Curve & Claws)
+            drawKanagawaGreatWave(isDark, t, pointer);
 
-              ctx.beginPath();
-              ctx.strokeStyle = color;
-              ctx.lineWidth = 1.5;
-
-              for (let i = 0; i < points; i++) {
-                const px = i * stepX;
-                const w1 = Math.sin(t * 0.6 + i * 0.4 + rOffset) * 26;
-                const w2 = Math.cos(t * 0.35 + i * 0.25 + rOffset * 1.5) * 14;
-                let py = baseY + w1 + w2;
-
-                if (pointer.active) {
-                  const dx = px - pointer.x;
-                  const dy = py - pointer.y;
-                  const dist = Math.sqrt(dx * dx + dy * dy);
-                  if (dist < 140) {
-                    const factor = (1 - dist / 140);
-                    py += Math.sin(dx * 0.05) * factor * 25;
-                  }
-                }
-
-                if (i === 0) {
-                  ctx.moveTo(px, py);
-                } else {
-                  const prevX = (i - 1) * stepX;
-                  const prevW1 = Math.sin(t * 0.6 + (i - 1) * 0.4 + rOffset) * 26;
-                  const prevW2 = Math.cos(t * 0.35 + (i - 1) * 0.25 + rOffset * 1.5) * 14;
-                  let prevY = baseY + prevW1 + prevW2;
-                  const cpX = prevX + stepX * 0.5;
-                  ctx.bezierCurveTo(cpX, prevY, cpX, py, px, py);
-                }
-              }
-              ctx.stroke();
-            }
-
-            // 2. Hydrodynamic Velocity Particles
-            for (let i = 0; i < PARTICLE_COUNT; i++) {
+            // Layer 3: Kinetic Vaporwave Foam & Spray Particles
+            for (let i = 0; i < FOAM_COUNT; i++) {
               const o = i * STRIDE;
-              let px = particleData[o + 0];
-              let py = particleData[o + 1];
-              let vx = particleData[o + 2];
-              let vy = particleData[o + 3];
-              const rad = particleData[o + 4];
-              const pAlpha = particleData[o + 5];
+              let px = foamData[o + 0];
+              let py = foamData[o + 1];
+              let vx = foamData[o + 2];
+              let vy = foamData[o + 3];
+              const rad = foamData[o + 4];
+              const pAlpha = foamData[o + 5];
 
               px += vx * dt;
-              py += (vy + Math.sin(t * 1.2 + px * 0.01) * 8) * dt;
+              py += (vy + 25) * dt;
 
               if (pointer.active) {
                 const dx = px - pointer.x;
                 const dy = py - pointer.y;
                 const distSq = dx * dx + dy * dy;
-                if (distSq < 10000 && distSq > 1) {
+                if (distSq < 14400 && distSq > 1) {
                   const dist = Math.sqrt(distSq);
-                  const force = (1 - dist / 100) * 80;
+                  const force = (1 - dist / 120) * 120;
                   px += (dx / dist) * force * dt;
                   py += (dy / dist) * force * dt;
                 }
               }
 
-              if (px > width + 20) px = -20;
-              if (px < -20) px = width + 20;
-              if (py > height + 20) py = -20;
-              if (py < -20) py = height + 20;
+              if (px > width || py > height || px < 0) {
+                px = width * 0.2 + Math.random() * (width * 0.4);
+                py = height * 0.25 + Math.random() * (height * 0.35);
+                vx = 25 + Math.random() * 50;
+                vy = (Math.random() - 0.8) * 40;
+              }
 
-              particleData[o + 0] = px;
-              particleData[o + 1] = py;
+              foamData[o + 0] = px;
+              foamData[o + 1] = py;
+              foamData[o + 2] = vx;
+              foamData[o + 3] = vy;
 
-              const finalAlpha = isDark ? pAlpha : pAlpha * 0.6;
-              ctx.fillStyle = i % 3 === 0 
-                ? `rgba(77, 227, 242, ${finalAlpha})` 
-                : (i % 3 === 1 ? `rgba(169, 152, 255, ${finalAlpha * 0.8})` : `rgba(124, 245, 178, ${finalAlpha * 0.7})`);
+              const finalAlpha = isDark ? pAlpha : pAlpha * 0.7;
+              ctx.fillStyle = i % 4 === 0 
+                ? `rgba(255, 112, 166, ${finalAlpha * 0.9})`
+                : (i % 4 === 1 
+                  ? `rgba(77, 227, 242, ${finalAlpha})` 
+                  : `rgba(255, 255, 255, ${finalAlpha * 0.95})`);
               ctx.beginPath();
               ctx.arc(px, py, rad, 0, Math.PI * 2);
               ctx.fill();
