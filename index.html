@@ -280,37 +280,23 @@
 
     .menu-toggle { display: none; }
 
-    /* Sticky Card Deck Layout Mechanism */
+    /* Card Deck Layout Mechanism */
     .stacked-deck-container {
       display: flex;
       flex-direction: column;
       gap: 2.5rem;
-      perspective: 1200px;
       padding-bottom: 4rem;
     }
 
-    /* Sticky Panel Section Deck Cards */
+    /* Panel Section Deck Cards */
     .sticky-deck-card {
-      position: sticky;
-      top: 88px; /* Sticky offset below nav */
+      position: relative;
       background: var(--glass-strong);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
       border: 1px solid var(--line-strong);
       border-radius: var(--radius-xl);
       padding: 3rem 2.5rem;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
-      transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1), filter 350ms ease, opacity 350ms ease, box-shadow 350ms ease;
-      will-change: transform, filter, opacity;
+      box-shadow: var(--shadow-soft);
       margin-bottom: 1.5rem;
-    }
-
-    /* Stacked Under Layer Style */
-    .sticky-deck-card.is-stacked-under {
-      transform: scale(0.96) translateY(-12px);
-      opacity: 0.82;
-      filter: blur(1.5px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     }
 
     /* Hero Section */
@@ -1749,40 +1735,23 @@
 
       document.getElementById('currentYear').textContent = String(new Date().getFullYear());
 
-      // Scroll Read Progress Bar Indicator
+      // Scroll Read Progress Bar Indicator (RAF debounced)
       const progressBar = document.getElementById('scrollProgressBar');
+      let progressTicking = false;
       window.addEventListener('scroll', () => {
-        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = totalHeight > 0 ? (window.scrollY / totalHeight) : 0;
-        if (progressBar) progressBar.style.transform = `scaleX(${progress})`;
+        if (!progressTicking) {
+          window.requestAnimationFrame(() => {
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = totalHeight > 0 ? (window.scrollY / totalHeight) : 0;
+            if (progressBar) progressBar.style.transform = `scaleX(${progress})`;
+            progressTicking = false;
+          });
+          progressTicking = true;
+        }
       }, { passive: true });
 
-      // Sticky Deck Panel Stacking Effect Mechanics
-      const deckCards = Array.from(document.querySelectorAll('.sticky-deck-card'));
-      function handleDeckStacking() {
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        
-        const offset = 90; // Header offset
-        deckCards.forEach((card, index) => {
-          const rect = card.getBoundingClientRect();
-          const nextCard = deckCards[index + 1];
-          
-          if (nextCard) {
-            const nextRect = nextCard.getBoundingClientRect();
-            // If next card is sliding over current card
-            if (nextRect.top <= offset + 60) {
-              card.classList.add('is-stacked-under');
-            } else {
-              card.classList.remove('is-stacked-under');
-            }
-          }
-        });
-      }
-
-      window.addEventListener('scroll', handleDeckStacking, { passive: true });
-      handleDeckStacking();
-
       // Scrollspy Navigation Highlight
+      const deckCards = Array.from(document.querySelectorAll('.sticky-deck-card'));
       const navAnchors = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
       const spyObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
