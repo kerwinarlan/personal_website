@@ -315,10 +315,24 @@
 
     /* Hero Section */
     .hero {
+      position: relative;
       padding-block: 3.5rem 2.5rem;
+      overflow: hidden;
+    }
+
+    .hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: auto;
+      z-index: 0;
+      opacity: 0.75;
     }
 
     .hero-grid {
+      position: relative;
+      z-index: 1;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2.5rem;
@@ -1211,6 +1225,7 @@
   <main id="main">
     <!-- Hero / Profile Section (Non-sticky intro banner) -->
     <section class="hero" id="profile">
+      <canvas id="heroWaveCanvas" class="hero-canvas" aria-hidden="true"></canvas>
       <div class="page-shell hero-grid">
         <div class="hero-copy">
           <div class="status-pill">
@@ -2019,6 +2034,191 @@
         searchInput.addEventListener('input', () => {
           renderProjects(currentFilter, searchInput.value);
         });
+      }
+
+      // ==========================================
+      // Procedural Hydrodynamic Wave & Surge Field
+      // ==========================================
+      const waveCanvas = document.getElementById('heroWaveCanvas');
+      if (waveCanvas) {
+        const ctx = waveCanvas.getContext('2d');
+        if (ctx) {
+          let animId = 0;
+          let width = 0;
+          let height = 0;
+          let lastTime = 0;
+          let totalTime = 0;
+          let isVisible = true;
+
+          const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          const pointer = { x: -1000, y: -1000, targetX: -1000, targetY: -1000, active: false };
+
+          const onPointerMove = (e) => {
+            const rect = waveCanvas.getBoundingClientRect();
+            pointer.targetX = e.clientX - rect.left;
+            pointer.targetY = e.clientY - rect.top;
+            pointer.active = true;
+          };
+
+          const onPointerLeave = () => {
+            pointer.active = false;
+          };
+
+          window.addEventListener('pointermove', onPointerMove, { passive: true });
+          document.addEventListener('pointerleave', onPointerLeave, { passive: true });
+
+          // Pre-allocated typed array for surge particles
+          // Layout per particle (stride 6): [x, y, vx, vy, radius, alpha]
+          const PARTICLE_COUNT = 90;
+          const STRIDE = 6;
+          const particleData = new Float32Array(PARTICLE_COUNT * STRIDE);
+
+          const initParticles = (w, h) => {
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+              const o = i * STRIDE;
+              particleData[o + 0] = Math.random() * w;
+              particleData[o + 1] = Math.random() * h;
+              particleData[o + 2] = 12 + Math.random() * 24;
+              particleData[o + 3] = (Math.random() - 0.5) * 6;
+              particleData[o + 4] = 1.0 + Math.random() * 2.0;
+              particleData[o + 5] = 0.15 + Math.random() * 0.45;
+            }
+          };
+
+          const resize = () => {
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            const rect = waveCanvas.getBoundingClientRect();
+            width = rect.width;
+            height = rect.height;
+            waveCanvas.width = Math.floor(width * dpr);
+            waveCanvas.height = Math.floor(height * dpr);
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.scale(dpr, dpr);
+            initParticles(width, height);
+            if (prefersReduced) drawFrame(0, 0);
+          };
+
+          const resizeObserver = new ResizeObserver(resize);
+          resizeObserver.observe(waveCanvas);
+          resize();
+
+          const io = new IntersectionObserver(([entry]) => {
+            isVisible = entry.isIntersecting;
+          });
+          io.observe(waveCanvas);
+
+          const drawFrame = (dt, t) => {
+            const isDark = root.dataset.theme === 'dark';
+            ctx.clearRect(0, 0, width, height);
+
+            pointer.x += (pointer.targetX - pointer.x) * 0.1;
+            pointer.y += (pointer.targetY - pointer.y) * 0.1;
+
+            // 1. Hydrodynamic Streamline Ribbons
+            const ribbonCount = 4;
+            const points = 12;
+            const stepX = width / (points - 1);
+
+            for (let r = 0; r < ribbonCount; r++) {
+              const rOffset = r * 0.75;
+              const baseY = height * (0.35 + r * 0.16);
+              const alpha = isDark ? (0.08 + r * 0.04) : (0.04 + r * 0.03);
+              const color = r % 2 === 0 ? `rgba(77, 227, 242, ${alpha})` : `rgba(169, 152, 255, ${alpha})`;
+
+              ctx.beginPath();
+              ctx.strokeStyle = color;
+              ctx.lineWidth = 1.5;
+
+              for (let i = 0; i < points; i++) {
+                const px = i * stepX;
+                const w1 = Math.sin(t * 0.6 + i * 0.4 + rOffset) * 26;
+                const w2 = Math.cos(t * 0.35 + i * 0.25 + rOffset * 1.5) * 14;
+                let py = baseY + w1 + w2;
+
+                if (pointer.active) {
+                  const dx = px - pointer.x;
+                  const dy = py - pointer.y;
+                  const dist = Math.sqrt(dx * dx + dy * dy);
+                  if (dist < 140) {
+                    const factor = (1 - dist / 140);
+                    py += Math.sin(dx * 0.05) * factor * 25;
+                  }
+                }
+
+                if (i === 0) {
+                  ctx.moveTo(px, py);
+                } else {
+                  const prevX = (i - 1) * stepX;
+                  const prevW1 = Math.sin(t * 0.6 + (i - 1) * 0.4 + rOffset) * 26;
+                  const prevW2 = Math.cos(t * 0.35 + (i - 1) * 0.25 + rOffset * 1.5) * 14;
+                  let prevY = baseY + prevW1 + prevW2;
+                  const cpX = prevX + stepX * 0.5;
+                  ctx.bezierCurveTo(cpX, prevY, cpX, py, px, py);
+                }
+              }
+              ctx.stroke();
+            }
+
+            // 2. Hydrodynamic Velocity Particles
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+              const o = i * STRIDE;
+              let px = particleData[o + 0];
+              let py = particleData[o + 1];
+              let vx = particleData[o + 2];
+              let vy = particleData[o + 3];
+              const rad = particleData[o + 4];
+              const pAlpha = particleData[o + 5];
+
+              px += vx * dt;
+              py += (vy + Math.sin(t * 1.2 + px * 0.01) * 8) * dt;
+
+              if (pointer.active) {
+                const dx = px - pointer.x;
+                const dy = py - pointer.y;
+                const distSq = dx * dx + dy * dy;
+                if (distSq < 10000 && distSq > 1) {
+                  const dist = Math.sqrt(distSq);
+                  const force = (1 - dist / 100) * 80;
+                  px += (dx / dist) * force * dt;
+                  py += (dy / dist) * force * dt;
+                }
+              }
+
+              if (px > width + 20) px = -20;
+              if (px < -20) px = width + 20;
+              if (py > height + 20) py = -20;
+              if (py < -20) py = height + 20;
+
+              particleData[o + 0] = px;
+              particleData[o + 1] = py;
+
+              const finalAlpha = isDark ? pAlpha : pAlpha * 0.6;
+              ctx.fillStyle = i % 3 === 0 
+                ? `rgba(77, 227, 242, ${finalAlpha})` 
+                : (i % 3 === 1 ? `rgba(169, 152, 255, ${finalAlpha * 0.8})` : `rgba(124, 245, 178, ${finalAlpha * 0.7})`);
+              ctx.beginPath();
+              ctx.arc(px, py, rad, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          };
+
+          const loop = (currentTime) => {
+            if (!lastTime) lastTime = currentTime;
+            const dt = Math.min((currentTime - lastTime) / 1000, 0.1);
+            lastTime = currentTime;
+
+            if (isVisible && !prefersReduced) {
+              totalTime += dt;
+              drawFrame(dt, totalTime);
+            }
+
+            animId = requestAnimationFrame(loop);
+          };
+
+          if (!prefersReduced) {
+            animId = requestAnimationFrame(loop);
+          }
+        }
       }
     })();
   </script>
