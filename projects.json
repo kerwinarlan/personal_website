@@ -255,12 +255,14 @@
   },
   {
     "id": "frontend-design-intelligence",
-    "description": "Design and motion intelligence for coding agents. Audit, redesign, animate, and portfolio-polish frontend projects with reusable Pi Agent skills.",
+    "description": "Design, motion, Canvas 2D, and WebGL intelligence for coding agents. Audit, redesign, animate, and portfolio-polish frontend projects with reusable Pi skills.",
     "url": "https://github.com/kerwinarlan/frontend-design-intelligence",
     "homepage": "",
-    "language": "TypeScript",
+    "language": "Python",
     "topics": [
       "agent-skills",
+      "canvas-animation",
+      "creative-coding",
       "design-systems",
       "frontend",
       "frontend-design",
@@ -274,7 +276,8 @@
       "react",
       "tailwindcss",
       "typescript",
-      "web-animation"
+      "web-animation",
+      "webgl"
     ],
     "stars": 0
   },
